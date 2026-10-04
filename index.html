@@ -3,42 +3,51 @@
 <title>COMPILE // PROTOCOL BATTLE</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#04070f;--pn:#0a1226;--ln:#17315a;--cy:#19e3ff;--mg:#ff2ea6;--tx:#d6e8ff;--dim:#6a85ad}
-*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#10265a 0,var(--bg) 60%) fixed;color:var(--tx);font:13px/1.4 'Noto Sans JP',sans-serif;min-height:100%}
+:root{--bg:#04070f;--pn:#0a1226;--ln:#17315a;--cy:#19e3ff;--mg:#ff2ea6;--tx:#d6e8ff;--dim:#7d96bd}
+*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#10265a 0,var(--bg) 60%) fixed;color:var(--tx);font:13px/1.45 'Noto Sans JP',sans-serif;min-height:100%}
 h1,.o{font-family:Orbitron,sans-serif;letter-spacing:.12em}
-#app{max-width:980px;margin:0 auto;padding:10px}
-.box{background:var(--pn);border:1px solid var(--ln);border-radius:4px;padding:14px;margin:10px 0;box-shadow:0 0 18px #19e3ff14 inset}
-h1{font-size:26px;margin:18px 0 4px;color:var(--cy);text-shadow:0 0 14px var(--cy)}
-input{background:#050b1c;border:1px solid var(--ln);color:var(--tx);padding:9px;border-radius:3px;width:100%;margin:5px 0;font-size:15px}
+#app{max-width:1000px;margin:0 auto;padding:10px}
+.box{background:var(--pn);border:1px solid var(--ln);border-radius:4px;padding:14px;margin:10px 0}
+h1{font-size:28px;margin:16px 0 4px;color:var(--cy);text-shadow:0 0 14px var(--cy)}
+input[type=text]{background:#050b1c;border:1px solid var(--ln);color:var(--tx);padding:9px;border-radius:3px;width:100%;margin:5px 0;font-size:15px}
 button{background:#0b1d3d;color:var(--cy);border:1px solid var(--cy);padding:8px 14px;border-radius:3px;cursor:pointer;font:700 13px 'Noto Sans JP';margin:3px}
-button:hover{background:var(--cy);color:#001}button.m{border-color:var(--mg);color:var(--mg)}
-.bar{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--dim)}
-.st{padding:8px 12px;border-left:3px solid var(--mg);background:#1a0b2a;margin:8px 0;color:#ffd0ec}
-.st.me{border-color:var(--cy);background:#07203a;color:#c8f6ff}
+button:hover{background:var(--cy);color:#001}button.m{border-color:var(--mg);color:var(--mg)}button.m:hover{background:var(--mg);color:#fff}button:disabled{opacity:.35}
+.bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--dim)}
+.st{padding:10px 14px;border-left:4px solid var(--mg);background:#1a0b2a;margin:8px 0;color:#ffd0ec;font-size:14px}
+.st.me{border-color:var(--cy);background:#07203a;color:#d8f8ff;box-shadow:0 0 16px #19e3ff40}.st b{font-size:15px;color:#fff}
 .g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.col{background:#07101f;border:1px solid var(--ln);padding:6px;border-radius:4px;min-height:330px;display:flex;flex-direction:column;justify-content:space-between}
-.half{display:flex;flex-direction:column;gap:3px;min-height:120px}.half.mine{flex-direction:column-reverse}
-.pr{border:1px solid var(--c);color:var(--c);text-align:center;padding:5px;font:800 12px Orbitron;border-radius:3px;box-shadow:0 0 10px var(--c) inset;background:#030812}
-.pr.done{background:var(--c);color:#001;box-shadow:0 0 14px var(--c)}
-.sc{text-align:center;font:800 18px Orbitron;color:var(--dim);padding:4px 0}.sc b{color:var(--cy)}.sc b.ok{color:var(--mg);text-shadow:0 0 8px var(--mg)}
-.cd{border:1px solid var(--c);background:linear-gradient(160deg,#0d1a36,#060c1c);border-radius:3px;padding:3px 6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:11px;min-height:22px}
-.cd b{font:800 14px Orbitron;color:var(--c)}.cd span{font:700 11px Orbitron;color:var(--c)}
-.cd i{font-style:normal;flex-basis:100%;color:var(--tx);font-size:11px;padding-bottom:2px}
-.cd.dn{background:repeating-linear-gradient(45deg,#0a1226 0 6px,#101c3a 6px 12px);border-color:var(--dim)}
-.cd.dn b,.cd.dn span{color:var(--dim)}.cd.top{min-height:56px}
-.hit{outline:2px solid var(--mg);box-shadow:0 0 14px var(--mg);cursor:pointer}
-.slot.hit{border-radius:3px}
-.hand{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.hc{width:112px;min-height:96px;border:1px solid var(--c);border-radius:4px;padding:6px;background:linear-gradient(160deg,#10224a,#060c1c);cursor:pointer;box-shadow:0 0 10px color-mix(in srgb,var(--c) 40%,transparent)}
-.hc.sel{transform:translateY(-8px);box-shadow:0 0 18px var(--c)}.hc b{font:800 22px Orbitron;color:var(--c)}.hc em{display:block;font:700 11px Orbitron;color:var(--c);font-style:normal}.hc i{font-style:normal;font-size:10px;color:var(--tx)}
-.log{font-size:11px;color:var(--dim);max-height:90px;overflow:auto}
-.pk{display:flex;gap:8px;flex-wrap:wrap}.pk button{border-color:var(--c);color:var(--c);min-width:110px;padding:14px}
-@media(max-width:600px){.col{min-height:260px}.cd{font-size:10px}}
+.col{background:#07101f;border:1px solid var(--ln);padding:6px;border-radius:4px;min-height:340px;display:flex;flex-direction:column;justify-content:space-between}
+.half{display:flex;flex-direction:column;gap:3px;min-height:130px;padding:2px;border-radius:4px}.half.mine{flex-direction:column-reverse}
+.pr{position:relative;overflow:hidden;border:1px solid var(--c);color:var(--c);text-align:center;padding:6px;font:800 12px Orbitron;border-radius:4px;background:radial-gradient(circle at 80% 0,color-mix(in srgb,var(--c) 40%,transparent),transparent 70%),var(--b)}
+.pr.done{background:var(--c);color:#001;box-shadow:0 0 16px var(--c)}
+.sc{text-align:center;font:800 20px Orbitron;color:var(--dim);padding:4px 0}.sc b{color:var(--cy)}.sc b.ok{color:var(--mg);text-shadow:0 0 8px var(--mg)}
+.holo{position:relative;overflow:hidden}
+.holo::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,#ffffff40 45%,#8ff 50%,#f8f 55%,transparent 70%);background-size:250% 100%;mix-blend-mode:screen;animation:sh 4s linear infinite}
+@keyframes sh{from{background-position:150% 0}to{background-position:-50% 0}}
+@media(prefers-reduced-motion:reduce){.holo::after{animation:none}}
+.cd{border:1px solid var(--c);border-radius:4px;padding:2px 7px;display:flex;gap:6px;align-items:center;min-height:26px;cursor:pointer;background:radial-gradient(circle at 85% 20%,color-mix(in srgb,var(--c) 45%,transparent),transparent 65%),linear-gradient(160deg,var(--b),#050a18);box-shadow:0 0 8px color-mix(in srgb,var(--c) 35%,transparent)}
+.cd b{font:800 17px Orbitron;color:#fff;text-shadow:0 0 8px var(--c)}.cd em{font:700 11px Orbitron;color:var(--c);font-style:normal}.cd .ic{font-size:16px}
+.cd.top{min-height:62px}.cd.top .ic{font-size:28px}.cd.top b{font-size:24px}
+.cd.dn{background:repeating-linear-gradient(45deg,#0a1226 0 6px,#13244a 6px 12px);border-color:#4a6a9a;box-shadow:none}.cd.dn em{color:var(--dim)}
+.hit{outline:3px solid var(--mg);box-shadow:0 0 18px var(--mg)!important;animation:pl 1s infinite alternate}@keyframes pl{to{outline-color:#fff}}
+.hand{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.hc{width:150px;border:2px solid var(--c);border-radius:8px;padding:6px;cursor:pointer;background:radial-gradient(circle at 80% 8%,color-mix(in srgb,var(--c) 50%,transparent),transparent 60%),linear-gradient(170deg,var(--b),#050a18);box-shadow:0 0 14px color-mix(in srgb,var(--c) 45%,transparent);transition:transform .15s}
+.hc.sel{transform:translateY(-12px) scale(1.04);box-shadow:0 0 26px var(--c)}.hc.nb{cursor:default}
+.hd{display:flex;justify-content:space-between;align-items:center;font:800 12px Orbitron;color:var(--c)}.hd b{font-size:30px;color:#fff;text-shadow:0 0 10px var(--c)}
+.ar{text-align:center;font-size:42px;line-height:54px;filter:drop-shadow(0 0 10px var(--c))}
+.sx{font-size:11px;margin-top:4px;padding:3px 5px;border-radius:3px;background:#0008}.sx u{display:block;text-decoration:none;font:700 9px Orbitron;color:var(--c)}
+.sx.m{border-left:3px solid var(--cy)}.sx.t{border-left:3px solid #ffe14a}.sx.b{border-left:3px solid var(--mg)}
+.sx s{color:#ff9a9a;text-decoration:none;font-size:9px;margin-left:3px}
+.dt{display:flex;gap:14px;align-items:flex-start}.dt .hc{cursor:default}
+.log{font-size:11px;color:var(--dim);max-height:100px;overflow:auto}
+.pk{display:flex;gap:8px;flex-wrap:wrap}.pk button{border-color:var(--c);color:var(--c);min-width:116px;padding:12px;background:var(--b)}
+.ck label{margin-right:12px}
+@media(max-width:600px){.col{min-height:260px}.hc{width:128px}.cd em{display:none}}
 </style></head><body><div id="app"></div>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
-// ★ここにFirebaseの設定値を貼り付けてください(poker-proと同じものでOK)
+// ★ここにFirebaseの設定値を貼り付けてください(前回入れたものと同じでOK)
 const CFG={
   apiKey: "AIzaSyDPvvpVoytZCFCSWGcNRQakDbWLn8S5c8Q",
   authDomain: "compile-game.firebaseapp.com",
@@ -48,131 +57,117 @@ const CFG={
   appId: "1:537392665193:web:69ce798c397c2263cd88f8",
   measurementId: "G-N7GJJCRLMR"};
 const COL='compile_rooms';
-const PR={Death:'#ff3b5c',Fire:'#ff8a1f',Water:'#2ea8ff',Plague:'#9dff3b',Life:'#3bffb0',Light:'#ffe14a'};
-// 形式: プロトコル|値|中段の処理コード|表示テキスト  (未実装の効果は【未実装】)
-const RAW=`Death|0||中:各他ラインから1枚Delete【未実装】
-Death|1||上:Start:引いてDelete【未実装】
-Death|2||中:値1か2を全Delete【未実装】
-Death|3|DELD|中:裏向き1枚Delete
-Death|4|DELL|中:値0か1の1枚Delete
-Death|5|X1|中:自分は1枚捨てる
-Fire|0|F D2|中:他1枚Flip→2枚引く(下段【未実装】)
-Fire|1|X1 ?DEL|中:1枚捨てる。そうしたら1枚Delete
-Fire|2|X1 ?RET|中:1枚捨てる。そうしたら1枚Return
-Fire|3||下:End:捨ててFlip【未実装】
-Fire|4||中:捨てて枚数+1引く【未実装】
-Fire|5|X1|中:自分は1枚捨てる
-Water|0|F|中:他1枚Flip(自身のFlipは【未実装】)
-Water|1||中:各ラインへ山札Play【未実装】
-Water|2|D2|中:2枚引く(Rearrange【未実装】)
-Water|3||中:値2を全Return【未実装】
-Water|4|RETS|中:自分のカード1枚Return
-Water|5|X1|中:自分は1枚捨てる
-Plague|0|O1|中:相手は1枚捨てる(下段【未実装】)
-Plague|1|O1|中:相手は1枚捨てる(上段【未実装】)
-Plague|2||上:捨て枚数連動【未実装】
-Plague|3||中:他の表向きを全Flip【未実装】
-Plague|4||下:End効果【未実装】
-Plague|5|X1|中:自分は1枚捨てる
-Life|0||中:各ラインへ山札Play【未実装】
-Life|1|F F|中:1枚Flip。さらに1枚Flip
-Life|2|D1|中:1枚引く(Flip任意【未実装】)
-Life|3||下:Cover時効果【未実装】
-Life|4||中:Cover時1枚引く【未実装】
-Life|5|X1|中:自分は1枚捨てる
-Light|0||中:Flip→値と同数引く【未実装】
-Light|1||下:End:1枚引く【未実装】
-Light|2|D2|中:2枚引く(Reveal【未実装】)
-Light|3||中:裏向きを別ラインへ【未実装】
-Light|4||中:相手手札公開【未実装】
-Light|5|X1|中:自分は1枚捨てる`;
-const C={};RAW.split('\n').forEach(l=>{const[p,v,o,t]=l.split('|');C[p+v]={p,v:+v,o:o?o.split(' '):[],t}});
+const C={"Darkness0": {"p": "Darkness", "v": 0, "s": "m1", "t": "", "m": "3枚引く。相手の裏向きの被覆カード1枚をShift", "b": "", "o": ["D3"], "ti": false, "mi": false, "bi": false}, "Darkness1": {"p": "Darkness", "v": 1, "s": "m1", "t": "", "m": "相手のカード1枚をFlip。そのカードをShiftしてもよい", "b": "", "o": ["FO"], "ti": false, "mi": false, "bi": false}, "Darkness2": {"p": "Darkness", "v": 2, "s": "m1", "t": "このスタックの裏向きカードはすべて値4になる", "m": "このラインの被覆カード1枚をFlipしてもよい", "b": "", "o": [], "ti": true, "mi": false, "bi": false}, "Darkness3": {"p": "Darkness", "v": 3, "s": "m1", "t": "", "m": "別のラインにカード1枚を裏向きでPlay", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Darkness4": {"p": "Darkness", "v": 4, "s": "m1", "t": "", "m": "裏向きカード1枚をShift", "b": "", "o": ["SHD"], "ti": false, "mi": true, "bi": false}, "Darkness5": {"p": "Darkness", "v": 5, "s": "m1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Death0": {"p": "Death", "v": 0, "s": "m1", "t": "", "m": "各他ラインからカード1枚をDelete", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Death1": {"p": "Death", "v": 1, "s": "m1", "t": "Start: 1枚引いてもよい。そうした場合、別のカード1枚をDelete。その後このカードをDelete", "m": "", "b": "", "o": [], "ti": false, "mi": true, "bi": false}, "Death2": {"p": "Death", "v": 2, "s": "m1", "t": "", "m": "1ラインの値1または2のカードをすべてDelete", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Death3": {"p": "Death", "v": 3, "s": "m1", "t": "", "m": "裏向きカード1枚をDelete", "b": "", "o": ["DELD"], "ti": false, "mi": true, "bi": false}, "Death4": {"p": "Death", "v": 4, "s": "m1", "t": "", "m": "値0または1のカード1枚をDelete", "b": "", "o": ["DELL"], "ti": false, "mi": true, "bi": false}, "Death5": {"p": "Death", "v": 5, "s": "m1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Fire0": {"p": "Fire", "v": 0, "s": "m1", "t": "", "m": "他のカード1枚をFlip。2枚引く", "b": "このカードがCoverされる時: まず1枚引き、その後他のカード1枚をFlip", "o": ["FX", "D2"], "ti": false, "mi": true, "bi": false}, "Fire1": {"p": "Fire", "v": 1, "s": "m1", "t": "", "m": "カード1枚を捨てる。そうした場合カード1枚をDelete", "b": "", "o": ["X1", "?DEL"], "ti": false, "mi": true, "bi": false}, "Fire2": {"p": "Fire", "v": 2, "s": "m1", "t": "", "m": "カード1枚を捨てる。そうした場合カード1枚をReturn", "b": "", "o": ["X1", "?RET"], "ti": false, "mi": true, "bi": false}, "Fire3": {"p": "Fire", "v": 3, "s": "m1", "t": "", "m": "", "b": "End: カード1枚を捨ててもよい。そうした場合カード1枚をFlip", "o": [], "ti": false, "mi": true, "bi": false}, "Fire4": {"p": "Fire", "v": 4, "s": "m1", "t": "", "m": "1枚以上捨て、捨てた枚数＋1枚を引く", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Fire5": {"p": "Fire", "v": 5, "s": "m1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Gravity0": {"p": "Gravity", "v": 0, "s": "m1", "t": "", "m": "このラインのカード2枚ごとに、山札トップをこのカードの下へ裏向きでPlay", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Gravity1": {"p": "Gravity", "v": 1, "s": "m1", "t": "", "m": "2枚引く。このラインへ、またはこのラインからカード1枚をShift", "b": "", "o": ["D2"], "ti": false, "mi": false, "bi": false}, "Gravity2": {"p": "Gravity", "v": 2, "s": "m1", "t": "", "m": "カード1枚をFlipし、そのカードをこのラインへShift", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Gravity4": {"p": "Gravity", "v": 4, "s": "m1", "t": "", "m": "裏向きカード1枚をこのラインへShift", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Gravity5": {"p": "Gravity", "v": 5, "s": "m1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Gravity6": {"p": "Gravity", "v": 6, "s": "m1", "t": "", "m": "相手は山札トップをこのラインへ裏向きでPlay", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Life0": {"p": "Life", "v": 0, "s": "m1", "t": "End: このカードがCoverされていればDelete", "m": "カードを持っている各ラインに山札トップを裏向きでPlay", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Life1": {"p": "Life", "v": 1, "s": "m1", "t": "", "m": "カード1枚をFlip。さらにカード1枚をFlip", "b": "", "o": ["F", "F"], "ti": false, "mi": true, "bi": false}, "Life2": {"p": "Life", "v": 2, "s": "m1", "t": "", "m": "1枚引く。裏向きカード1枚をFlipしてもよい", "b": "", "o": ["D1"], "ti": false, "mi": false, "bi": false}, "Life3": {"p": "Life", "v": 3, "s": "m1", "t": "", "m": "", "b": "このカードがCoverされる時: 山札トップを別ラインに裏向きでPlay", "o": [], "ti": false, "mi": true, "bi": false}, "Life4": {"p": "Life", "v": 4, "s": "m1", "t": "", "m": "このカードがカードをCoverしていれば1枚引く", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Life5": {"p": "Life", "v": 5, "s": "m1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Light0": {"p": "Light", "v": 0, "s": "m1", "t": "", "m": "カード1枚をFlip。そのカードの値と同じ枚数を引く", "b": "", "o": ["F"], "ti": false, "mi": false, "bi": false}, "Light1": {"p": "Light", "v": 1, "s": "m1", "t": "", "m": "", "b": "End: 1枚引く", "o": [], "ti": false, "mi": true, "bi": false}, "Light2": {"p": "Light", "v": 2, "s": "m1", "t": "", "m": "2枚引く。裏向きカード1枚をRevealし、ShiftまたはFlipしてもよい", "b": "", "o": ["D2"], "ti": false, "mi": false, "bi": false}, "Light3": {"p": "Light", "v": 3, "s": "m1", "t": "", "m": "このラインの裏向きカードをすべて別ラインへShift", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Light4": {"p": "Light", "v": 4, "s": "m1", "t": "", "m": "相手は手札を公開", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Light5": {"p": "Light", "v": 5, "s": "m1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Metal0": {"p": "Metal", "v": 0, "s": "m1", "t": "相手のこのラインの合計値－2", "m": "カード1枚をFlip", "b": "", "o": ["F"], "ti": true, "mi": true, "bi": false}, "Metal1": {"p": "Metal", "v": 1, "s": "m1", "t": "", "m": "2枚引く。相手は次のターンCompileできない", "b": "", "o": ["D2"], "ti": false, "mi": false, "bi": false}, "Metal2": {"p": "Metal", "v": 2, "s": "m1", "t": "相手はこのラインに裏向きでカードをPlayできない", "m": "", "b": "", "o": [], "ti": true, "mi": true, "bi": false}, "Metal3": {"p": "Metal", "v": 3, "s": "m1", "t": "", "m": "1枚引く。別ラインに8枚以上あれば、そのラインのカードをすべてDelete", "b": "", "o": ["D1"], "ti": false, "mi": false, "bi": false}, "Metal5": {"p": "Metal", "v": 5, "s": "m1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Metal6": {"p": "Metal", "v": 6, "s": "m1", "t": "このカードがCoverまたはFlipされる時: まずこのカードをDelete", "m": "", "b": "", "o": [], "ti": false, "mi": true, "bi": false}, "Plague0": {"p": "Plague", "v": 0, "s": "m1", "t": "", "m": "相手はカード1枚を捨てる", "b": "相手はこのラインにカードをPlayできない", "o": ["O1"], "ti": false, "mi": true, "bi": true}, "Plague1": {"p": "Plague", "v": 1, "s": "m1", "t": "相手がカードを捨てた後: 1枚引く", "m": "相手はカード1枚を捨てる", "b": "", "o": ["O1"], "ti": false, "mi": true, "bi": false}, "Plague2": {"p": "Plague", "v": 2, "s": "m1", "t": "1枚以上捨てる。相手は捨てた枚数＋1枚捨てる", "m": "", "b": "", "o": [], "ti": false, "mi": true, "bi": false}, "Plague3": {"p": "Plague", "v": 3, "s": "m1", "t": "", "m": "他の表向きカードをすべてFlip", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Plague4": {"p": "Plague", "v": 4, "s": "m1", "t": "", "m": "", "b": "End: 相手は裏向きカード1枚をDelete。自分はこのカードをFlipしてもよい", "o": [], "ti": false, "mi": true, "bi": false}, "Plague5": {"p": "Plague", "v": 5, "s": "m1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Psychic0": {"p": "Psychic", "v": 0, "s": "m1", "t": "", "m": "2枚引く。相手は2枚捨て、その後手札公開", "b": "", "o": ["D2"], "ti": false, "mi": false, "bi": false}, "Psychic1": {"p": "Psychic", "v": 1, "s": "m1", "t": "相手は裏向きでしかカードをPlayできない", "m": "", "b": "Start: このカードをFlip", "o": [], "ti": true, "mi": true, "bi": false}, "Psychic2": {"p": "Psychic", "v": 2, "s": "m1", "t": "", "m": "相手は2枚捨て、プロトコルをRearrange", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Psychic3": {"p": "Psychic", "v": 3, "s": "m1", "t": "", "m": "相手は1枚捨て、相手のカード1枚をShift", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Psychic4": {"p": "Psychic", "v": 4, "s": "m1", "t": "", "m": "", "b": "End: 相手のカード1枚をReturnしてもよい。そうした場合このカードをFlip", "o": [], "ti": false, "mi": true, "bi": false}, "Psychic5": {"p": "Psychic", "v": 5, "s": "m1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Speed0": {"p": "Speed", "v": 0, "s": "m1", "t": "", "m": "カード1枚をPlay", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Speed1": {"p": "Speed", "v": 1, "s": "m1", "t": "CacheをClearした後: 1枚引く", "m": "2枚引く", "b": "", "o": ["D2"], "ti": false, "mi": true, "bi": false}, "Speed2": {"p": "Speed", "v": 2, "s": "m1", "t": "CompileでこのカードがDeleteされる時: CoverされていてもこのカードをShift", "m": "", "b": "", "o": [], "ti": false, "mi": true, "bi": false}, "Speed3": {"p": "Speed", "v": 3, "s": "m1", "t": "", "m": "自分の他のカード1枚をShift", "b": "End: 自分のカード1枚をShiftしてもよい。そうした場合このカードをFlip", "o": ["SHX"], "ti": false, "mi": true, "bi": false}, "Speed4": {"p": "Speed", "v": 4, "s": "m1", "t": "", "m": "相手の裏向きカード1枚をShift", "b": "", "o": ["SHOD"], "ti": false, "mi": true, "bi": false}, "Speed5": {"p": "Speed", "v": 5, "s": "m1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Spirit0": {"p": "Spirit", "v": 0, "s": "m1", "t": "", "m": "Refresh。1枚引く", "b": "Cache確認フェイズをSkip", "o": ["RF", "D1"], "ti": false, "mi": true, "bi": false}, "Spirit1": {"p": "Spirit", "v": 1, "s": "m1", "t": "表向きでPlayするカードはプロトコル一致不要", "m": "2枚引く", "b": "Start: 1枚捨てるか、このカードをFlip", "o": ["D2"], "ti": true, "mi": true, "bi": false}, "Spirit2": {"p": "Spirit", "v": 2, "s": "m1", "t": "", "m": "カード1枚をFlipしてもよい", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Spirit3": {"p": "Spirit", "v": 3, "s": "m1", "t": "カードを引いた後: CoverされていてもこのカードをShiftしてよい", "m": "", "b": "", "o": [], "ti": false, "mi": true, "bi": false}, "Spirit4": {"p": "Spirit", "v": 4, "s": "m1", "t": "", "m": "自分の2つのプロトコルの位置をSwap", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Spirit5": {"p": "Spirit", "v": 5, "s": "m1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Water0": {"p": "Water", "v": 0, "s": "m1", "t": "", "m": "他のカード1枚をFlip。このカードもFlip", "b": "", "o": ["FX"], "ti": false, "mi": false, "bi": false}, "Water1": {"p": "Water", "v": 1, "s": "m1", "t": "", "m": "山札トップを他の各ラインに裏向きでPlay", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Water2": {"p": "Water", "v": 2, "s": "m1", "t": "", "m": "2枚引く。自分のプロトコルをRearrange", "b": "", "o": ["D2"], "ti": false, "mi": false, "bi": false}, "Water3": {"p": "Water", "v": 3, "s": "m1", "t": "", "m": "1ラインにある値2のカードをすべてReturn", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Water4": {"p": "Water", "v": 4, "s": "m1", "t": "", "m": "自分のカード1枚をReturn", "b": "", "o": ["RETS"], "ti": false, "mi": true, "bi": false}, "Water5": {"p": "Water", "v": 5, "s": "m1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Apathy0": {"p": "Apathy", "v": 0, "s": "a1", "t": "このラインの裏向きカード1枚につき、このラインの合計値＋1", "m": "", "b": "", "o": [], "ti": true, "mi": true, "bi": false}, "Apathy1": {"p": "Apathy", "v": 1, "s": "a1", "t": "", "m": "このラインの他の表向きカードをすべてFlip", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Apathy2": {"p": "Apathy", "v": 2, "s": "a1", "t": "このラインのMiddleコマンドをすべて無視", "m": "", "b": "このカードがCoverされる時: まずこのカードをFlip", "o": [], "ti": false, "mi": true, "bi": false}, "Apathy3": {"p": "Apathy", "v": 3, "s": "a1", "t": "", "m": "相手の表向きカード1枚をFlip", "b": "", "o": ["FOU"], "ti": false, "mi": true, "bi": false}, "Apathy4": {"p": "Apathy", "v": 4, "s": "a1", "t": "", "m": "自分の表向きの被覆カード1枚をFlipしてもよい", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Apathy5": {"p": "Apathy", "v": 5, "s": "a1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Hate0": {"p": "Hate", "v": 0, "s": "a1", "t": "", "m": "カード1枚をDelete", "b": "", "o": ["DEL"], "ti": false, "mi": true, "bi": false}, "Hate1": {"p": "Hate", "v": 1, "s": "a1", "t": "", "m": "3枚捨てる。カード1枚をDelete。さらにカード1枚をDelete", "b": "", "o": ["DEL"], "ti": false, "mi": false, "bi": false}, "Hate2": {"p": "Hate", "v": 2, "s": "a1", "t": "", "m": "自分の最も高い値の未被覆カードをDelete。相手の最も高い値の未被覆カードもDelete", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Hate3": {"p": "Hate", "v": 3, "s": "a1", "t": "カードをDeleteした後: 1枚引く", "m": "", "b": "", "o": [], "ti": false, "mi": true, "bi": false}, "Hate4": {"p": "Hate", "v": 4, "s": "a1", "t": "", "m": "", "b": "このカードがCoverされる時: このラインの最も低い値の被覆カードをDelete", "o": [], "ti": false, "mi": true, "bi": false}, "Hate5": {"p": "Hate", "v": 5, "s": "a1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Love1": {"p": "Love", "v": 1, "s": "a1", "t": "", "m": "相手の山札トップを引く", "b": "End: 手札1枚を相手に渡してもよい。そうした場合2枚引く", "o": [], "ti": false, "mi": false, "bi": false}, "Love2": {"p": "Love", "v": 2, "s": "a1", "t": "", "m": "相手は1枚引く。Refresh", "b": "", "o": ["OD1", "RF"], "ti": false, "mi": true, "bi": false}, "Love3": {"p": "Love", "v": 3, "s": "a1", "t": "", "m": "相手の手札からランダムに1枚Take。自分の手札から1枚相手にGive", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Love4": {"p": "Love", "v": 4, "s": "a1", "t": "", "m": "手札1枚をReveal。カード1枚をFlip", "b": "", "o": ["F"], "ti": false, "mi": false, "bi": false}, "Love5": {"p": "Love", "v": 5, "s": "a1", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Love6": {"p": "Love", "v": 6, "s": "a1", "t": "", "m": "相手は2枚引く", "b": "", "o": ["OD2"], "ti": false, "mi": true, "bi": false}, "Chaos0": {"p": "Chaos", "v": 0, "s": "m2", "t": "", "m": "各ラインで被覆カード1枚をFlip", "b": "Start: 相手の山札トップを引く。相手も自分の山札トップを引く", "o": [], "ti": false, "mi": false, "bi": false}, "Chaos1": {"p": "Chaos", "v": 1, "s": "m2", "t": "", "m": "自分のプロトコルをRearrange。相手のプロトコルもRearrange", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Chaos2": {"p": "Chaos", "v": 2, "s": "m2", "t": "", "m": "自分の被覆カード1枚をShift", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Chaos3": {"p": "Chaos", "v": 3, "s": "m2", "t": "", "m": "", "b": "このカードはプロトコル一致なしでPlayできる", "o": [], "ti": false, "mi": true, "bi": true}, "Chaos4": {"p": "Chaos", "v": 4, "s": "m2", "t": "", "m": "", "b": "End: 手札をすべて捨て、その枚数と同じ枚数を引く", "o": [], "ti": false, "mi": true, "bi": false}, "Chaos5": {"p": "Chaos", "v": 5, "s": "m2", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Clarity0": {"p": "Clarity", "v": 0, "s": "m2", "t": "手札1枚につき、このラインの合計値＋1", "m": "", "b": "", "o": [], "ti": true, "mi": true, "bi": false}, "Clarity1": {"p": "Clarity", "v": 1, "s": "m2", "t": "Start: 山札トップをReveal。山札トップを捨ててもよい", "m": "相手は手札公開", "b": "このカードがCoverされる時: 3枚引く", "o": [], "ti": false, "mi": false, "bi": false}, "Clarity2": {"p": "Clarity", "v": 2, "s": "m2", "t": "", "m": "山札をRevealし、その中から値1のカード1枚を引く。Shuffle。値1のカード1枚をPlay", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Clarity3": {"p": "Clarity", "v": 3, "s": "m2", "t": "", "m": "山札をRevealし、その中から値5のカード1枚を引く。Shuffle", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Clarity4": {"p": "Clarity", "v": 4, "s": "m2", "t": "", "m": "Trashを山札にShuffleしてもよい", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Clarity5": {"p": "Clarity", "v": 5, "s": "m2", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Corruption0": {"p": "Corruption", "v": 0, "s": "m2", "t": "Start: このスタックのこのカード以外の表向きカード1枚をFlip", "m": "", "b": "このカードはどちらのプレイヤー側のどのラインにもPlay可能", "o": [], "ti": false, "mi": true, "bi": false}, "Corruption1": {"p": "Corruption", "v": 1, "s": "m2", "t": "", "m": "カード1枚をReturn", "b": "相手の手札へReturnされる時: そのカードを相手の山札トップへ裏向きで置く", "o": ["RET"], "ti": false, "mi": true, "bi": false}, "Corruption2": {"p": "Corruption", "v": 2, "s": "m2", "t": "カードを捨てた後: 相手は1枚捨てる", "m": "1枚引き、1枚捨てる", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Corruption3": {"p": "Corruption", "v": 3, "s": "m2", "t": "", "m": "自分の表向き被覆カード1枚をFlipしてもよい", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Corruption5": {"p": "Corruption", "v": 5, "s": "m2", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Corruption6": {"p": "Corruption", "v": 6, "s": "m2", "t": "End: カード1枚を捨てるか、このカードをDelete", "m": "", "b": "", "o": [], "ti": false, "mi": true, "bi": false}, "Courage0": {"p": "Courage", "v": 0, "s": "m2", "t": "Start: 手札が0枚なら1枚引く", "m": "1枚引く", "b": "End: 1枚捨ててもよい。そうした場合相手も1枚捨てる", "o": ["D1"], "ti": false, "mi": true, "bi": false}, "Courage1": {"p": "Courage", "v": 1, "s": "m2", "t": "", "m": "自分より相手の合計値が高いラインから相手のカード1枚をDelete", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Courage2": {"p": "Courage", "v": 2, "s": "m2", "t": "", "m": "1枚引く", "b": "End: このラインで相手の合計値が高ければ1枚引く", "o": ["D1"], "ti": false, "mi": true, "bi": false}, "Courage3": {"p": "Courage", "v": 3, "s": "m2", "t": "", "m": "", "b": "End: 相手の合計値が最も高いラインへこのカードをShiftしてもよい", "o": [], "ti": false, "mi": true, "bi": false}, "Courage5": {"p": "Courage", "v": 5, "s": "m2", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Courage6": {"p": "Courage", "v": 6, "s": "m2", "t": "End: このラインで相手の値が高ければ、このカードをFlip", "m": "", "b": "", "o": [], "ti": false, "mi": true, "bi": false}, "Fear0": {"p": "Fear", "v": 0, "s": "m2", "t": "自分のターン中、相手カードのMiddleコマンドは発動しない", "m": "カード1枚をShiftまたはFlip", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Fear1": {"p": "Fear", "v": 1, "s": "m2", "t": "", "m": "2枚引く。相手は手札をすべて捨て、捨てた枚数－1枚を引く", "b": "", "o": ["D2"], "ti": false, "mi": false, "bi": false}, "Fear2": {"p": "Fear", "v": 2, "s": "m2", "t": "", "m": "相手のカード1枚をReturn", "b": "", "o": ["RETO"], "ti": false, "mi": true, "bi": false}, "Fear3": {"p": "Fear", "v": 3, "s": "m2", "t": "", "m": "このラインの相手の被覆・未被覆カード1枚をShift", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Fear4": {"p": "Fear", "v": 4, "s": "m2", "t": "", "m": "相手はランダムに1枚捨てる", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Fear5": {"p": "Fear", "v": 5, "s": "m2", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Ice1": {"p": "Ice", "v": 1, "s": "m2", "t": "", "m": "このカードをShiftしてもよい", "b": "相手がこのラインにカードをPlayした後: 相手は1枚捨てる", "o": [], "ti": false, "mi": false, "bi": false}, "Ice2": {"p": "Ice", "v": 2, "s": "m2", "t": "", "m": "他のカード1枚をShift", "b": "", "o": ["SHA"], "ti": false, "mi": true, "bi": false}, "Ice3": {"p": "Ice", "v": 3, "s": "m2", "t": "End: このカードがCoverされていればShiftしてもよい", "m": "", "b": "", "o": [], "ti": false, "mi": true, "bi": false}, "Ice4": {"p": "Ice", "v": 4, "s": "m2", "t": "", "m": "", "b": "このカードはFlipできない", "o": [], "ti": false, "mi": true, "bi": false}, "Ice5": {"p": "Ice", "v": 5, "s": "m2", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Ice6": {"p": "Ice", "v": 6, "s": "m2", "t": "手札にカードがある場合、カードを引けない", "m": "", "b": "", "o": [], "ti": false, "mi": true, "bi": false}, "Luck0": {"p": "Luck", "v": 0, "s": "m2", "t": "", "m": "数字を宣言。3枚引く。その中から宣言した値の表向きカード1枚をRevealし、Playしてもよい", "b": "", "o": ["D3"], "ti": false, "mi": false, "bi": false}, "Luck1": {"p": "Luck", "v": 1, "s": "m2", "t": "", "m": "山札トップを裏向きでPlayし、そのカードをMiddleコマンドを無視してFlip", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Luck2": {"p": "Luck", "v": 2, "s": "m2", "t": "", "m": "山札トップを捨て、そのカードの値と同じ枚数を引く", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Luck3": {"p": "Luck", "v": 3, "s": "m2", "t": "", "m": "プロトコルを宣言。相手の山札トップを捨て、一致すればカード1枚をDelete", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Luck4": {"p": "Luck", "v": 4, "s": "m2", "t": "", "m": "山札トップを捨て、捨てたカードと同じ値の被覆・未被覆カード1枚をDelete", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Luck5": {"p": "Luck", "v": 5, "s": "m2", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Mirror0": {"p": "Mirror", "v": 0, "s": "m2", "t": "このラインにある相手カード1枚につき、自分の合計値＋1", "m": "", "b": "", "o": [], "ti": true, "mi": true, "bi": false}, "Mirror1": {"p": "Mirror", "v": 1, "s": "m2", "t": "", "m": "", "b": "End: 相手カード1枚のMiddleコマンドを、このカード上のものとして解決してもよい", "o": [], "ti": false, "mi": true, "bi": false}, "Mirror2": {"p": "Mirror", "v": 2, "s": "m2", "t": "", "m": "1つの自分のスタックのカードを、別のスタックのカードとすべてSwap", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Mirror3": {"p": "Mirror", "v": 3, "s": "m2", "t": "", "m": "自分のカード1枚をFlip。同じラインの相手カード1枚もFlip", "b": "", "o": ["FS"], "ti": false, "mi": false, "bi": false}, "Mirror4": {"p": "Mirror", "v": 4, "s": "m2", "t": "", "m": "", "b": "相手がカードを引いた後: 1枚引く", "o": [], "ti": false, "mi": true, "bi": false}, "Mirror5": {"p": "Mirror", "v": 5, "s": "m2", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Peace1": {"p": "Peace", "v": 1, "s": "m2", "t": "", "m": "両プレイヤーは手札をすべて捨てる", "b": "End: 手札が空なら1枚引く", "o": [], "ti": false, "mi": false, "bi": false}, "Peace2": {"p": "Peace", "v": 2, "s": "m2", "t": "", "m": "1枚引く。カード1枚を裏向きでPlay", "b": "", "o": ["D1"], "ti": false, "mi": false, "bi": false}, "Peace3": {"p": "Peace", "v": 3, "s": "m2", "t": "", "m": "1枚捨ててもよい。手札枚数より大きい値のカード1枚をFlip", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Peace4": {"p": "Peace", "v": 4, "s": "m2", "t": "", "m": "", "b": "相手ターン中に自分がカードを捨てた後: 1枚引く", "o": [], "ti": false, "mi": true, "bi": false}, "Peace5": {"p": "Peace", "v": 5, "s": "m2", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Peace6": {"p": "Peace", "v": 6, "s": "m2", "t": "", "m": "手札が1枚より多ければ、このカードをFlip", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Smoke0": {"p": "Smoke", "v": 0, "s": "m2", "t": "", "m": "山札トップを、裏向きカードがある各ラインに裏向きでPlay", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Smoke1": {"p": "Smoke", "v": 1, "s": "m2", "t": "", "m": "自分のカード1枚をFlip。さらにそのカードをShiftしてもよい", "b": "", "o": ["FS"], "ti": false, "mi": false, "bi": false}, "Smoke2": {"p": "Smoke", "v": 2, "s": "m2", "t": "このラインの裏向きカード1枚につき合計値＋1", "m": "", "b": "", "o": [], "ti": true, "mi": true, "bi": false}, "Smoke3": {"p": "Smoke", "v": 3, "s": "m2", "t": "", "m": "裏向きカードがあるラインにカード1枚を裏向きでPlay", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Smoke4": {"p": "Smoke", "v": 4, "s": "m2", "t": "", "m": "被覆された裏向きカード1枚をShift", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Smoke5": {"p": "Smoke", "v": 5, "s": "m2", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "Time0": {"p": "Time", "v": 0, "s": "m2", "t": "", "m": "Trashからカード1枚をPlay。その後Trashを山札にShuffle", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Time1": {"p": "Time", "v": 1, "s": "m2", "t": "", "m": "被覆カード1枚をFlip。自分の山札をすべて捨てる", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Time2": {"p": "Time", "v": 2, "s": "m2", "t": "山札をShuffleした後: 1枚引き、このカードをShiftしてもよい", "m": "Trashにカードがあれば、Trashを山札へShuffleしてもよい", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Time3": {"p": "Time", "v": 3, "s": "m2", "t": "", "m": "Trashのカード1枚をRevealし、別ラインに裏向きでPlay", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Time4": {"p": "Time", "v": 4, "s": "m2", "t": "", "m": "2枚引き、2枚捨てる", "b": "", "o": [], "ti": false, "mi": false, "bi": false}, "Time5": {"p": "Time", "v": 5, "s": "m2", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}, "War0": {"p": "War", "v": 0, "s": "m2", "t": "Refresh後: このカードをFlipしてもよい", "m": "", "b": "相手がカードを引いた後: カード1枚をDeleteしてもよい", "o": [], "ti": false, "mi": true, "bi": false}, "War1": {"p": "War", "v": 1, "s": "m2", "t": "", "m": "", "b": "相手がRefreshした後: 任意枚数捨ててRefresh", "o": [], "ti": false, "mi": true, "bi": false}, "War2": {"p": "War", "v": 2, "s": "m2", "t": "", "m": "カード1枚をFlip", "b": "相手がCompileした後: 相手は手札をすべて捨てる", "o": ["F"], "ti": false, "mi": true, "bi": false}, "War3": {"p": "War", "v": 3, "s": "m2", "t": "", "m": "1枚引く", "b": "相手がカードを捨てた後: カード1枚を裏向きでPlayしてもよい", "o": ["D1"], "ti": false, "mi": true, "bi": false}, "War4": {"p": "War", "v": 4, "s": "m2", "t": "", "m": "相手はカード1枚を捨てる", "b": "", "o": ["O1"], "ti": false, "mi": true, "bi": false}, "War5": {"p": "War", "v": 5, "s": "m2", "t": "", "m": "自分はカード1枚を捨てる", "b": "", "o": ["X1"], "ti": false, "mi": true, "bi": false}};
+const TH={"Darkness": ["#8a5cff", "#1a0b3a", "🌑"], "Death": ["#ff3b5c", "#2a0610", "💀"], "Fire": ["#ff8a1f", "#3a1204", "🔥"], "Gravity": ["#b07cff", "#1a1030", "🪐"], "Life": ["#3bffb0", "#06301f", "🌿"], "Light": ["#ffe14a", "#3a3205", "✨"], "Metal": ["#b8c4d6", "#1c2430", "⚙️"], "Plague": ["#9dff3b", "#1c3004", "☣️"], "Psychic": ["#ff5be6", "#30082a", "🔮"], "Speed": ["#ffd23b", "#33280a", "⚡"], "Spirit": ["#5be3ff", "#06283a", "👻"], "Water": ["#2ea8ff", "#04203a", "💧"], "Apathy": ["#9aa5b5", "#1a1f28", "😶"], "Hate": ["#ff2a2a", "#300606", "💢"], "Love": ["#ff6fa8", "#3a0a1e", "💖"], "Chaos": ["#ff6a00", "#2a0f2a", "🌀"], "Clarity": ["#9fe8ff", "#0a2a3a", "💎"], "Corruption": ["#b3ff00", "#1a2a05", "🧬"], "Courage": ["#ff9d2e", "#3a1c05", "🦁"], "Fear": ["#7a5cff", "#10102a", "😱"], "Ice": ["#a8f0ff", "#0a2a40", "❄️"], "Luck": ["#4dff6e", "#06300f", "🍀"], "Mirror": ["#d6e8ff", "#1a2438", "🪞"], "Peace": ["#8fffd2", "#06302a", "🕊️"], "Smoke": ["#a0a0b8", "#1a1a24", "🌫️"], "Time": ["#ffb347", "#2a1c05", "⏳"], "War": ["#ff4d4d", "#2a0a0a", "⚔️"]};
+const SN={m1:'Main 1',a1:'Aux 1',m2:'Main 2'};
+const PT={F:'裏返す(表⇄裏)カードを選択',FX:'裏返すカードを選択(このカード以外)',FO:'裏返す相手のカードを選択',FS:'裏返す自分のカードを選択',FOU:'裏返す相手の表向きカードを選択',DEL:'削除するカードを選択',DELD:'削除する裏向きカードを選択',DELL:'削除する値0〜1のカードを選択',RET:'持ち主の手札に戻すカードを選択',RETS:'手札に戻す自分のカードを選択',RETO:'相手の手札に戻すカードを選択',SH:'移動するカードを選択',SHA:'移動するカードを選択(このカード以外)',SHX:'移動する自分のカードを選択(このカード以外)',SHD:'移動する裏向きカードを選択',SHOD:'移動する相手の裏向きカードを選択'};
+const FT={F:()=>1,FX:(e,x,p,s)=>e.c!=s.sc,FO:(e,x,p)=>x!=p,FS:(e,x,p)=>x==p,FOU:(e,x,p)=>x!=p&&e.u,DEL:()=>1,DELD:e=>!e.u,DELL:e=>e.u&&C[e.c].v<2,RET:()=>1,RETS:(e,x,p)=>x==p,RETO:(e,x,p)=>x!=p,SH:()=>1,SHA:(e,x,p,s)=>e.c!=s.sc,SHX:(e,x,p,s)=>x==p&&e.c!=s.sc,SHD:e=>!e.u,SHOD:(e,x,p)=>x!=p&&!e.u};
 const opp=p=>p=='a'?'b':'a',ORD=['a','b','b','a','a','b'];
 const sh=a=>{for(let i=a.length;i>1;){const j=Math.random()*i--|0;[a[i],a[j]]=[a[j],a[i]]}return a};
-const val=e=>e.u?C[e.c].v:2,tot=(s,i,p)=>s.ln[i][p].reduce((x,e)=>x+val(e),0);
-const lg=(s,m)=>{s.log.push(m);s.log=s.log.slice(-8)};
+const fu=(r,id)=>r.some(e=>e.u&&e.c==id);
+const val=e=>e.u?C[e.c].v:2;
+function tot(s,i,p){const st=s.ln[i][p],os=s.ln[i][opp(p)],d=st.filter(e=>!e.u).length;
+ let t=st.reduce((a,e)=>a+(e.u?C[e.c].v:fu(st,'Darkness2')?4:2),0);
+ if(fu(st,'Apathy0')||fu(st,'Smoke2'))t+=d*(fu(st,'Apathy0')+fu(st,'Smoke2'));
+ if(fu(st,'Clarity0'))t+=s.hand[p].length;if(fu(st,'Mirror0'))t+=os.length;if(fu(os,'Metal0'))t-=2;return t}
+const lg=(s,m)=>{s.log.push(m);s.log=s.log.slice(-10)};
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-/* ===== ゲームエンジン(状態sを直接書き換える) ===== */
-function blank(){return{names:{},ph:'wait',pool:Object.keys(PR),pk:0,pr:{a:[],b:[]},deck:{a:[],b:[]},hand:{a:[],b:[]},dis:{a:[],b:[]},ln:[0,1,2].map(()=>({a:[],b:[]})),cp:{a:[0,0,0],b:[0,0,0]},turn:'a',q:[],wt:null,log:['ROOM CREATED'],win:null,act:'a',ok:0}}
+const protos=sets=>[...new Set(Object.values(C).filter(c=>sets.includes(c.s)).map(c=>c.p))];
+/* ===== ゲームエンジン ===== */
+function blank(sets){return{names:{},ph:'wait',pool:protos(sets),pk:0,pr:{a:[],b:[]},deck:{a:[],b:[]},hand:{a:[],b:[]},dis:{a:[],b:[]},ln:[0,1,2].map(()=>({a:[],b:[]})),cp:{a:[0,0,0],b:[0,0,0]},turn:'a',q:[],wt:null,log:['ルーム作成'],win:null,act:'a',ok:0,sc:''}}
+const W=(s,o)=>{s.wt={src:s.sc,...o}};
 function draw(s,p,n){for(;n>0;n--){if(!s.deck[p].length){if(!s.dis[p].length)break;s.deck[p]=sh(s.dis[p]);s.dis[p]=[]}s.hand[p].push(s.deck[p].pop())}}
-function setup(s){['a','b'].forEach(p=>{s.deck[p]=sh(s.pr[p].flatMap(n=>[0,1,2,3,4,5].map(v=>n+v)));draw(s,p,5)});s.ph='play';s.turn='a';lg(s,'BATTLE START');begin(s)}
+function setup(s){['a','b'].forEach(p=>{s.deck[p]=sh(s.pr[p].flatMap(n=>Object.keys(C).filter(id=>C[id].p==n)));draw(s,p,5)});s.ph='play';s.turn='a';lg(s,'バトル開始');begin(s)}
 function begin(s){const p=s.turn,o=opp(p);const ok=[0,1,2].filter(i=>{const t=tot(s,i,p);return t>=10&&t>tot(s,i,o)});
- if(ok.length==1)comp(s,ok[0]);else if(ok.length)s.wt={who:p,k:'comp',opts:ok};else s.wt={who:p,k:'act'}}
+ s.sc='';if(ok.length==1)comp(s,ok[0]);else if(ok.length)W(s,{who:p,k:'comp',opts:ok});else W(s,{who:p,k:'act'})}
 function comp(s,i){const p=s.turn,o=opp(p);['a','b'].forEach(x=>{s.ln[i][x].forEach(e=>s.dis[e.o].push(e.c));s.ln[i][x]=[]});
  if(s.cp[p][i]){if(s.deck[o].length)s.hand[p].push(s.deck[o].pop())}else s.cp[p][i]=1;
- lg(s,s.names[p]+' が '+s.pr[p][i]+' をコンパイル!');
- if(s.cp[p].every(x=>x)){s.win=p;s.wt=null;return}fin(s)}
-function fin(s){const p=s.turn;if(s.hand[p].length>5){s.wt={who:p,k:'disc',cache:1,n:1};return}s.turn=opp(p);begin(s)}
+ lg(s,s.names[p]+' が '+s.pr[p][i]+' をコンパイル!');if(s.cp[p].every(x=>x)){s.win=p;s.wt=null;return}fin(s)}
+function fin(s){const p=s.turn;s.sc='';if(s.hand[p].length>5){W(s,{who:p,k:'disc',cache:1,n:1});return}s.turn=opp(p);begin(s)}
 function run(s){s.wt=null;while(s.q.length){let op=s.q.shift();const p=s.act,o=opp(p);
- if(op[0]=='D'){draw(s,p,+op[1]);continue}
- if(op[0]=='X'){if(s.hand[p].length){s.wt={who:p,k:'disc',n:+op[1]};return}s.ok=0;continue}
- if(op[0]=='O'){if(s.hand[o].length){s.wt={who:o,k:'disc',n:+op[1]};return}continue}
+ if(op[0]=='D'&&op[1]!='E'&&op[1]!='E'){draw(s,p,+op.slice(1));continue}
+ if(op.startsWith('OD')){draw(s,o,+op.slice(2));continue}
+ if(op=='RF'){if(s.hand[p].length<5)draw(s,p,5-s.hand[p].length);continue}
+ if(op[0]=='X'){s.ok=0;if(s.hand[p].length){W(s,{who:p,k:'disc',n:+op[1]});return}continue}
+ if(op[0]=='O'){if(s.hand[o].length){W(s,{who:o,k:'disc',n:+op[1],by:p});return}continue}
  if(op[0]=='?'){if(!s.ok)continue;op=op.slice(1)}
- const f={F:()=>1,DEL:()=>1,DELD:e=>!e.u,DELL:e=>val(e)<2,RET:()=>1,RETS:(e,x)=>x==p}[op];if(!f)continue;
- const opts=[];[0,1,2].forEach(i=>['a','b'].forEach(x=>{const r=s.ln[i][x],e=r[r.length-1];if(e&&f(e,x))opts.push([i,x])}));
- if(!opts.length)continue;s.wt={who:p,k:'tgt',op,opts};return}
+ const f=FT[op];if(!f)continue;const opts=[];
+ [0,1,2].forEach(i=>['a','b'].forEach(x=>{const r=s.ln[i][x],e=r[r.length-1];if(e&&f(e,x,p,s))opts.push([i,x])}));
+ if(!opts.length)continue;W(s,{who:p,k:'tgt',op,opts});return}
  fin(s)}
-function pickTgt(s,i,x){const w=s.wt,r=s.ln[i][x],e=r[r.length-1];
- if(w.op=='F'){e.u=e.u?0:1;if(e.u)s.q.unshift(...C[e.c].o)}
- else{r.pop();if(w.op[0]=='D')s.dis[e.o].push(e.c);else s.hand[e.o].push(e.c);const n=r[r.length-1];if(n&&n.u)s.q.unshift(...C[n.c].o)}
+function uncover(s,r){const n=r[r.length-1];if(n&&n.u)s.q.unshift(...C[n.c].o)}
+function pickTgt(s,i,x){const w=s.wt,r=s.ln[i][x],e=r[r.length-1],p=w.who;
+ if(w.op[0]=='F'){e.u=e.u?0:1;lg(s,C[e.c].p+C[e.c].v+' を'+(e.u?'表':'裏')+'向きに');if(e.u)s.q.unshift(...C[e.c].o)}
+ else if(w.op[0]=='S'){W(s,{who:p,k:'dst',from:[i,x]});return}
+ else{r.pop();const d=w.op[0]=='D';(d?s.dis[e.o]:s.hand[e.o]).push(e.c);lg(s,C[e.c].p+C[e.c].v+(d?' を削除':' を手札へ戻した'));uncover(s,r)}
  run(s)}
+function dstTo(s,j){const[i,x]=s.wt.from,r=s.ln[i][x],e=r.pop();s.ln[j][x].push(e);lg(s,C[e.c].p+C[e.c].v+' を移動(シフト)');uncover(s,r);run(s)}
 function disc(s,idx){const w=s.wt,p=w.who;s.dis[p].push(s.hand[p].splice(idx,1)[0]);
  if(w.cache){if(s.hand[p].length>5)return;s.turn=opp(p);s.wt=null;begin(s);return}
- s.ok=1;if(w.n>1&&s.hand[p].length){s.wt={...w,n:w.n-1};return}run(s)}
-function play(s,p,idx,i,up){const id=s.hand[p].splice(idx,1)[0];s.ln[i][p].push({c:id,u:up,o:p});s.act=p;s.q=up?[...C[id].o]:[];
- lg(s,s.names[p]+(up?' が '+id+' を表向きでプレイ':' が裏向きでプレイ'));run(s)}
+ if(p==s.act)s.ok=1;if(w.n>1&&s.hand[p].length){s.wt={...w,n:w.n-1};return}run(s)}
+function why(s,p,id,i,up){const o=opp(p),c=C[id],own=s.ln.flatMap(l=>l[p]),en=s.ln[i][o];
+ if(!up){if(s.ln[i][o].some(e=>e.u&&e.c=='Metal2')&&s.ln[i][o][s.ln[i][o].length-1].c=='Metal2'||fu(en,'Metal2'))return 'このラインには Metal 2 の効果で裏向きでは出せません';}
+ else{if(s.ln.some(l=>fu(l[o],'Psychic1')))return 'Psychic 1 の効果で、相手は裏向きでしかカードを出せません(あなたのことです)';
+  if(c.p!=s.pr[p][i]&&!fu(own,'Spirit1')&&id!='Chaos3')return '表向きは、そのカードのプロトコル('+c.p+')のラインにしか出せません。裏向きなら任意のラインに出せます'}
+ const t=en[en.length-1];if(t&&t.u&&t.c=='Plague0')return 'Plague 0 の効果で、このラインにはカードを出せません';return''}
+function play(s,p,idx,i,up){const id=s.hand[p].splice(idx,1)[0];s.ln[i][p].push({c:id,u:up,o:p});s.act=p;s.sc=id;s.q=up?[...C[id].o]:[];
+ lg(s,s.names[p]+' が '+(up?id+' を表向きでプレイ':'カードを裏向きでプレイ'));run(s)}
 function refresh(s,p){draw(s,p,5-s.hand[p].length);lg(s,s.names[p]+' がリフレッシュ');fin(s)}
-/* ===== 通信(Firestore) ===== */
-let me=null,ref=null,S=null,sel=-1,down=false,unsub=null;const $=id=>document.getElementById(id);
-async function tx(fn){try{await db.runTransaction(async t=>{const d=await t.get(ref);const s=JSON.parse(d.data().s);fn(s);t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){alert('通信エラー: '+e.message)}}
+/* ===== 通信 ===== */
+let me=null,ref=null,S=null,sel=-1,down=false,unsub=null,det=null,db;const $=id=>document.getElementById(id);
+async function tx(fn){try{await db.runTransaction(async t=>{const d=await t.get(ref);if(!d.exists)throw Error('部屋が存在しません');const s=JSON.parse(d.data().s);fn(s);t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){alert('通信エラー: '+e.message)}}
 async function join(){const room=$('room').value.trim(),name=$('name').value.trim();if(!room||!name)return alert('部屋IDと名前を入力してください');
+ const sets=[...document.querySelectorAll('.ck input:checked')].map(x=>x.value);if(!sets.length)return alert('使うセットを1つ以上選んでください');
  ref=db.collection(COL).doc(room);
  try{await db.runTransaction(async t=>{const d=await t.get(ref);let s;
-  if(!d.exists){s=blank();s.names.a=name;me='a'}
+  if(!d.exists){s=blank(sets);s.names.a=name;me='a'}
   else{s=JSON.parse(d.data().s);if(s.names.a==name)me='a';else if(!s.names.b){s.names.b=name;me='b';s.ph='draft'}else if(s.names.b==name)me='b';else throw Error('この部屋は満員です')}
   t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){return alert(e.message)}
- unsub=ref.onSnapshot(d=>{if(d.exists){S=JSON.parse(d.data().s);R()}})}
-/* ===== 画面描画 ===== */
-function R(){const A=$('app');if(!S){return}const s=S,o=opp(me),H=s.hand[me];
- let h=`<div class="bar o"><span>ROOM ${esc(ref.id)}</span><span>YOU: ${esc(s.names[me])} / FOE: ${esc(s.names[o]||'待機中…')}</span></div>`;
+ unsub=ref.onSnapshot(d=>{if(d.exists){S=JSON.parse(d.data().s);R()}else if(S){S=null;me=null;unsub&&unsub();lobby('部屋がリセットされました。同じ部屋IDで入り直せます。')}})}
+async function resetRoom(){if(confirm('ゲームを強制終了して部屋を削除します。相手の画面も入室画面に戻ります。よろしいですか?'))try{await ref.delete()}catch(e){alert('削除に失敗: '+e.message)}}
+/* ===== 描画 ===== */
+const th=p=>`--c:${TH[p][0]};--b:${TH[p][1]}`;
+function big(id,cls,attr){const c=C[id],T=(x,l,k,ok)=>x?`<div class="sx ${k}"><u>${l}</u>${esc(x)}${ok?'':'<s>未実装</s>'}</div>`:'';
+ return`<div class="hc holo ${cls}" style="${th(c.p)}" ${attr||''}><div class="hd"><span>${c.p}</span><b>${c.v}</b></div><div class="ar">${TH[c.p][2]}</div>${T(c.t,'上段 常に有効','t',c.ti)}${T(c.m,'中段 出した時','m',c.mi)}${T(c.b,'下段 条件で発動','b',c.bi)}</div>`}
+function lobby(note){$('app').innerHTML=`<h1 class="o">COMPILE</h1><div class="bar">PROTOCOL BATTLE // 1 vs 1</div>${note?`<div class="st">${note}</div>`:''}<div class="box"><label>ROOM ID</label><input type="text" id="room" placeholder="例: room1" autocomplete="off"><label>NAME</label><input type="text" id="name" placeholder="あなたの名前" autocomplete="off"><div class="ck" style="margin:8px 0">使うセット(部屋を作る人の設定が有効):<br><label><input type="checkbox" value="m1" checked> Main 1</label><label><input type="checkbox" value="a1" checked> Aux 1</label><label><input type="checkbox" value="m2" checked> Main 2</label></div><button onclick="join()">ENTER ROOM</button><div style="color:var(--dim);margin-top:8px">同じ部屋IDを入れた2人で対戦します。切断しても同じ名前で入り直せば再開できます。</div></div>`}
+function R(){const A=$('app');if(!S)return;const s=S,o=opp(me),H=s.hand[me],w=s.wt,mine=w&&w.who==me&&!s.win;
+ let h=`<div class="bar o"><span>ROOM ${esc(ref.id)}</span><span>YOU: ${esc(s.names[me])} / FOE: ${esc(s.names[o]||'待機中…')}</span><button class="m" data-a="reset">強制終了・部屋リセット</button></div>`;
  if(s.ph=='wait')return A.innerHTML=h+'<div class="box">対戦相手の入室を待っています。同じ部屋IDで相手に入室してもらってください。</div>';
  if(s.ph=='draft'){const cur=ORD[s.pk];
-  h+=`<div class="st ${cur==me?'me':''}">プロトコル選択(先手1→後手2→先手2→後手1) — ${cur==me?'あなたの番です':esc(s.names[cur])+' が選択中'}</div><div class="box pk">`+
-   s.pool.map(n=>`<button data-pk="${n}" style="--c:${PR[n]}">${n}</button>`).join('')+'</div>'+
-   ['a','b'].map(p=>`<div>${esc(s.names[p])}: ${s.pr[p].join(' / ')||'-'}</div>`).join('');return A.innerHTML=h}
- const w=s.wt,mine=w&&w.who==me&&!s.win;let msg='';
- if(s.win)msg=s.win==me?'🏆 VICTORY — 全プロトコルをコンパイルしました':'DEFEAT — 相手が全プロトコルをコンパイルしました';
- else if(!w)msg='処理中…';
- else if(!mine)msg=esc(s.names[w.who])+' の操作を待っています';
- else msg={act:'アクション: 手札を選んでラインへプレイ、またはリフレッシュ',comp:'コンパイルするラインを選んでください(強調中のライン)',disc:(w.cache?'手札が6枚以上: ':'')+'捨てるカードを手札から選択',tgt:'対象のカードを選択(強調中のカード)'}[w.k];
- h+=`<div class="st ${mine?'me':''}">${s.turn==me?'YOUR TURN':'FOE TURN'} — ${msg}</div>`;
- h+='<div class="bar"><span>FOE 手札 '+s.hand[o].length+' / 山札 '+s.deck[o].length+'</span><span>自分 山札 '+s.deck[me].length+' / 捨札 '+s.dis[me].length+'</span></div><div class="g">';
+  h+=`<div class="st ${cur==me?'me':''}"><b>プロトコル選択</b>(先手1→後手2→先手2→後手1) — ${cur==me?'あなたの番です。1つ選んでください':esc(s.names[cur])+' が選択中'}</div><div class="box pk">`+s.pool.map(n=>`<button data-pk="${n}" style="${th(n)}">${TH[n][2]} ${n}</button>`).join('')+'</div>'+['a','b'].map(p=>`<div>${esc(s.names[p])}: ${s.pr[p].join(' / ')||'-'}</div>`).join('');return A.innerHTML=h}
+ let msg='';const src=w&&w.src&&C[w.src]?`<b>${w.src}</b> の効果:`:'';
+ if(s.win)msg=s.win==me?'<b>🏆 勝利!</b> 全プロトコルをコンパイルしました。「強制終了・部屋リセット」で次の対戦へ':'<b>敗北…</b> 相手が全プロトコルをコンパイルしました';
+ else if(!w)msg='処理中…';else if(!mine)msg=esc(s.names[w.who])+' の操作を待っています';
+ else msg={act:'<b>あなたの行動:</b> ①手札を選び、出したいラインの自分側を押す ②またはリフレッシュ',comp:'<b>コンパイル!</b> 光っているラインの「コンパイル」ボタンを押してください',disc:`${src} <b>${w.cache?'手札が6枚以上です。5枚になるまで':''}手札から捨てるカードを選んでください</b>`,tgt:`${src} <b>${PT[w.op]}</b>(光っているカードを押す)`,dst:`${src} <b>移動先のラインを選んでください</b>(光っている自分/相手側の枠を押す)`}[w.k];
+ h+=`<div class="st ${mine?'me':''}">${s.turn==me?'【あなたのターン】':'【相手のターン】'} ${msg}</div>`;
+ h+='<div class="bar"><span>相手 手札 '+s.hand[o].length+' / 山札 '+s.deck[o].length+' / 捨札 '+s.dis[o].length+'</span><span>自分 山札 '+s.deck[me].length+' / 捨札 '+s.dis[me].length+'</span></div><div class="g">';
  for(let i=0;i<3;i++){const tm=tot(s,i,me),to=tot(s,i,o),cl=mine&&w.k=='comp'&&w.opts.includes(i);
-  const st=(x)=>s.ln[i][x].map((e,j,r)=>{const t=j==r.length-1,hit=mine&&w.k=='tgt'&&t&&w.opts.some(q=>q[0]==i&&q[1]==x),c=C[e.c],v=e.u||x==me;
-   return`<div class="cd ${e.u?'':'dn'} ${t?'top':''} ${hit?'hit':''}" style="--c:${PR[c.p]}" ${hit?`data-t="${i},${x}"`:''}><b>${val(e)}</b><span>${v?c.p+c.v:'??'}</span>${t&&v?`<i>${c.t}</i>`:''}</div>`}).join('');
-  const pr=(x)=>`<div class="pr ${s.cp[x][i]?'done':''}" style="--c:${PR[s.pr[x][i]]}">${s.pr[x][i]}${s.cp[x][i]?' ✔':''}</div>`;
-  h+=`<div class="col">${''}<div class="half">${pr(o)}${st(o)}</div>
+  const st=x=>s.ln[i][x].map((e,j,r)=>{const t=j==r.length-1,hit=mine&&w.k=='tgt'&&t&&w.opts.some(q=>q[0]==i&&q[1]==x),c=C[e.c],v=e.u||x==me;
+   return`<div class="cd holo ${e.u?'':'dn'} ${t?'top':''} ${hit?'hit':''}" style="${th(c.p)}" ${hit?`data-t="${i},${x}"`:v?`data-d="${e.c}"`:''}><span class="ic">${v?TH[c.p][2]:'❔'}</span><b>${val(e)}</b><em>${v?c.p+' '+c.v:'裏'}${!e.u&&v?'(伏)':''}</em></div>`}).join('');
+  const pr=x=>`<div class="pr ${s.cp[x][i]?'done':''}" style="${th(s.pr[x][i])}">${TH[s.pr[x][i]][2]} ${s.pr[x][i]}${s.cp[x][i]?' ✔':''}</div>`;
+  const dl=mine&&w.k=='dst'&&w.from[0]!=i&&true,dlx=x=>dl&&x==w.from[1]&&w.from[0]!=i;
+  const pl=mine&&w.k=='act'&&sel>=0;
+  h+=`<div class="col"><div class="half ${dlx(o)?'hit':''}" ${dlx(o)?`data-dl="${i}"`:''}>${pr(o)}${st(o)}</div>
   <div class="sc">${to} <span style="color:var(--ln)">|</span> <b class="${tm>=10&&tm>to?'ok':''}">${tm}</b>${cl?`<br><button class="m" data-cp="${i}">コンパイル</button>`:''}</div>
-  <div class="half mine slot ${mine&&w.k=='act'&&sel>=0?'hit':''}" ${mine&&w.k=='act'&&sel>=0?`data-pl="${i}"`:''}>${pr(me)}${st(me)}</div></div>`}
+  <div class="half mine ${pl||dlx(me)?'hit':''}" ${pl?`data-pl="${i}"`:dlx(me)?`data-dl="${i}"`:''}>${pr(me)}${st(me)}</div></div>`}
  h+='</div>';
- if(mine&&w.k=='act')h+=`<div><button data-a="ref" ${H.length>=5?'disabled':''}>リフレッシュ</button><label><input type="checkbox" id="dn" ${down?'checked':''} style="width:auto"> 裏向きで出す(値2・どのラインでも可)</label>${!H.length&&!s.deck[me].length&&!s.dis[me].length?'<button data-a="pass">パス</button>':''}</div>`;
- h+='<div class="hand">'+H.map((id,k)=>{const c=C[id];return`<div class="hc ${k==sel?'sel':''}" style="--c:${PR[c.p]}" data-h="${k}"><em>${c.p}</em><b>${c.v}</b><br><i>${c.t}</i></div>`}).join('')+'</div>';
+ if(mine&&w.k=='act')h+=`<div class="ck"><button data-a="ref" ${H.length>=5?'disabled':''}>リフレッシュ(手札5枚まで引く)</button><label><input type="checkbox" id="dn" ${down?'checked':''}> 裏向きで出す(値2・どのラインでも可)</label>${!H.length&&!s.deck[me].length&&!s.dis[me].length?'<button data-a="pass">パス</button>':''}</div>`;
+ h+='<div class="hand">'+H.map((id,k)=>big(id,k==sel?'sel':'',`data-h="${k}"`)).join('')+'</div>';
+ if(det)h+=`<div class="box dt">${big(det,'nb')}<div>カード詳細(場のカードを押すと表示)<br><button data-a="cl">閉じる</button></div></div>`;
  h+='<div class="box log">'+s.log.slice().reverse().map(esc).join('<br>')+'</div>';A.innerHTML=h}
-document.addEventListener('click',e=>{const t=e.target.closest('[data-pk],[data-t],[data-cp],[data-pl],[data-h],[data-a]');if(!t||!S||!me)return;const s=S,w=s.wt,mine=w&&w.who==me&&!s.win;
+document.addEventListener('click',e=>{const t=e.target.closest('[data-pk],[data-t],[data-cp],[data-pl],[data-h],[data-a],[data-dl],[data-d]');if(!t||!S||!me)return;const s=S,w=s.wt,mine=w&&w.who==me&&!s.win;
+ if(t.dataset.a=='reset')return resetRoom();if(t.dataset.a=='cl'){det=null;return R()}
  if(t.dataset.pk){if(ORD[s.pk]!=me)return;const n=t.dataset.pk;return tx(s=>{if(ORD[s.pk]!=me)return;s.pr[me].push(n);s.pool=s.pool.filter(x=>x!=n);s.pk++;if(s.pk>=6)setup(s)})}
+ if(t.dataset.d&&!(mine&&t.dataset.t)){det=t.dataset.d;return R()}
  if(!mine)return;
  if(t.dataset.t){const[i,x]=t.dataset.t.split(',');return tx(s=>pickTgt(s,+i,x))}
+ if(t.dataset.dl)return tx(s=>dstTo(s,+t.dataset.dl));
  if(t.dataset.cp)return tx(s=>comp(s,+t.dataset.cp));
- if(t.dataset.h!==undefined){const k=+t.dataset.h;if(w.k=='disc'){return tx(s=>disc(s,k))}if(w.k=='act'){sel=sel==k?-1:k;R()}return}
- if(t.dataset.pl!==undefined){const i=+t.dataset.pl,id=s.hand[me][sel],up=!$('dn')?.checked;
-  if(up&&C[id].p!=s.pr[me][i])return alert('表向きは、対応するプロトコルのラインにしか出せません。裏向きなら任意のラインに出せます。');
-  down=!up;const k=sel;sel=-1;return tx(s=>play(s,me,k,i,up))}
+ if(t.dataset.h!==undefined){const k=+t.dataset.h;if(w.k=='disc')return tx(s=>disc(s,k));if(w.k=='act'){sel=sel==k?-1:k;R()}return}
+ if(t.dataset.pl!==undefined){const i=+t.dataset.pl,id=s.hand[me][sel],up=!$('dn')?.checked,er=why(s,me,id,i,up);if(er)return alert(er);down=!up;const k=sel;sel=-1;return tx(s=>play(s,me,k,i,up))}
  if(t.dataset.a=='ref')return tx(s=>refresh(s,me));
  if(t.dataset.a=='pass')return tx(s=>{s.turn=opp(me);begin(s)})});
 document.addEventListener('change',e=>{if(e.target.id=='dn')down=e.target.checked});
-/* ===== 起動 ===== */
-let db;
-if(CFG.apiKey==="YOUR_API_KEY"){$('app').innerHTML='<h1>COMPILE</h1><div class="box">このファイル内の <code>CFG</code>(Firebase設定値)を書き換えてから使ってください。</div>'}
-else{firebase.initializeApp(CFG);db=firebase.firestore();
- $('app').innerHTML=`<h1 class="o">COMPILE</h1><div class="bar">PROTOCOL BATTLE // 1 vs 1</div><div class="box"><label>ROOM ID</label><input id="room" placeholder="例: room1" autocomplete="off"><label>NAME</label><input id="name" placeholder="あなたの名前" autocomplete="off"><button onclick="join()">ENTER ROOM</button><div style="color:var(--dim);margin-top:8px">同じ部屋IDを入力した2人で対戦できます。再接続は同じ名前で入り直してください。</div></div>`}
+if(CFG.apiKey==="YOUR_API_KEY")$('app').innerHTML='<h1>COMPILE</h1><div class="box">このファイル内の <code>CFG</code>(Firebase設定値)を書き換えてから使ってください。</div>';
+else{firebase.initializeApp(CFG);db=firebase.firestore();lobby()}
 </script></body></html>
