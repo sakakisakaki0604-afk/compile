@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>COMPILE // PROTOCOL BATTLE</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#04070f;--pn:#0a1226;--ln:#17315a;--cy:#19e3ff;--mg:#ff2ea6;--tx:#d6e8ff;--dim:#6a85ad}
+*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#10265a 0,var(--bg) 60%) fixed;color:var(--tx);font:13px/1.4 'Noto Sans JP',sans-serif;min-height:100%}
+h1,.o{font-family:Orbitron,sans-serif;letter-spacing:.12em}
+#app{max-width:980px;margin:0 auto;padding:10px}
+.box{background:var(--pn);border:1px solid var(--ln);border-radius:4px;padding:14px;margin:10px 0;box-shadow:0 0 18px #19e3ff14 inset}
+h1{font-size:26px;margin:18px 0 4px;color:var(--cy);text-shadow:0 0 14px var(--cy)}
+input{background:#050b1c;border:1px solid var(--ln);color:var(--tx);padding:9px;border-radius:3px;width:100%;margin:5px 0;font-size:15px}
+button{background:#0b1d3d;color:var(--cy);border:1px solid var(--cy);padding:8px 14px;border-radius:3px;cursor:pointer;font:700 13px 'Noto Sans JP';margin:3px}
+button:hover{background:var(--cy);color:#001}button.m{border-color:var(--mg);color:var(--mg)}
+.bar{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--dim)}
+.st{padding:8px 12px;border-left:3px solid var(--mg);background:#1a0b2a;margin:8px 0;color:#ffd0ec}
+.st.me{border-color:var(--cy);background:#07203a;color:#c8f6ff}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.col{background:#07101f;border:1px solid var(--ln);padding:6px;border-radius:4px;min-height:330px;display:flex;flex-direction:column;justify-content:space-between}
+.half{display:flex;flex-direction:column;gap:3px;min-height:120px}.half.mine{flex-direction:column-reverse}
+.pr{border:1px solid var(--c);color:var(--c);text-align:center;padding:5px;font:800 12px Orbitron;border-radius:3px;box-shadow:0 0 10px var(--c) inset;background:#030812}
+.pr.done{background:var(--c);color:#001;box-shadow:0 0 14px var(--c)}
+.sc{text-align:center;font:800 18px Orbitron;color:var(--dim);padding:4px 0}.sc b{color:var(--cy)}.sc b.ok{color:var(--mg);text-shadow:0 0 8px var(--mg)}
+.cd{border:1px solid var(--c);background:linear-gradient(160deg,#0d1a36,#060c1c);border-radius:3px;padding:3px 6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:11px;min-height:22px}
+.cd b{font:800 14px Orbitron;color:var(--c)}.cd span{font:700 11px Orbitron;color:var(--c)}
+.cd i{font-style:normal;flex-basis:100%;color:var(--tx);font-size:11px;padding-bottom:2px}
+.cd.dn{background:repeating-linear-gradient(45deg,#0a1226 0 6px,#101c3a 6px 12px);border-color:var(--dim)}
+.cd.dn b,.cd.dn span{color:var(--dim)}.cd.top{min-height:56px}
+.hit{outline:2px solid var(--mg);box-shadow:0 0 14px var(--mg);cursor:pointer}
+.slot.hit{border-radius:3px}
+.hand{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hc{width:112px;min-height:96px;border:1px solid var(--c);border-radius:4px;padding:6px;background:linear-gradient(160deg,#10224a,#060c1c);cursor:pointer;box-shadow:0 0 10px color-mix(in srgb,var(--c) 40%,transparent)}
+.hc.sel{transform:translateY(-8px);box-shadow:0 0 18px var(--c)}.hc b{font:800 22px Orbitron;color:var(--c)}.hc em{display:block;font:700 11px Orbitron;color:var(--c);font-style:normal}.hc i{font-style:normal;font-size:10px;color:var(--tx)}
+.log{font-size:11px;color:var(--dim);max-height:90px;overflow:auto}
+.pk{display:flex;gap:8px;flex-wrap:wrap}.pk button{border-color:var(--c);color:var(--c);min-width:110px;padding:14px}
+@media(max-width:600px){.col{min-height:260px}.cd{font-size:10px}}
+</style></head><body><div id="app"></div>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+// ★ここにFirebaseの設定値を貼り付けてください(poker-proと同じものでOK)
+const CFG={
+  apiKey: "AIzaSyDPvvpVoytZCFCSWGcNRQakDbWLn8S5c8Q",
+  authDomain: "compile-game.firebaseapp.com",
+  projectId: "compile-game",
+  storageBucket: "compile-game.firebasestorage.app",
+  messagingSenderId: "537392665193",
+  appId: "1:537392665193:web:69ce798c397c2263cd88f8",
+  measurementId: "G-N7GJJCRLMR"};
+const COL='compile_rooms';
+const PR={Death:'#ff3b5c',Fire:'#ff8a1f',Water:'#2ea8ff',Plague:'#9dff3b',Life:'#3bffb0',Light:'#ffe14a'};
+// 形式: プロトコル|値|中段の処理コード|表示テキスト  (未実装の効果は【未実装】)
+const RAW=`Death|0||中:各他ラインから1枚Delete【未実装】
+Death|1||上:Start:引いてDelete【未実装】
+Death|2||中:値1か2を全Delete【未実装】
+Death|3|DELD|中:裏向き1枚Delete
+Death|4|DELL|中:値0か1の1枚Delete
+Death|5|X1|中:自分は1枚捨てる
+Fire|0|F D2|中:他1枚Flip→2枚引く(下段【未実装】)
+Fire|1|X1 ?DEL|中:1枚捨てる。そうしたら1枚Delete
+Fire|2|X1 ?RET|中:1枚捨てる。そうしたら1枚Return
+Fire|3||下:End:捨ててFlip【未実装】
+Fire|4||中:捨てて枚数+1引く【未実装】
+Fire|5|X1|中:自分は1枚捨てる
+Water|0|F|中:他1枚Flip(自身のFlipは【未実装】)
+Water|1||中:各ラインへ山札Play【未実装】
+Water|2|D2|中:2枚引く(Rearrange【未実装】)
+Water|3||中:値2を全Return【未実装】
+Water|4|RETS|中:自分のカード1枚Return
+Water|5|X1|中:自分は1枚捨てる
+Plague|0|O1|中:相手は1枚捨てる(下段【未実装】)
+Plague|1|O1|中:相手は1枚捨てる(上段【未実装】)
+Plague|2||上:捨て枚数連動【未実装】
+Plague|3||中:他の表向きを全Flip【未実装】
+Plague|4||下:End効果【未実装】
+Plague|5|X1|中:自分は1枚捨てる
+Life|0||中:各ラインへ山札Play【未実装】
+Life|1|F F|中:1枚Flip。さらに1枚Flip
+Life|2|D1|中:1枚引く(Flip任意【未実装】)
+Life|3||下:Cover時効果【未実装】
+Life|4||中:Cover時1枚引く【未実装】
+Life|5|X1|中:自分は1枚捨てる
+Light|0||中:Flip→値と同数引く【未実装】
+Light|1||下:End:1枚引く【未実装】
+Light|2|D2|中:2枚引く(Reveal【未実装】)
+Light|3||中:裏向きを別ラインへ【未実装】
+Light|4||中:相手手札公開【未実装】
+Light|5|X1|中:自分は1枚捨てる`;
+const C={};RAW.split('\n').forEach(l=>{const[p,v,o,t]=l.split('|');C[p+v]={p,v:+v,o:o?o.split(' '):[],t}});
+const opp=p=>p=='a'?'b':'a',ORD=['a','b','b','a','a','b'];
+const sh=a=>{for(let i=a.length;i>1;){const j=Math.random()*i--|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const val=e=>e.u?C[e.c].v:2,tot=(s,i,p)=>s.ln[i][p].reduce((x,e)=>x+val(e),0);
+const lg=(s,m)=>{s.log.push(m);s.log=s.log.slice(-8)};
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* ===== ゲームエンジン(状態sを直接書き換える) ===== */
+function blank(){return{names:{},ph:'wait',pool:Object.keys(PR),pk:0,pr:{a:[],b:[]},deck:{a:[],b:[]},hand:{a:[],b:[]},dis:{a:[],b:[]},ln:[0,1,2].map(()=>({a:[],b:[]})),cp:{a:[0,0,0],b:[0,0,0]},turn:'a',q:[],wt:null,log:['ROOM CREATED'],win:null,act:'a',ok:0}}
+function draw(s,p,n){for(;n>0;n--){if(!s.deck[p].length){if(!s.dis[p].length)break;s.deck[p]=sh(s.dis[p]);s.dis[p]=[]}s.hand[p].push(s.deck[p].pop())}}
+function setup(s){['a','b'].forEach(p=>{s.deck[p]=sh(s.pr[p].flatMap(n=>[0,1,2,3,4,5].map(v=>n+v)));draw(s,p,5)});s.ph='play';s.turn='a';lg(s,'BATTLE START');begin(s)}
+function begin(s){const p=s.turn,o=opp(p);const ok=[0,1,2].filter(i=>{const t=tot(s,i,p);return t>=10&&t>tot(s,i,o)});
+ if(ok.length==1)comp(s,ok[0]);else if(ok.length)s.wt={who:p,k:'comp',opts:ok};else s.wt={who:p,k:'act'}}
+function comp(s,i){const p=s.turn,o=opp(p);['a','b'].forEach(x=>{s.ln[i][x].forEach(e=>s.dis[e.o].push(e.c));s.ln[i][x]=[]});
+ if(s.cp[p][i]){if(s.deck[o].length)s.hand[p].push(s.deck[o].pop())}else s.cp[p][i]=1;
+ lg(s,s.names[p]+' が '+s.pr[p][i]+' をコンパイル!');
+ if(s.cp[p].every(x=>x)){s.win=p;s.wt=null;return}fin(s)}
+function fin(s){const p=s.turn;if(s.hand[p].length>5){s.wt={who:p,k:'disc',cache:1,n:1};return}s.turn=opp(p);begin(s)}
+function run(s){s.wt=null;while(s.q.length){let op=s.q.shift();const p=s.act,o=opp(p);
+ if(op[0]=='D'){draw(s,p,+op[1]);continue}
+ if(op[0]=='X'){if(s.hand[p].length){s.wt={who:p,k:'disc',n:+op[1]};return}s.ok=0;continue}
+ if(op[0]=='O'){if(s.hand[o].length){s.wt={who:o,k:'disc',n:+op[1]};return}continue}
+ if(op[0]=='?'){if(!s.ok)continue;op=op.slice(1)}
+ const f={F:()=>1,DEL:()=>1,DELD:e=>!e.u,DELL:e=>val(e)<2,RET:()=>1,RETS:(e,x)=>x==p}[op];if(!f)continue;
+ const opts=[];[0,1,2].forEach(i=>['a','b'].forEach(x=>{const r=s.ln[i][x],e=r[r.length-1];if(e&&f(e,x))opts.push([i,x])}));
+ if(!opts.length)continue;s.wt={who:p,k:'tgt',op,opts};return}
+ fin(s)}
+function pickTgt(s,i,x){const w=s.wt,r=s.ln[i][x],e=r[r.length-1];
+ if(w.op=='F'){e.u=e.u?0:1;if(e.u)s.q.unshift(...C[e.c].o)}
+ else{r.pop();if(w.op[0]=='D')s.dis[e.o].push(e.c);else s.hand[e.o].push(e.c);const n=r[r.length-1];if(n&&n.u)s.q.unshift(...C[n.c].o)}
+ run(s)}
+function disc(s,idx){const w=s.wt,p=w.who;s.dis[p].push(s.hand[p].splice(idx,1)[0]);
+ if(w.cache){if(s.hand[p].length>5)return;s.turn=opp(p);s.wt=null;begin(s);return}
+ s.ok=1;if(w.n>1&&s.hand[p].length){s.wt={...w,n:w.n-1};return}run(s)}
+function play(s,p,idx,i,up){const id=s.hand[p].splice(idx,1)[0];s.ln[i][p].push({c:id,u:up,o:p});s.act=p;s.q=up?[...C[id].o]:[];
+ lg(s,s.names[p]+(up?' が '+id+' を表向きでプレイ':' が裏向きでプレイ'));run(s)}
+function refresh(s,p){draw(s,p,5-s.hand[p].length);lg(s,s.names[p]+' がリフレッシュ');fin(s)}
+/* ===== 通信(Firestore) ===== */
+let me=null,ref=null,S=null,sel=-1,down=false,unsub=null;const $=id=>document.getElementById(id);
+async function tx(fn){try{await db.runTransaction(async t=>{const d=await t.get(ref);const s=JSON.parse(d.data().s);fn(s);t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){alert('通信エラー: '+e.message)}}
+async function join(){const room=$('room').value.trim(),name=$('name').value.trim();if(!room||!name)return alert('部屋IDと名前を入力してください');
+ ref=db.collection(COL).doc(room);
+ try{await db.runTransaction(async t=>{const d=await t.get(ref);let s;
+  if(!d.exists){s=blank();s.names.a=name;me='a'}
+  else{s=JSON.parse(d.data().s);if(s.names.a==name)me='a';else if(!s.names.b){s.names.b=name;me='b';s.ph='draft'}else if(s.names.b==name)me='b';else throw Error('この部屋は満員です')}
+  t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){return alert(e.message)}
+ unsub=ref.onSnapshot(d=>{if(d.exists){S=JSON.parse(d.data().s);R()}})}
+/* ===== 画面描画 ===== */
+function R(){const A=$('app');if(!S){return}const s=S,o=opp(me),H=s.hand[me];
+ let h=`<div class="bar o"><span>ROOM ${esc(ref.id)}</span><span>YOU: ${esc(s.names[me])} / FOE: ${esc(s.names[o]||'待機中…')}</span></div>`;
+ if(s.ph=='wait')return A.innerHTML=h+'<div class="box">対戦相手の入室を待っています。同じ部屋IDで相手に入室してもらってください。</div>';
+ if(s.ph=='draft'){const cur=ORD[s.pk];
+  h+=`<div class="st ${cur==me?'me':''}">プロトコル選択(先手1→後手2→先手2→後手1) — ${cur==me?'あなたの番です':esc(s.names[cur])+' が選択中'}</div><div class="box pk">`+
+   s.pool.map(n=>`<button data-pk="${n}" style="--c:${PR[n]}">${n}</button>`).join('')+'</div>'+
+   ['a','b'].map(p=>`<div>${esc(s.names[p])}: ${s.pr[p].join(' / ')||'-'}</div>`).join('');return A.innerHTML=h}
+ const w=s.wt,mine=w&&w.who==me&&!s.win;let msg='';
+ if(s.win)msg=s.win==me?'🏆 VICTORY — 全プロトコルをコンパイルしました':'DEFEAT — 相手が全プロトコルをコンパイルしました';
+ else if(!w)msg='処理中…';
+ else if(!mine)msg=esc(s.names[w.who])+' の操作を待っています';
+ else msg={act:'アクション: 手札を選んでラインへプレイ、またはリフレッシュ',comp:'コンパイルするラインを選んでください(強調中のライン)',disc:(w.cache?'手札が6枚以上: ':'')+'捨てるカードを手札から選択',tgt:'対象のカードを選択(強調中のカード)'}[w.k];
+ h+=`<div class="st ${mine?'me':''}">${s.turn==me?'YOUR TURN':'FOE TURN'} — ${msg}</div>`;
+ h+='<div class="bar"><span>FOE 手札 '+s.hand[o].length+' / 山札 '+s.deck[o].length+'</span><span>自分 山札 '+s.deck[me].length+' / 捨札 '+s.dis[me].length+'</span></div><div class="g">';
+ for(let i=0;i<3;i++){const tm=tot(s,i,me),to=tot(s,i,o),cl=mine&&w.k=='comp'&&w.opts.includes(i);
+  const st=(x)=>s.ln[i][x].map((e,j,r)=>{const t=j==r.length-1,hit=mine&&w.k=='tgt'&&t&&w.opts.some(q=>q[0]==i&&q[1]==x),c=C[e.c],v=e.u||x==me;
+   return`<div class="cd ${e.u?'':'dn'} ${t?'top':''} ${hit?'hit':''}" style="--c:${PR[c.p]}" ${hit?`data-t="${i},${x}"`:''}><b>${val(e)}</b><span>${v?c.p+c.v:'??'}</span>${t&&v?`<i>${c.t}</i>`:''}</div>`}).join('');
+  const pr=(x)=>`<div class="pr ${s.cp[x][i]?'done':''}" style="--c:${PR[s.pr[x][i]]}">${s.pr[x][i]}${s.cp[x][i]?' ✔':''}</div>`;
+  h+=`<div class="col">${''}<div class="half">${pr(o)}${st(o)}</div>
+  <div class="sc">${to} <span style="color:var(--ln)">|</span> <b class="${tm>=10&&tm>to?'ok':''}">${tm}</b>${cl?`<br><button class="m" data-cp="${i}">コンパイル</button>`:''}</div>
+  <div class="half mine slot ${mine&&w.k=='act'&&sel>=0?'hit':''}" ${mine&&w.k=='act'&&sel>=0?`data-pl="${i}"`:''}>${pr(me)}${st(me)}</div></div>`}
+ h+='</div>';
+ if(mine&&w.k=='act')h+=`<div><button data-a="ref" ${H.length>=5?'disabled':''}>リフレッシュ</button><label><input type="checkbox" id="dn" ${down?'checked':''} style="width:auto"> 裏向きで出す(値2・どのラインでも可)</label>${!H.length&&!s.deck[me].length&&!s.dis[me].length?'<button data-a="pass">パス</button>':''}</div>`;
+ h+='<div class="hand">'+H.map((id,k)=>{const c=C[id];return`<div class="hc ${k==sel?'sel':''}" style="--c:${PR[c.p]}" data-h="${k}"><em>${c.p}</em><b>${c.v}</b><br><i>${c.t}</i></div>`}).join('')+'</div>';
+ h+='<div class="box log">'+s.log.slice().reverse().map(esc).join('<br>')+'</div>';A.innerHTML=h}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-pk],[data-t],[data-cp],[data-pl],[data-h],[data-a]');if(!t||!S||!me)return;const s=S,w=s.wt,mine=w&&w.who==me&&!s.win;
+ if(t.dataset.pk){if(ORD[s.pk]!=me)return;const n=t.dataset.pk;return tx(s=>{if(ORD[s.pk]!=me)return;s.pr[me].push(n);s.pool=s.pool.filter(x=>x!=n);s.pk++;if(s.pk>=6)setup(s)})}
+ if(!mine)return;
+ if(t.dataset.t){const[i,x]=t.dataset.t.split(',');return tx(s=>pickTgt(s,+i,x))}
+ if(t.dataset.cp)return tx(s=>comp(s,+t.dataset.cp));
+ if(t.dataset.h!==undefined){const k=+t.dataset.h;if(w.k=='disc'){return tx(s=>disc(s,k))}if(w.k=='act'){sel=sel==k?-1:k;R()}return}
+ if(t.dataset.pl!==undefined){const i=+t.dataset.pl,id=s.hand[me][sel],up=!$('dn')?.checked;
+  if(up&&C[id].p!=s.pr[me][i])return alert('表向きは、対応するプロトコルのラインにしか出せません。裏向きなら任意のラインに出せます。');
+  down=!up;const k=sel;sel=-1;return tx(s=>play(s,me,k,i,up))}
+ if(t.dataset.a=='ref')return tx(s=>refresh(s,me));
+ if(t.dataset.a=='pass')return tx(s=>{s.turn=opp(me);begin(s)})});
+document.addEventListener('change',e=>{if(e.target.id=='dn')down=e.target.checked});
+/* ===== 起動 ===== */
+let db;
+if(CFG.apiKey==="YOUR_API_KEY"){$('app').innerHTML='<h1>COMPILE</h1><div class="box">このファイル内の <code>CFG</code>(Firebase設定値)を書き換えてから使ってください。</div>'}
+else{firebase.initializeApp(CFG);db=firebase.firestore();
+ $('app').innerHTML=`<h1 class="o">COMPILE</h1><div class="bar">PROTOCOL BATTLE // 1 vs 1</div><div class="box"><label>ROOM ID</label><input id="room" placeholder="例: room1" autocomplete="off"><label>NAME</label><input id="name" placeholder="あなたの名前" autocomplete="off"><button onclick="join()">ENTER ROOM</button><div style="color:var(--dim);margin-top:8px">同じ部屋IDを入力した2人で対戦できます。再接続は同じ名前で入り直してください。</div></div>`}
+</script></body></html>
