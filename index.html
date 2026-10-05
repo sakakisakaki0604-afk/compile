@@ -93,6 +93,24 @@ body[data-tn=d2] #bg g{animation-duration:10s!important}
 .ctl{display:inline-flex;flex-direction:column;align-items:center;gap:3px;border:3px solid #ffe14a;border-radius:8px;padding:4px;background:linear-gradient(160deg,#2a2000,#0a0800);box-shadow:0 0 18px #ffe14a,inset 0 0 12px #ffe14a55;animation:cg 1.6s infinite alternate}
 .ctl img{width:104px;height:104px;object-fit:cover;border-radius:4px;display:block}.ctl b{font:800 12px Orbitron,sans-serif;color:#ffe14a;letter-spacing:.15em}.zn .ctl{margin-left:6px}
 .ts.cs{font-size:17px;padding:14px 22px}.ts.cs img{width:84px;height:84px;border-radius:6px}
+.hc:hover{transform:translateY(-6px)}
+.cd.pop{animation:pop .55s ease-out}@keyframes pop{0%{transform:scale(1.7) translateY(-40px);opacity:0}60%{transform:scale(.94);opacity:1}100%{transform:none}}
+.hc.dr{animation:dr .55s ease-out}@keyframes dr{from{transform:translateY(80px) rotate(-10deg);opacity:0}to{transform:none;opacity:1}}
+.tbn{position:fixed;top:38%;left:0;right:0;text-align:center;z-index:92;font:800 clamp(28px,8vw,64px) Orbitron,sans-serif;letter-spacing:.2em;color:#fff;text-shadow:0 0 20px var(--c),0 0 50px var(--c);pointer-events:none;background:linear-gradient(90deg,transparent,#000b 20%,#000b 80%,transparent);padding:12px 0;animation:tbi 1.5s forwards}@keyframes tbi{0%{transform:translateX(-100%);opacity:0}20%,70%{transform:none;opacity:1}100%{transform:translateX(100%);opacity:0}}
+#sp{position:fixed;inset:0;z-index:97;background:radial-gradient(circle,#0b1a3a,#02050c);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+.spt{font:800 22px Orbitron,sans-serif;color:#19e3ff;letter-spacing:.2em;z-index:1}.spn{display:flex;gap:30px;flex-wrap:wrap;justify-content:center;z-index:1}
+.spc{padding:26px 42px;border:2px solid #17315a;font:800 24px 'Noto Sans JP',sans-serif;color:#7d96bd}.spc.on{border-color:#ffe14a;color:#fff;box-shadow:0 0 34px #ffe14a;transform:scale(1.15);background:#2a2000}
+.spr{position:absolute;left:50%;top:50%;width:70vmin;height:70vmin;margin:-35vmin;border:3px dashed #19e3ff66;border-radius:50%;animation:rot 3s linear infinite}
+.spw{font:800 26px 'Noto Sans JP',sans-serif;color:#fff;text-align:center;min-height:90px;z-index:1}.spw b{color:#ffe14a;font-size:38px}#sp.fin{animation:fo 1.9s forwards}@keyframes fo{0%,70%{opacity:1}100%{opacity:0}}
+#bgb{position:fixed;left:10px;bottom:10px;z-index:96}.bgbtn{background:#06142e;box-shadow:0 0 12px #19e3ff80}
+#bgp{position:fixed;left:10px;bottom:56px;z-index:96;background:#070d1e;border:1px solid var(--cy);padding:12px;max-width:330px;font-size:13px;line-height:2;box-shadow:0 0 22px #19e3ff60}#bgp select{background:#050b1c;color:#d6e8ff;padding:5px;max-width:200px}
+#ytp0{position:fixed;left:0;bottom:0;width:2px;height:2px;opacity:0;pointer-events:none}
+.ts,.ts.cs{z-index:140}
+.lk{position:fixed;inset:0;z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;background:#000b;animation:lkf 1.8s forwards}
+.lkb{font:800 clamp(48px,14vw,150px) Orbitron,'Noto Sans JP',sans-serif;color:#fff;text-shadow:0 0 30px #19e3ff,0 0 70px #19e3ff}.lks{font:700 20px 'Noto Sans JP',sans-serif;color:#cfe6ff;margin-top:10px}
+.lk.ht .lkb{color:#ffe14a;text-shadow:0 0 30px #ffb300,0 0 80px #ff8a00;animation:pu .35s infinite alternate}.lk.ht::before{content:'';position:absolute;left:50%;top:50%;border:4px solid #ffe14a;border-radius:50%;animation:rgx 1.2s ease-out}
+.lk.ms .lkb{color:#ff6b7f;text-shadow:0 0 30px #f00;animation:shk .12s 8}
+@keyframes lkf{0%{opacity:0}10%,80%{opacity:1}100%{opacity:0}}@keyframes shk{50%{transform:translateX(12px)}}
 </style></head><body><div id="app"></div><div id="fx"></div>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -111,9 +129,9 @@ const SN={m1:'Main 1',a1:'Aux 1',m2:'Main 2'};
 const PT={MCP:'効果を借りる相手の表向きカードを選択',PHA:'カード1枚を裏向きでPlayする',FSELF:'このカードをFlipする',SHANY:'このカードを別ラインへ移動する',FSTK:'裏返すカード(このスタックの他の表向きカード)を選択',SHS:'移動する自分のカードを選択',DELX:'削除するカード(このカード以外)を選択',FCN0:'ライン1の被覆カードを裏返す',FCN1:'ライン2の被覆カードを裏返す',FCN2:'ライン3の被覆カードを裏返す',D1K:'1枚引く',SCH:'相手の合計値が最も高いラインへ、このカードを移動する',DTOP:'山札トップを捨てる',SHCV:'このカードを別ラインへ移動する',GV:'手札1枚を相手に渡す',PVD:'宣言した値のカードをPlayする',DELV0:'',DELV:'削除するカード(捨てたカードと同じ値)を選択',FGH:'裏返すカード(値が手札枚数より大きい)を選択',SHGR:'このラインへ(またはこのラインから)移動するカードを選択',SHC:'そのカードを別ラインへ移動する',X1:'手札を1枚捨てる',DELN0:'ライン1から削除するカードを選択',DELN1:'ライン2から削除するカードを選択',DELN2:'ライン3から削除するカードを選択',DELH:'削除する相手のカード(自分より合計が高いライン)を選択',FLO:'同じラインの相手カードを裏返す',SHTL:'このラインへ移動する裏向きカードを選択',FC:'裏返す覆われたカードを選択',FCL:'このラインの覆われたカードを裏返す',FCS:'覆われた自分の表向きカードを裏返す',SCS:'移動する自分の覆われたカードを選択',SCD:'移動する覆われた裏向きカードを選択',SCOD:'移動する相手の覆われた裏向きカードを選択',SLO:'移動する相手のカード(このライン)を選択',SHO:'移動する相手のカードを選択',SHSELF:'このカードを別ラインへ移動する',FD:'裏返す裏向きカードを選択',F:'裏返す(表⇄裏)カードを選択',FX:'裏返すカードを選択(このカード以外)',FO:'裏返す相手のカードを選択',FS:'裏返す自分のカードを選択',FOU:'裏返す相手の表向きカードを選択',DEL:'削除するカードを選択',DELD:'削除する裏向きカードを選択',DELL:'削除する値0〜1のカードを選択',RET:'持ち主の手札に戻すカードを選択',RETS:'手札に戻す自分のカードを選択',RETO:'相手の手札に戻すカードを選択',SH:'移動するカードを選択',SHA:'移動するカードを選択(このカード以外)',SHX:'移動する自分のカードを選択(このカード以外)',SHD:'移動する裏向きカードを選択',SHOD:'移動する相手の裏向きカードを選択'};
 const CO=new Set(['FC','FCL','FCS','SCS','SCD','SCOD','FCN0','FCN1','FCN2']),ANY=new Set(['SLO','DELV','FSTK']);
 const FT={MCP:(e,x,p)=>x!=p&&e.u,FSTK:(e,x,p,s,c,i)=>i==s.li&&x==p&&e.u&&e.c!=s.sc,SHS:(e,x,p)=>x==p,DELX:(e,x,p,s)=>e.c!=s.sc,FCN0:(e,x,p,s,c,i)=>c&&i==0,FCN1:(e,x,p,s,c,i)=>c&&i==1,FCN2:(e,x,p,s,c,i)=>c&&i==2,DELV:(e,x,p,s)=>val(e)==s.tv2,FGH:(e,x,p,s)=>val(e)>s.hand[p].length,SHGR:()=>1,DELN0:(e,x,p,s,c,i)=>i==0&&s.li!=0,DELN1:(e,x,p,s,c,i)=>i==1&&s.li!=1,DELN2:(e,x,p,s,c,i)=>i==2&&s.li!=2,DELH:(e,x,p,s,c,i)=>x!=p&&tot(s,i,x)>tot(s,i,p),FLO:(e,x,p,s,c,i)=>x!=p&&i==s.tl,SHTL:(e,x,p,s,c,i)=>!e.u&&i!=s.li,FC:(e,x,p,s,c)=>c,FCL:(e,x,p,s,c,i)=>c&&i==s.li,FCS:(e,x,p,s,c)=>c&&x==p&&e.u,SCS:(e,x,p,s,c)=>c&&x==p,SCD:(e,x,p,s,c)=>c&&!e.u,SCOD:(e,x,p,s,c)=>c&&x!=p&&!e.u,SLO:(e,x,p,s,c,i)=>x!=p&&i==s.li,SHO:(e,x,p)=>x!=p,FD:e=>!e.u,F:()=>1,FX:(e,x,p,s)=>e.c!=s.sc,FO:(e,x,p)=>x!=p,FS:(e,x,p)=>x==p,FOU:(e,x,p)=>x!=p&&e.u,DEL:()=>1,DELD:e=>!e.u,DELL:e=>e.u&&C[e.c].v<2,RET:()=>1,RETS:(e,x,p)=>x==p,RETO:(e,x,p)=>x!=p,SH:()=>1,SHA:(e,x,p,s)=>e.c!=s.sc,SHX:(e,x,p,s)=>x==p&&e.c!=s.sc,SHD:e=>!e.u,SHOD:(e,x,p)=>x!=p&&!e.u};
-const TERMS={Flip:'カードの表裏を入れ替える。裏→表になった時、そのカードの中段効果が発動する。',Delete:'場のカードを削除し、持ち主の捨て札に置く。',Return:'場のカードを持ち主の手札に戻す。',Shift:'場のカードを、同じ側の別のラインへ移動する。',Play:'手札(または指定された場所)のカードを自分側のラインに出す。',Draw:'自分の山札から手札にカードを加える(引く)。',Discard:'手札のカードを捨て札にする(捨てる)。',Refresh:'手札が5枚未満のときに、5枚になるまで山札から引くアクション。',Reveal:'カードの内容を相手にも見せること(公開)。',Compile:'自分側の合計値が10以上で、かつ相手より大きいラインを完成させること。そのラインの両者のカードは捨て札になる。',Cover:'カードの上に別のカードが重ねて出され、覆われた状態。覆われたカードの中段は無効、上段は有効。',Rearrange:'プロトコルの並び順を入れ替える。',Swap:'2つのものを入れ替える。',Shuffle:'山札(または捨て札)を混ぜ直す。',Take:'相手の手札から1枚を自分の手札に取る。',Give:'自分の手札のカードを相手に渡す。',Trash:'捨て札置き場。',被覆:'上に別のカードが重なって覆われていること。',未被覆:'一番上にあり、覆われていないカード。',表向き:'効果が有効な向き。値はカードに書かれた数字。',裏向き:'効果が無効な向き。値は2として数える。'};
+const TERMS={Top:'カードの上部に書かれた効果。表向きの間は(覆われていても)常に有効。',Middle:'カードの中央に書かれた効果。表向きで出した時・表向きになった時・覆いが外れた時に発動する。',Bottom:'カードの下部に書かれた効果。条件(Start/End/Cover時など)を満たした時に発動。一番上の表向きのカードだけが有効。',Flip:'カードの表裏を入れ替える。裏→表になった時、そのカードのMiddle効果が発動する。',Delete:'場のカードを削除し、持ち主の捨て札に置く。',Return:'場のカードを持ち主の手札に戻す。',Shift:'場のカードを、同じ側の別のラインへ移動する。',Play:'手札(または指定された場所)のカードを自分側のラインに出す。',Draw:'自分の山札から手札にカードを加える(引く)。',Discard:'手札のカードを捨て札にする(捨てる)。',Refresh:'手札が5枚未満のときに、5枚になるまで山札から引くアクション。',Reveal:'カードの内容を相手にも見せること(公開)。',Compile:'自分側の合計値が10以上で、かつ相手より大きいラインを完成させること。そのラインの両者のカードは捨て札になる。',Cover:'カードの上に別のカードが重ねて出され、覆われた状態。覆われたカードのMiddleは無効、Topは有効。',Rearrange:'プロトコルの並び順を入れ替える。',Swap:'2つのものを入れ替える。',Shuffle:'山札(または捨て札)を混ぜ直す。',Take:'相手の手札から1枚を自分の手札に取る。',Give:'自分の手札のカードを相手に渡す。',Trash:'捨て札置き場。',被覆:'上に別のカードが重なって覆われていること。',未被覆:'一番上にあり、覆われていないカード。',表向き:'効果が有効な向き。値はカードに書かれた数字。',裏向き:'効果が無効な向き。値は2として数える。'};
 const TRE=new RegExp('('+Object.keys(TERMS).sort((a,b)=>b.length-a.length).join('|')+')','g');
-const LB=(k,x)=>/^Start/.test(x)?'ターン開始時':/^End/.test(x)?'ターン終了時':/Cover/.test(x)?'覆われた時':k=='t'?'常に有効':'条件を満たした時';
+const LB=(k,x)=>(k=='t'?'Top':'Bottom')+'・'+(/^Start/.test(x)?'ターン開始時':/^End/.test(x)?'ターン終了時':/Cover/.test(x)?'覆われた時':k=='t'?'常に有効':'条件を満たした時');
 const nm=x=>String(x).normalize('NFKC').trim().toLowerCase();
 const opp=p=>p=='a'?'b':'a',ORD=['a','b','b','a','a','b'];
 const sh=a=>{for(let i=a.length;i>1;){const j=Math.random()*i--|0;[a[i],a[j]]=[a[j],a[i]]}return a};
@@ -129,9 +147,10 @@ const protos=sets=>[...new Set(Object.values(C).filter(c=>sets.includes(c.s)).ma
 /* ===== ゲームエンジン ===== */
 function blank(sets){return{gid:Math.random().toString(36).slice(2),names:{},ph:'wait',pool:protos(sets),pk:0,pr:{a:[],b:[]},deck:{a:[],b:[]},hand:{a:[],b:[]},dis:{a:[],b:[]},ln:[0,1,2].map(()=>({a:[],b:[]})),cp:{a:[0,0,0],b:[0,0,0]},turn:'a',q:[],wt:null,log:['ルーム作成'],win:null,act:'a',ok:0,sc:'',cn:0,cl:''}}
 const W=(s,o)=>{s.wt={src:s.sc,...o}};
+const fev=(s,o)=>{s.fq=[...(s.fq||[]).slice(-5),o];s.fn=(s.fn||0)+1};
 function topc(s,p){if(!s.deck[p].length&&s.dis[p].length){s.deck[p]=sh(s.dis[p]);s.dis[p]=[]}return s.deck[p].pop()}
 function draw(s,p,n){if(s.hand[p].length&&s.ln.some(l=>fu(l[p],'Ice6')))return;for(;n>0;n--){if(!s.deck[p].length){if(!s.dis[p].length)break;s.deck[p]=sh(s.dis[p]);s.dis[p]=[]}s.hand[p].push(s.deck[p].pop())}}
-function setup(s){['a','b'].forEach(p=>{s.deck[p]=sh(s.pr[p].flatMap(n=>Object.keys(C).filter(id=>C[id].p==n)));draw(s,p,5)});s.ph='play';s.turn='a';lg(s,'バトル開始');begin(s)}
+function setup(s){['a','b'].forEach(p=>{s.deck[p]=sh(s.pr[p].flatMap(n=>Object.keys(C).filter(id=>C[id].p==n)));draw(s,p,5)});s.ph='play';s.turn=Math.random()<.5?'a':'b';s.first=s.turn;lg(s,'バトル開始: 先攻は '+s.names[s.turn]);begin(s)}
 function trig(s,p,k){const q=[];s.ln.forEach((l,li)=>{const r=l[p];r.forEach((e,j)=>{const c=C[e.c];if(e.u&&c[k]&&(c.sp=='t'||j==r.length-1))q.push('@'+e.c+'|'+li,...c[k])})});return q}
 function begin(s){const q0=trig(s,s.turn,'st');if(q0.length){s.act=s.turn;s.q=q0;s.cont='start';s.sc='';lg(s,'開始効果が発動');run(s);return}begin2(s)}
 function begin2(s){s.rv=null;s.fl=[];if(s.uc&&[0,1,2].filter(i=>tot(s,i,s.turn)>tot(s,i,opp(s.turn))).length>=2&&s.ctl!=s.turn){s.ctl=s.turn;s.nn=(s.nn||0)+1;s.nt={k:'get',p:s.turn};lg(s,s.names[s.turn]+' がコントロールを獲得')}const p=s.turn,o=opp(p);const ok=[0,1,2].filter(i=>{const t=tot(s,i,p);return t>=10&&t>tot(s,i,o)});
@@ -169,7 +188,7 @@ function run(s){s.wt=null;while(s.q.length){let op=s.q.shift();const p=s.act,o=o
  if(op=='PLO2'){const c=topc(s,p);if(c){W(s,{who:p,k:'phd',stage:1,src:'deck',card:c,fd:1,lines:[0,1,2].filter(i=>i!=s.li)});return}continue}
  if(op=='DLOWC'){let b=null,bv=9;if(s.ln[s.li])['a','b'].forEach(x=>{const r=s.ln[s.li][x];r.forEach((e,j)=>{if(j<r.length-1&&val(e)<bv){bv=val(e);b=[r,j]}})});if(b){const e=b[0].splice(b[1],1)[0];s.dis[e.o].push(e.c)}continue}
  if(op=='DCN'||op=='DCP'){W(s,{who:p,k:'dcl',type:op=='DCN'?'n':'p'});return}
- if(op=='DT3'){const c=topc(s,o);if(c){s.dis[o].push(c);lg(s,s.names[o]+' の山札トップ '+c+' を捨てた(宣言: '+s.dp+')');if(C[c].p==s.dp)s.q.unshift('DEL')}continue}
+ if(op=='DT3'){const c=topc(s,o);if(c){s.dis[o].push(c);lg(s,s.names[o]+' の山札トップ '+c+' を捨てた(宣言: '+s.dp+')');const hit=C[c].p==s.dp;fev(s,{k:hit?'hit':'miss',w:p,v:c});if(hit)s.q.unshift('DEL')}continue}
  if(op=='CHSF'||op=='CHLF'){W(s,{who:p,k:'ch',skip:op=='CHLF',opts:op=='CHSF'?[['移動(Shift)','SH'],['裏返す(Flip)','F']]:[['移動(Shift)','SHD'],['裏返す(Flip)','FD']]});return}
  if(op=='GR0'){let st=null;s.ln.forEach(l=>['a','b'].forEach(x=>{const r=l[x],j=r.findIndex(e=>e.c==s.sc);if(j>=0)st=[l,r,j]}));if(st){const[l,r,j]=st,n=Math.floor((l.a.length+l.b.length)/2),ins=[];for(let q=0;q<n;q++){const c=topc(s,p);if(c)ins.push({c,u:0,o:p})}r.splice(j,0,...ins)}continue}
  if(op=='LS3'||op=='MR2'){W(s,{who:p,k:'lsel',op});return}
@@ -266,7 +285,7 @@ function choices(s,p){const w=s.wt,o=opp(p),L=[];
  else if(w.k=='opt'){const op=w.op;[0,1].forEach(y=>L.push(c=>{c.wt=null;if(y)c.q.unshift(op);run(c)}))}
  else if(w.k=='rr'){if(w.opt)L.push(rrEnd);(w.tgt?[w.tgt]:['a','b']).forEach(g=>[[0,1],[0,2],[1,2]].forEach(([i,j])=>L.push(c=>{c.wt.tgt=c.wt.tgt||g;rrDo(c,g,i,j)})))}
  else if(w.k=='phd'){if(w.stage==0){if(w.src=='dis')s.dis[p].forEach((_,k)=>L.push(c=>{c.wt.dk=k;c.wt.stage=1}));else s.hand[p].forEach((id,k)=>{if(w.vf==null||C[id].v==w.vf)L.push(c=>{c.wt.idx=k;c.wt.stage=1})})}else if(w.stage==1)w.lines.forEach(i=>L.push(c=>phdPlace(c,i)));else[1,0].forEach(u=>L.push(c=>phdFinal(c,c.wt.line,!!u)))}
- else if(w.k=='dcl'){(w.type=='n'?[0,1,2,3,4,5,6]:[...new Set([...s.pr.a,...s.pr.b])]).forEach(v=>L.push(c=>{if(w.type=='n')c.dv=v;else c.dp=v;c.wt=null;run(c)}))}
+ else if(w.k=='dcl'){(w.type=='n'?[0,1,2,3,4,5,6]:[...new Set([...s.pr.a,...s.pr.b])]).forEach(v=>L.push(c=>{if(w.type=='n')c.dv=v;else c.dp=v;fev(c,{k:'decl',w:w.who,v});c.wt=null;run(c)}))}
  else if(w.k=='ch'){w.opts.forEach(o=>L.push(c=>{c.wt=null;c.q.unshift(o[1]);run(c)}));if(w.skip)L.push(c=>{c.wt=null;run(c)})}
  else if(w.k=='dm'){s.hand[p].forEach((_,k)=>L.push(c=>{c.dis[p].push(c.hand[p].splice(k,1)[0]);c.wt.n++;if(!c.hand[p].length)dmEnd(c)}));if(w.n>=1||w.rf)L.push(dmEnd)}
  else if(w.k=='lsel')[0,1,2].filter(i=>!(w.op=='LS3'&&i==s.li)&&!(w.op=='MR2'&&w.first==i)).forEach(i=>L.push(c=>lineSel(c,i)))
@@ -281,7 +300,7 @@ function decide(s,p,lv){const L=choices(s,p);if(!L.length)return;if(lv<=1)return
   L.forEach((f,i)=>{const c=cln(r);f(c);nodes=0;sc[i]+=lv>=3?ex(c,p,1):ev(c,p)})}
  let bi=0,bv=-1e9;sc.forEach((v,i)=>{v+=Math.random()*(lv==2?6*K:.01);if(v>bv){bv=v;bi=i}});L[bi](s)}
 /* ===== 通信 ===== */
-let arSel=-1,rrSel=-1,pkSel='',pend=-1,trs='',myName='',me=null,ref=null,S=null,sel=-1,down=false,unsub=null,det=null,db;const $=id=>document.getElementById(id);
+let perr='',fresh=new Set(),fh=0,animUntil=0,arSel=-1,rrSel=-1,pkSel='',pend=-1,trs='',myName='',me=null,ref=null,S=null,sel=-1,down=false,unsub=null,det=null,db;const $=id=>document.getElementById(id);
 async function tx(fn,force){const v0=S?(S.v||0):0;try{await db.runTransaction(async t=>{const d=await t.get(ref);if(!d.exists)throw Error('部屋が存在しません');const s=JSON.parse(d.data().s);if(!force&&(s.v||0)!==v0)return;fn(s);s.v=(s.v||0)+1;t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){alert('通信エラー: '+e.message)}}
 async function join(){const room=$('room').value.trim(),name=$('name').value.trim();if(!room||!name)return alert('部屋IDと名前を入力してください');
  const sets=[...document.querySelectorAll('.ck input:checked')].map(x=>x.value);if(!sets.length)return alert('使うセットを1つ以上選んでください');
@@ -291,12 +310,16 @@ async function join(){const room=$('room').value.trim(),name=$('name').value.tri
   else{s=JSON.parse(d.data().s);if(nm(s.names.a)==nm(name))me='a';else if(!s.names.b){s.names.b=name;me='b';s.ph='draft'}else if(nm(s.names.b)==nm(name))me='b';else throw Error('この部屋は満員です。参加者: '+s.names.a+' / '+s.names.b+'(同じ名前で入ると再入室できます)')}
   t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){return alert(e.message)}
  myName=nm(name);try{localStorage.setItem('cp',JSON.stringify({room,name}))}catch(e){}
- unsub=ref.onSnapshot(d=>{if(d.exists){const old=S;S=JSON.parse(d.data().s);if(old&&(S.gid!=old.gid||nm(S.names[me]||'')!=myName)){S=null;me=null;unsub&&unsub();return lobby('部屋がリセットされました。もう一度入室してください。')}const cc=old&&S.cn>(old.cn||0);if(cc)fx(S.cl,S.cpn);if(old&&S.ev>(old.ev||0)&&!cc)toast(S.evt);if(old&&S.nn>(old.nn||0)&&S.nt)cnotice(S.nt);if(old&&S.win&&!old.win)setTimeout(()=>end(S.win==me),cc?2900:0);R()}else if(S){S=null;me=null;unsub&&unsub();lobby('部屋がリセットされました。同じ部屋IDで入り直せます。')}})}
+ unsub=ref.onSnapshot(d=>{if(d.exists){const old=S;S=JSON.parse(d.data().s);if(old&&(S.gid!=old.gid||nm(S.names[me]||'')!=myName)){S=null;me=null;unsub&&unsub();return lobby('部屋がリセットされました。もう一度入室してください。')}const cc=old&&S.cn>(old.cn||0);if(cc)fx(S.cl,S.cpn);if(old&&S.ev>(old.ev||0)&&!cc)toast(S.evt);if(old&&S.nn>(old.nn||0)&&S.nt)cnotice(S.nt);if(old&&S.win&&!old.win)setTimeout(()=>end(S.win==me),cc?2900:0);
+ if(old&&old.ph=='arr'&&S.ph=='play')turnSpin(S);else if(old&&old.ph=='play'&&S.ph=='play'&&!S.win&&old.turn!=S.turn)banner(S.turn==me?'YOUR TURN':'ENEMY TURN',S.turn==me?'#19e3ff':'#ff2ea6');
+ if(old&&S.fn>(old.fn||0)){const n=S.fn-(old.fn||0);(S.fq||[]).slice(-n).forEach((e,i)=>setTimeout(()=>luckFx(e),i*1900))}
+ if(old&&S.ph=='play'){S.ln.forEach((l,i)=>['a','b'].forEach(x=>{for(let j=old.ln[i][x].length;j<l[x].length;j++)fresh.add(i+','+x+','+j)}));fh=Math.max(0,S.hand[me].length-old.hand[me].length)}
+R()}else if(S){S=null;me=null;unsub&&unsub();lobby('部屋がリセットされました。同じ部屋IDで入り直せます。')}})}
 async function resetRoom(){if(confirm('ゲームを強制終了して部屋を削除します。相手の画面も入室画面に戻ります。よろしいですか?'))try{await ref.delete()}catch(e){alert('削除に失敗: '+e.message)}}
 /* ===== 描画 ===== */
 const th=p=>`--c:${TH[p][0]};--b:${TH[p][1]}`;
 function big(id,cls,attr){const c=C[id],T=(x,l,k,ok)=>x?`<div class="sx ${k}"><u>${l}</u>${fmt(x)}${ok?'':'<s>未実装</s>'}</div>`:'';
- return`<div class="hc holo ${cls}" style="${th(c.p)}" ${attr||''}><div class="hd"><b>${c.v}</b><span>${c.p}</span></div><div class="ha pi p-${c.p}"></div>${T(c.t,LB('t',c.t),'t',c.ti)}${T(c.m,'出した時','m',c.mi)}${T(c.b,LB('b',c.b),'b',c.bi)}</div>`}
+ return`<div class="hc holo ${cls}" style="${th(c.p)}" ${attr||''}><div class="hd"><b>${c.v}</b><span>${c.p}</span></div><div class="ha pi p-${c.p}"></div>${T(c.t,LB('t',c.t),'t',c.ti)}${T(c.m,'Middle・出した時','m',c.mi)}${T(c.b,LB('b',c.b),'b',c.bi)}</div>`}
 function lobby(note){$('app').innerHTML=`<h1 class="o">COMPILE</h1><div class="bar">PROTOCOL BATTLE // 1 vs 1</div>${note?`<div class="st">${note}</div>`:''}<div class="box pi p-${rk()}"><label>ROOM ID</label><input type="text" id="room" placeholder="例: room1" autocomplete="off"><label>NAME</label><input type="text" id="name" placeholder="あなたの名前" autocomplete="off"><div class="ck" style="margin:8px 0">使うセット(部屋を作る人の設定が有効):<br><label><input type="checkbox" value="m1" checked> Main 1</label><label><input type="checkbox" value="a1" checked> Aux 1</label><label><input type="checkbox" value="m2" checked> Main 2</label></div><div style="margin-bottom:8px"><label><input type="checkbox" id="ctlc" checked> コントロールカードを使う(初回は外してもOK)</label></div><button onclick="join()">ENTER ROOM</button><button onclick="showGl()">用語集・ルール</button><button onclick="showDex()">カード能力図鑑</button><div style="color:var(--dim);margin-top:8px">同じ部屋IDを入れた2人で対戦します。切断しても同じ名前で入り直せば再開できます。</div></div><div class="box"><b class="o">VS CPU</b><br>名前<input type="text" id="cname" placeholder="あなたの名前" autocomplete="off">難易度 <select id="lv" style="background:#050b1c;color:#d6e8ff;padding:6px"><option value="1">弱い</option><option value="2" selected>普通</option><option value="3">最強</option></select><button class="m" onclick="joinCpu()">CPUと対戦開始</button><div style="color:var(--dim)">上の「使うセット」の選択が使われます。</div></div>`;try{const c=JSON.parse(localStorage.getItem('cp'));if(c){$('room').value=c.room;$('name').value=c.name;$('cname').value=c.name}}catch(e){}}
 function R(){const A=$('app');if(!S)return;cpu();const s=S,o=opp(me),H=s.hand[me],w=s.wt,mine=w&&w.who==me&&!s.win;tn(s,o);
  let h=`<div class="bar o"><span>ROOM ${esc(ref.id)}</span><span>YOU: ${esc(s.names[me])} / FOE: ${esc(s.names[o]||'待機中…')}</span><button onclick="showGl()">用語集・ルール</button><button onclick="showDex()">カード能力図鑑</button><button data-a="fix">操作が止まった時の復旧</button><button class="m" data-a="reset">強制終了・部屋リセット</button></div>`;
@@ -318,7 +341,7 @@ function R(){const A=$('app');if(!S)return;cpu();const s=S,o=opp(me),H=s.hand[me
  h+=zn(o,0)+(s.uc?`<div class="bar"><span>コントロール: ${s.ctl?(s.ctl==me?'あなたが所持':'相手が所持'):'中央'}</span>${s.ctl?'':`<span class="ctl"><img src="${IMC}"><b>CONTROL(中央)</b></span>`}</div>`:'')+'<div class="g">';
  for(let i=0;i<3;i++){const tm=tot(s,i,me),to=tot(s,i,o),cl=mine&&w.k=='comp'&&w.opts.includes(i);
   const st=x=>s.ln[i][x].map((e,j,r)=>{const t=j==r.length-1,hit=mine&&w.k=='tgt'&&w.opts.some(q=>q[0]==i&&q[1]==x&&q[2]==j),c=C[e.c],v=e.u||x==me;
-   return`<div class="cd holo ${e.u?'pi p-'+c.p:'dn'} ${t?'top':''} ${hit?'hit':''}" style="${th(c.p)}" ${hit?`data-t="${i},${x},${j}"`:v?`data-d="${e.c}"`:''}><span class="ic">${v?TH[c.p][2]:''}</span><b>${val(e)}</b><em>${v?c.p+' '+c.v:'裏'}${!e.u&&v?'(伏)':''}</em>${e.u&&(t||c.t)?`<div class="ft">${esc(t?[c.t&&'【'+LB('t',c.t)+'】'+c.t,c.m&&'【出した時】'+c.m,c.b&&'【'+LB('b',c.b)+'】'+c.b].filter(Boolean).join(' / '):'【常に有効】'+c.t)}</div>`:''}</div>`}).join('');
+   return`<div class="cd holo ${e.u?'pi p-'+c.p:'dn'} ${t?'top':''} ${hit?'hit':''} ${fresh.has(i+','+x+','+j)?'pop':''}" style="${th(c.p)}" ${hit?`data-t="${i},${x},${j}"`:v?`data-d="${e.c}"`:''}><span class="ic">${v?TH[c.p][2]:''}</span><b>${val(e)}</b><em>${v?c.p+' '+c.v:'裏'}${!e.u&&v?'(伏)':''}</em>${e.u&&(t||c.t)?`<div class="ft">${esc(t?[c.t&&'【'+LB('t',c.t)+'】'+c.t,c.m&&'【Middle・出した時】'+c.m,c.b&&'【'+LB('b',c.b)+'】'+c.b].filter(Boolean).join(' / '):'【Top・常に有効】'+c.t)}</div>`:''}</div>`}).join('');
   const pr=x=>`<div class="pr pi p-${s.pr[x][i]} ${s.cp[x][i]?'done':''}" style="${th(s.pr[x][i])}">${s.pr[x][i]}${s.cp[x][i]?'<small class="ld">COMPILED</small>':'<small class="ld">Loading...</small>'}</div>`;
   const dl=mine&&w.k=='dst'&&w.from[0]!=i&&true,dlx=x=>dl&&x==w.from[1]&&w.from[0]!=i;
   const pl=mine&&w.k=='act',pd=mine&&w.k=='phd'&&w.stage==1&&w.lines.includes(i),ls=mine&&w.k=='lsel'&&!(w.op=='LS3'&&i==s.li)&&!(w.op=='MR2'&&w.first==i);
@@ -328,13 +351,13 @@ function R(){const A=$('app');if(!S)return;cpu();const s=S,o=opp(me),H=s.hand[me
  h+='</div>';
  if(mine&&w.k=='act')h+=`<div class="ck"><button data-a="ref" ${H.length>=5?'disabled':''}>リフレッシュ(手札5枚未満の時だけ)</button>${!H.length&&!s.deck[me].length&&!s.dis[me].length?'<button data-a="pass">パス</button>':''}</div>`;
  h+=zn(me,1)+`<div style="margin:6px 0"><b>あなたの手札 ${H.length}枚</b>${H.length>5?'(6枚以上は終了時に捨てます)':''}</div>`;
- h+='<div class="hand">'+H.map((id,k)=>big(id,k==sel?'sel':'',`data-h="${k}" draggable="true"`)).join('')+'</div>';
+ h+='<div class="hand">'+H.map((id,k)=>big(id,(k==sel?'sel ':'')+(fh&&k>=H.length-fh?'dr':''),`data-h="${k}" draggable="true"`)).join('')+'</div>';
  if(det)h+=`<div class="box dt">${big(det,'nb')}<div>カード詳細(場のカードを押すと表示)<br><button data-a="cl">閉じる</button></div></div>`;
  h+=`<div class="box"><b>プロトコル特色</b>(押すと表示)<br>${[...s.pr[me],...s.pr[o]].map(n=>`<button class="pb2" data-tr="${n}" style="${th(n)}">${n}</button>`).join('')}<div id="trb" style="margin-top:6px">${trs&&TR[trs]?`<b>${trs}</b><br>`+esc(TR[trs]):''}</div></div>`;
  h+='<div class="box log">'+s.log.slice().reverse().map(esc).join('<br>')+'</div>';
  if(mine&&w.k=='phd'&&w.stage==2)h+=`<div class="md"><div class="mb"><b>どちらで出しますか?</b><div style="display:flex;justify-content:center;margin:10px">${big(phdCard(s),'nb')}</div><button data-pf="1">表向きで出す(効果が発動)</button><button class="m" data-pf="0">裏向きで出す(値2)</button></div></div>`;
- if(pend>=0&&mine&&w.k=='act'&&H[sel])h+=`<div class="md"><div class="mb"><b>どちらで出しますか?</b><div style="display:flex;justify-content:center;margin:10px">${big(H[sel],'nb')}</div><button data-up="1">表向きで出す(効果が発動)</button><button class="m" data-up="0">裏向きで出す(値2・どのラインでも可)</button>${H[sel]=="Corruption0"?'<button data-up="s">相手側のラインへ表向きで出す</button>':''}<button data-up="x">キャンセル</button></div></div>`;
- A.innerHTML=h}
+ if(pend>=0&&mine&&w.k=='act'&&H[sel])h+=`<div class="md"><div class="mb"><b>どちらで出しますか?</b><div style="display:flex;justify-content:center;margin:10px">${big(H[sel],'nb')}</div>${perr?'<div style="color:#ff9a9a;margin:6px;font-weight:700">⚠ '+esc(perr)+'</div>':''}<button data-up="1">表向きで出す(効果が発動)</button><button class="m" data-up="0">裏向きで出す(値2・どのラインでも可)</button>${H[sel]=="Corruption0"?'<button data-up="s">相手側のラインへ表向きで出す</button>':''}<button data-up="x">キャンセル</button></div></div>`;
+ A.innerHTML=h;fresh.clear();fh=0}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-pk],[data-t],[data-cp],[data-pl],[data-h],[data-a],[data-dl],[data-d],[data-o],[data-tr],[data-ok],[data-up],[data-pd],[data-ls],[data-dd],[data-dc],[data-ch],[data-hd],[data-pf],[data-ar],[data-ok2],[data-rw],[data-rs],[data-rr]');if(!t||!S||!me)return;const s=S,w=s.wt,mine=w&&w.who==me&&!s.win;
  if(mine&&(w.k=='phd'&&w.stage==1||w.k=='lsel')){const L=e.target.closest('[data-pd],[data-ls]');if(L){const q=L.dataset.pd!==undefined?+L.dataset.pd:+L.dataset.ls;return tx(s=>{const z=s.wt;if(!z||z.who!=me)return;if(z.k=='phd'&&z.stage==1)phdPlace(s,q);else if(z.k=='lsel')lineSel(s,q)})}}
  if(mine&&w.k=='act'&&sel>=0&&!e.target.closest('[data-h],[data-a],label')){const L=e.target.closest('[data-pl]');if(L)return doPlay(+L.dataset.pl)}
@@ -347,7 +370,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-pk],[data-
  if(t.dataset.ok2)return tx(s=>{if(s.ph!='arr')return;s.ok2[me]=1;if(s.ok2.a&&s.ok2.b)setup(s)});
  if(t.dataset.tr){trs=t.dataset.tr;return R()}
  if(!mine)return;
- if(t.dataset.dc!==undefined){const v=t.dataset.dc;return tx(s=>{const z=s.wt;if(!z||z.k!='dcl')return;if(z.type=='n')s.dv=+v;else s.dp=v;lg(s,s.names[z.who]+' が宣言: '+v);s.wt=null;run(s)})}
+ if(t.dataset.dc!==undefined){const v=t.dataset.dc;return tx(s=>{const z=s.wt;if(!z||z.k!='dcl')return;if(z.type=='n')s.dv=+v;else s.dp=v;lg(s,s.names[z.who]+' が宣言: '+v);fev(s,{k:'decl',w:z.who,v:z.type=='n'?+v:v});s.wt=null;run(s)})}
  if(t.dataset.ch!==undefined){const v=+t.dataset.ch;return tx(s=>{const z=s.wt;if(!z||z.k!='ch')return;const o=z.opts[v];s.wt=null;if(o)s.q.unshift(o[1]);run(s)})}
  if(t.dataset.hd!==undefined){const v=+t.dataset.hd;return tx(s=>{const z=s.wt;if(z&&z.k=='phd'&&z.stage==0&&z.src=='dis'){z.dk=v;z.stage=1}})}
  if(t.dataset.pf!==undefined){const v=t.dataset.pf=='1';return tx(s=>{const z=s.wt;if(z&&z.k=='phd'&&z.stage==2)phdFinal(s,z.line,v)})}
@@ -355,7 +378,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-pk],[data-
  if(t.dataset.rw){const v=t.dataset.rw;return tx(s=>{if(s.wt&&s.wt.k=='rr'&&!s.wt.tgt)s.wt.tgt=v})}
  if(t.dataset.rs)return tx(s=>{if(s.wt&&s.wt.k=='rr'&&s.wt.opt)rrEnd(s)});
  if(t.dataset.rr!==undefined){const i=+t.dataset.rr;if(rrSel<0){rrSel=i;return R()}const j=rrSel;rrSel=-1;if(j==i)return R();return tx(s=>{if(s.wt&&s.wt.k=='rr'&&s.wt.tgt)rrDo(s,s.wt.tgt,i,j)})}
- if(t.dataset.up!==undefined){const u=t.dataset.up;if(u=='x'){pend=-1;return R()}if(pend<0||sel<0)return;const sd=u=='s',up=u=='1'||sd,id=s.hand[me][sel],er=why(s,me,id,pend,up);if(er)return toast(er);const k=sel,i=pend;sel=-1;pend=-1;return tx(s=>play(s,me,k,i,up,sd?opp(me):null))}
+ if(t.dataset.up!==undefined){const u=t.dataset.up;if(u=='x'){pend=-1;return R()}if(pend<0||sel<0)return;const sd=u=='s',up=u=='1'||sd,id=s.hand[me][sel],er=why(s,me,id,pend,up);if(er){perr=er;toast(er);return R()}perr='';const k=sel,i=pend;sel=-1;pend=-1;return tx(s=>play(s,me,k,i,up,sd?opp(me):null))}
  if(t.dataset.o!==undefined){const y=t.dataset.o=='1';return tx(s=>{const op=s.wt.op;s.wt=null;if(y)s.q.unshift(op);run(s)})}
  if(t.dataset.t){const[i,x,jj]=t.dataset.t.split(',');return tx(s=>pickTgt(s,+i,x,+jj))}
  if(t.dataset.dl)return tx(s=>dstTo(s,+t.dataset.dl));
@@ -375,7 +398,7 @@ function toast(x){const n=document.createElement('div');n.className='ts';n.textC
 function end(w){const f=$('fx');let hx='';for(let i=0;i<40;i++)hx+=Array.from({length:8},()=>Math.random().toString(16).slice(2,6).toUpperCase()).join(' ')+'<br>';
  f.className='on end '+(w?'win':'lose');f.style.pointerEvents='auto';f.onclick=()=>{f.className='';f.innerHTML='';f.style.pointerEvents='none'};
  f.innerHTML=w?'<i class="ray"></i><i class="rg"></i><i class="rg r2"></i><div class="cm"><div class="gl">VICTORY</div><div class="sb">ALL PROTOCOLS COMPILED</div><div class="sb s2">CLICK TO CLOSE</div></div>':`<div class="hx">${hx}${hx}</div><div class="cm"><div class="gl">BREACHED</div><div class="sb">YOUR PROTOCOLS HAVE BEEN HACKED</div><pre class="tm">&gt; root access granted to opponent\n&gt; overwriting protocol stack ...\n&gt; ACCESS DENIED // YOU LOSE</pre><div class="sb s2">CLICK TO CLOSE</div></div>`}
-function doPlay(i){if(!S.hand[me][sel])return;pend=i;R()}
+function doPlay(i){if(!S.hand[me][sel])return;pend=i;perr='';R()}
 document.addEventListener('dragstart',e=>{const h=e.target.closest('[data-h]');if(h){sel=+h.dataset.h;e.dataTransfer.setData('text','c')}});
 document.addEventListener('dragover',e=>{if(e.target.closest('[data-pl]'))e.preventDefault()});
 document.addEventListener('drop',e=>{const L=e.target.closest('[data-pl]');if(L&&sel>=0){e.preventDefault();doPlay(+L.dataset.pl)}});
@@ -393,11 +416,42 @@ async function joinCpu(){const name=$('cname').value.trim();const sets=[...docum
  const room='cpu-'+Math.random().toString(36).slice(2,8),s=blank(sets);s.uc=$('ctlc').checked?1:0;s.names.a=name;s.lv=+$('lv').value;s.names.b='CPU';s.ph='draft';s.cpu=1;
  try{await db.collection(COL).doc(room).set({s:JSON.stringify(s),t:Date.now()})}catch(e){return alert(e.message)}$('room').value=room;$('name').value=name;join()}
 let cpuT=0;
-function cpu(){if(!S||!S.cpu||me!='a'||S.win||cpuT)return;const w=S.wt;if(!(S.ph=='draft'?ORD[S.pk]=='b':w&&w.who=='b'))return;cpuT=setTimeout(()=>{cpuT=0;if(S&&S.cpu)tx(s=>cpuAct(s))},900)}
+function cpu(){if(!S||!S.cpu||me!='a'||S.win||cpuT)return;const w=S.wt;if(!(S.ph=='draft'?ORD[S.pk]=='b':w&&w.who=='b'))return;cpuT=setTimeout(()=>{cpuT=0;if(S&&S.cpu)tx(s=>cpuAct(s))},Math.max(900,animUntil-Date.now()+400))}
 function cpuAct(s){const w=s.wt,lv=s.lv||2;
  if(s.ph=='draft'){if(ORD[s.pk]!='b'||!s.pool.length)return;const sc=n=>Object.values(C).filter(c=>c.p==n).reduce((a,c)=>a+((c.mi||!c.m)?1:0)+((c.ti||c.bi||(!c.t&&!c.b))?1:0),0);
   const n=lv<=1?rndc(s.pool):[...s.pool].sort((x,y)=>sc(y)-sc(x)+(lv==2?(Math.random()-.5)*8:0))[0];s.pr.b.push(n);s.pool=s.pool.filter(x=>x!=n);s.pk++;if(s.pk>=6)toArr(s);return}
  if(!w||w.who!='b'||s.win)return;decide(s,'b',lv)}
+function banner(x,c){const n=document.createElement('div');n.className='tbn';n.style.setProperty('--c',c);n.textContent=x;document.body.appendChild(n);setTimeout(()=>n.remove(),1500)}
+function turnSpin(s){const n=[s.names.a,s.names.b],w=s.first=='a'?0:1;animUntil=Date.now()+5600;
+ const d=document.createElement('div');d.id='sp';d.innerHTML='<div class="spt">先攻・後攻を決定中…</div><div class="spr"></div><div class="spn"><div class="spc" id="sp0">'+esc(n[0])+(me=='a'?'(あなた)':'')+'</div><div class="spc" id="sp1">'+esc(n[1])+(me=='b'?'(あなた)':'')+'</div></div><div class="spw" id="spw"></div>';document.body.appendChild(d);
+ let i=0,steps=20+w,delay=60;const tick=()=>{const k=i%2;$('sp0').classList.toggle('on',k==0);$('sp1').classList.toggle('on',k==1);i++;if(i<=steps){delay*=1.09;setTimeout(tick,delay)}else{$('spw').innerHTML='先攻: <b>'+esc(n[w])+'</b>'+(s.first==me?'(あなたが先攻!)':'')+'<br>後攻: '+esc(n[1-w]);d.classList.add('fin');setTimeout(()=>d.remove(),1900)}};tick()}
+/* ===== BGM(YouTube埋め込み) ===== */
+const BGM={vid:'TteWeu6uLTg',tr:[],cur:0,on:false,vol:50,loop:true,p:null,ready:false,ts:'',want:false};
+function bgmLoad(){try{const c=JSON.parse(localStorage.getItem('bgm')||'{}');if(c.vol!=null)BGM.vol=c.vol;if(c.cur!=null)BGM.cur=c.cur;if(c.loop!=null)BGM.loop=c.loop;BGM.ts=c.ts||'';BGM.want=!!c.on}catch(e){}}
+function bgmSave(){try{localStorage.setItem('bgm',JSON.stringify({vol:BGM.vol,cur:BGM.cur,loop:BGM.loop,ts:BGM.ts,on:BGM.on}))}catch(e){}}
+function parseTs(x){const L=[];(x||'').split('\n').forEach(l=>{const m=l.match(/(?:(\d+):)?(\d{1,2}):(\d{2})\s*[-–:\s]*\s*(.*)/);if(m)L.push({t:(+m[1]||0)*3600+(+m[2])*60+(+m[3]),n:(m[4]||'').trim()})});return L}
+function buildTracks(){let L=parseTs(BGM.ts);const d=BGM.p&&BGM.p.getDuration?BGM.p.getDuration():0;if(L.length<2)L=d>0?Array.from({length:15},(_,i)=>({t:Math.floor(d/15*i),n:'曲'+(i+1)})):[];BGM.tr=L}
+function ytLoad(cb){if(window.YT&&YT.Player)return cb();window.onYouTubeIframeAPIReady=cb;if(!$('ytapi')){const s=document.createElement('script');s.id='ytapi';s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s)}}
+function bgmInit(cb){if(BGM.ready)return cb();BGM.q=cb;if(BGM.p)return;const h=document.createElement('div');h.id='ytp0';document.body.appendChild(h);
+ ytLoad(()=>{BGM.p=new YT.Player('ytp0',{height:'2',width:'2',videoId:BGM.vid,playerVars:{playsinline:1,controls:0,rel:0},events:{onReady:()=>{BGM.ready=true;buildTracks();BGM.q&&BGM.q()},onError:()=>{BGM.err=1;BGM.on=false;bgmUi()},onStateChange:e=>{if(e.data===1&&!BGM.tr.length){buildTracks();fillSel();const t=BGM.tr[BGM.cur];if(t&&t.t>1)BGM.p.seekTo(t.t,true)}if(e.data===0&&BGM.on)BGM.p.playVideo();bgmUi()}}})})}
+function bgmPlay(){BGM.on=true;BGM.err=0;bgmSave();bgmUi();bgmInit(()=>{BGM.p.setVolume(BGM.vol);BGM.p.unMute();BGM.p.playVideo();setTimeout(()=>{if(!BGM.tr.length)buildTracks();const t=BGM.tr[BGM.cur];if(t&&t.t>1)BGM.p.seekTo(t.t,true);fillSel();bgmUi()},1200)})}
+function bgmOff(){BGM.on=false;bgmSave();try{BGM.p&&BGM.p.pauseVideo()}catch(e){}bgmUi()}
+function bgmToggle(){BGM.on?bgmOff():bgmPlay()}
+function bgmSeek(i){BGM.cur=i;bgmSave();if(!BGM.on||!BGM.ready){bgmPlay();return}const t=BGM.tr[i];if(t)BGM.p.seekTo(t.t,true);bgmUi()}
+function bgmStep(d){const n=BGM.tr.length||15;bgmSeek((BGM.cur+d+n)%n)}
+function bgmVol(v){BGM.vol=+v;if($('bgvv'))$('bgvv').textContent=v;try{BGM.p&&BGM.p.setVolume(BGM.vol)}catch(e){}bgmSave()}
+function bgmApply(){BGM.ts=$('bgts').value;bgmSave();buildTracks();fillSel();if(BGM.on&&BGM.ready)bgmSeek(0)}
+function fillSel(){const e=$('bgsel');if(!e)return;const L=BGM.tr.length?BGM.tr:Array.from({length:15},(_,i)=>({n:'曲'+(i+1)}));e.innerHTML=L.map((x,i)=>`<option value="${i}">${i+1}. ${esc(x.n||'曲'+(i+1))}</option>`).join('');e.value=BGM.cur}
+function bgmUi(){let b=$('bgb');if(!b){b=document.createElement('div');b.id='bgb';b.innerHTML='<button class="bgbtn" onclick="bgmPanel()"></button>';document.body.appendChild(b)}
+ b.firstChild.textContent='♪ BGM '+(BGM.on?'ON':'OFF');const t=$('bgt');if(t)t.textContent=BGM.on?'■ OFF(停止)':'▶ 再生';const s=$('bgs');if(s)s.textContent=BGM.err?'この動画は埋め込み再生できませんでした(YouTube側の制限の可能性があります)':BGM.on&&!BGM.ready?'読み込み中…':(BGM.tr.length?'':'再生が始まると曲リストが作られます');const e=$('bgsel');if(e&&BGM.tr.length)e.value=BGM.cur}
+function bgmPanel(){BGM.open=!BGM.open;let p=$('bgp');if(!BGM.open){p&&p.remove();return}
+ p=document.createElement('div');p.id='bgp';p.innerHTML=`<b class="o">BGM</b> <button onclick="bgmToggle()" id="bgt"></button><br><select id="bgsel" onchange="bgmSeek(+this.value)"></select><button onclick="bgmStep(-1)">◀</button><button onclick="bgmStep(1)">▶</button><br>音量 <input type="range" id="bgv" min="0" max="100" value="${BGM.vol}" oninput="bgmVol(this.value)" style="width:140px"> <span id="bgvv">${BGM.vol}</span><br><label><input type="checkbox" id="bgl" ${BGM.loop?'checked':''} onchange="BGM.loop=this.checked;bgmSave()"> この曲をループ</label><details><summary>曲の区切りを設定(YouTube概要欄の時刻を貼り付け)</summary><textarea id="bgts" rows="6" style="width:100%;background:#050b1c;color:#d6e8ff" placeholder="0:00 曲名&#10;3:25 曲名">${esc(BGM.ts||'')}</textarea><button onclick="bgmApply()">適用</button></details><div id="bgs" style="color:#ff9a9a"></div>`;document.body.appendChild(p);fillSel();bgmUi()}
+setInterval(()=>{if(!BGM.on||!BGM.ready||!BGM.tr.length||!BGM.p.getCurrentTime)return;const ct=BGM.p.getCurrentTime(),t=BGM.tr[BGM.cur],nx=BGM.tr[BGM.cur+1],end=nx?nx.t:BGM.p.getDuration();if(t&&end&&ct>=end-.4){if(BGM.loop)BGM.p.seekTo(t.t,true);else bgmSeek((BGM.cur+1)%BGM.tr.length)}},500);
+bgmLoad();bgmUi();document.addEventListener('click',()=>{if(BGM.want&&!BGM.on&&!BGM.auto){BGM.auto=1;bgmPlay()}},{once:true});
+function luckFx(e){const d=document.createElement('div'),who=S?S.names[e.w]||'':'';d.className='lk '+(e.k=='decl'?'dc':e.k=='hit'?'ht':'ms');
+ d.innerHTML='<div class="lkb" id="lkb"></div><div class="lks">'+esc(e.k=='decl'?who+' の宣言':'公開: '+e.v)+'</div>';document.body.appendChild(d);const b=d.querySelector('.lkb');
+ if(e.k=='decl'){const pool=typeof e.v=='number'?['0','1','2','3','4','5','6']:Object.keys(TH);let i=0,n=0;const tk=()=>{if(n++<14){b.textContent=pool[(i+=1+(Math.random()*3|0))%pool.length];setTimeout(tk,70+n*12)}else b.textContent=String(e.v)};tk()}else b.textContent=e.k=='hit'?'的中!!':'ハズレ…';
+ setTimeout(()=>d.remove(),1800)}
 if(CFG.apiKey==="YOUR_API_KEY")$('app').innerHTML='<h1>COMPILE</h1><div class="box">このファイル内の <code>CFG</code>(Firebase設定値)を書き換えてから使ってください。</div>';
 else{firebase.initializeApp(CFG);db=firebase.firestore();lobby()}
 </script></body></html>
