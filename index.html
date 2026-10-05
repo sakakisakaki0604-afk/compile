@@ -111,6 +111,27 @@ body[data-tn=d2] #bg g{animation-duration:10s!important}
 .lk.ht .lkb{color:#ffe14a;text-shadow:0 0 30px #ffb300,0 0 80px #ff8a00;animation:pu .35s infinite alternate}.lk.ht::before{content:'';position:absolute;left:50%;top:50%;border:4px solid #ffe14a;border-radius:50%;animation:rgx 1.2s ease-out}
 .lk.ms .lkb{color:#ff6b7f;text-shadow:0 0 30px #f00;animation:shk .12s 8}
 @keyframes lkf{0%{opacity:0}10%,80%{opacity:1}100%{opacity:0}}@keyframes shk{50%{transform:translateX(12px)}}
+.pane{position:absolute;top:0;bottom:0;overflow:hidden;border-right:2px solid #19e3ff}
+.bump{display:inline-block;animation:bmp .6s}@keyframes bmp{0%{transform:scale(2.2);color:#ffe14a}100%{transform:none}}
+.cd.flp{animation:flp .6s}@keyframes flp{0%{transform:rotateY(90deg)}100%{transform:none}}
+.col.zap{animation:zp .7s}@keyframes zp{0%{box-shadow:0 0 0 #ffe14a}30%{box-shadow:0 0 30px #ffe14a,inset 0 0 30px #ffe14a66}100%{box-shadow:none}}
+.col.lead{box-shadow:0 0 16px #19e3ff70}
+.sc b.ok{animation:okp 1s infinite alternate}@keyframes okp{to{text-shadow:0 0 18px #ff2ea6,0 0 30px #ff2ea6}}
+body.shk2{animation:shk3 .45s}@keyframes shk3{20%{transform:translate(-6px,3px)}40%{transform:translate(6px,-3px)}60%{transform:translate(-4px,2px)}80%{transform:translate(3px,-2px)}}
+button{touch-action:manipulation}
+@media(max-width:700px){
+#app{padding:4px}.g{gap:4px}.col{padding:3px;min-height:auto}.half{min-height:90px}
+.cd{padding:2px 4px;min-height:24px;gap:3px}.cd b{font-size:14px}.cd.top b{font-size:18px}.cd.top .ic{width:16px;height:16px}.ft{font-size:10px;line-height:1.35}
+.pr{font-size:10px;padding:4px}.sc{font-size:16px}
+.hand{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:14px 2px 8px}.hand .hc{flex:0 0 156px;width:156px}
+.sx{font-size:11.5px}.hd b{width:36px;height:36px;font-size:19px}.hd span{font-size:13px}.ha{height:96px}
+.st{font-size:12.5px;padding:7px 9px}.bar{font-size:11px}.bar button,button{padding:6px 9px;font-size:12px}
+.zn{font-size:11px;padding:4px 6px;gap:5px}.zc{padding:2px 6px}.zc i{font-size:15px}.ctl img{width:60px;height:60px}.ctl{padding:3px}
+.pb{min-width:44%;min-height:70px;font-size:12px}.pk button{min-width:44%}
+.mb{max-width:97vw;padding:10px}.mb .hc{width:150px}.md{padding:4px}
+#bgp{left:6px;right:6px;max-width:none;bottom:50px}#bgb{left:6px;bottom:6px}.bgbtn{padding:5px 8px;font-size:11px}
+.tbn{font-size:30px}.gl{font-size:48px}.spc{padding:16px 24px;font-size:18px}
+h1{font-size:22px}}
 </style></head><body><div id="app"></div><div id="fx"></div>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -157,7 +178,7 @@ function begin2(s){s.rv=null;s.fl=[];if(s.uc&&[0,1,2].filter(i=>tot(s,i,s.turn)>
  if(s.nc==p){ok.length=0;s.nc=null}s.sc='';if(ok.length==1)comp(s,ok[0]);else if(ok.length)W(s,{who:p,k:'comp',opts:ok});else W(s,{who:p,k:'act'})}
 function comp(s,i){if(ctlGate(s,s.turn,{t:'comp',i}))return;['a','b'].forEach(x=>{const r=s.ln[i][x],j=r.findIndex(e=>e.u&&e.c=='Speed2');if(j>=0){const e=r.splice(j,1)[0];s.ln[(i+1)%3][x].push(e);lg(s,'Speed 2 がCompileの削除を避けて移動')}});const p=s.turn,o=opp(p);['a','b'].forEach(x=>{s.ln[i][x].forEach(e=>s.dis[e.o].push(e.c));s.ln[i][x]=[]});
  if(s.cp[p][i]){if(s.deck[o].length)s.hand[p].push(s.deck[o].pop())}else s.cp[p][i]=1;
- lg(s,s.names[p]+' が '+s.pr[p][i]+' をコンパイル!');s.cn=(s.cn||0)+1;s.cl=s.names[p]+' // '+s.pr[p][i];s.cpn=s.pr[p][i];if(s.cp[p].every(x=>x)){s.win=p;s.wt=null;return}const rq=reacts(s,'cmp',p);if(rq.length){s.act=p;s.q=rq;run(s);return}fin(s)}
+ lg(s,s.names[p]+' が '+s.pr[p][i]+' をコンパイル!');s.cn=(s.cn||0)+1;s.cl=s.names[p]+' // '+s.pr[p][i];s.cpn=s.pr[p][i];s.cq=[...(s.cq||[]).slice(-3),{s:s.cl,pn:s.cpn}];if(s.cp[p].every(x=>x)){s.win=p;s.wt=null;return}const rq=reacts(s,'cmp',p);if(rq.length){s.act=p;s.q=rq;run(s);return}fin(s)}
 function fin(s){const q0=trig(s,s.turn,'en');if(q0.length){s.act=s.turn;s.q=q0;s.cont='end';s.sc='';lg(s,'終了効果が発動');run(s);return}fin2(s)}
 function fin2(s){const p=s.turn;s.sc='';if(s.hand[p].length>5&&!s.ln.some(l=>{const r=l[p],e=r[r.length-1];return e&&e.u&&e.c=='Spirit0'})){W(s,{who:p,k:'disc',cache:1,n:1});return}s.turn=opp(p);begin(s)}
 function run(s){s.wt=null;while(s.q.length){let op=s.q.shift();const p=s.act,o=opp(p);
@@ -300,7 +321,7 @@ function decide(s,p,lv){const L=choices(s,p);if(!L.length)return;if(lv<=1)return
   L.forEach((f,i)=>{const c=cln(r);f(c);nodes=0;sc[i]+=lv>=3?ex(c,p,1):ev(c,p)})}
  let bi=0,bv=-1e9;sc.forEach((v,i)=>{v+=Math.random()*(lv==2?6*K:.01);if(v>bv){bv=v;bi=i}});L[bi](s)}
 /* ===== 通信 ===== */
-let perr='',fresh=new Set(),fh=0,animUntil=0,arSel=-1,rrSel=-1,pkSel='',pend=-1,trs='',myName='',me=null,ref=null,S=null,sel=-1,down=false,unsub=null,det=null,db;const $=id=>document.getElementById(id);
+let flp=new Set(),zap=new Set(),chg=new Set(),perr='',fresh=new Set(),fh=0,animUntil=0,arSel=-1,rrSel=-1,pkSel='',pend=-1,trs='',myName='',me=null,ref=null,S=null,sel=-1,down=false,unsub=null,det=null,db;const $=id=>document.getElementById(id);
 async function tx(fn,force){const v0=S?(S.v||0):0;try{await db.runTransaction(async t=>{const d=await t.get(ref);if(!d.exists)throw Error('部屋が存在しません');const s=JSON.parse(d.data().s);if(!force&&(s.v||0)!==v0)return;fn(s);s.v=(s.v||0)+1;t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){alert('通信エラー: '+e.message)}}
 async function join(){const room=$('room').value.trim(),name=$('name').value.trim();if(!room||!name)return alert('部屋IDと名前を入力してください');
  const sets=[...document.querySelectorAll('.ck input:checked')].map(x=>x.value);if(!sets.length)return alert('使うセットを1つ以上選んでください');
@@ -310,10 +331,10 @@ async function join(){const room=$('room').value.trim(),name=$('name').value.tri
   else{s=JSON.parse(d.data().s);if(nm(s.names.a)==nm(name))me='a';else if(!s.names.b){s.names.b=name;me='b';s.ph='draft'}else if(nm(s.names.b)==nm(name))me='b';else throw Error('この部屋は満員です。参加者: '+s.names.a+' / '+s.names.b+'(同じ名前で入ると再入室できます)')}
   t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){return alert(e.message)}
  myName=nm(name);try{localStorage.setItem('cp',JSON.stringify({room,name}))}catch(e){}
- unsub=ref.onSnapshot(d=>{if(d.exists){const old=S;S=JSON.parse(d.data().s);if(old&&(S.gid!=old.gid||nm(S.names[me]||'')!=myName)){S=null;me=null;unsub&&unsub();return lobby('部屋がリセットされました。もう一度入室してください。')}const cc=old&&S.cn>(old.cn||0);if(cc)fx(S.cl,S.cpn);if(old&&S.ev>(old.ev||0)&&!cc)toast(S.evt);if(old&&S.nn>(old.nn||0)&&S.nt)cnotice(S.nt);if(old&&S.win&&!old.win)setTimeout(()=>end(S.win==me),cc?2900:0);
+ unsub=ref.onSnapshot(d=>{if(d.exists){const old=S;S=JSON.parse(d.data().s);if(old&&(S.gid!=old.gid||nm(S.names[me]||'')!=myName)){S=null;me=null;unsub&&unsub();return lobby('部屋がリセットされました。もう一度入室してください。')}const cc=old&&S.cn>(old.cn||0);if(cc)(S.cq||[]).slice(-(S.cn-(old.cn||0))).forEach(x=>fxc(x.s,x.pn));if(old&&S.ev>(old.ev||0)&&!cc)toast(S.evt);if(old&&S.nn>(old.nn||0)&&S.nt)cnotice(S.nt);if(old&&S.win&&!old.win)setTimeout(()=>end(S.win==me),cc?2900:0);
  if(old&&old.ph=='arr'&&S.ph=='play')turnSpin(S);else if(old&&old.ph=='play'&&S.ph=='play'&&!S.win&&old.turn!=S.turn)banner(S.turn==me?'YOUR TURN':'ENEMY TURN',S.turn==me?'#19e3ff':'#ff2ea6');
  if(old&&S.fn>(old.fn||0)){const n=S.fn-(old.fn||0);(S.fq||[]).slice(-n).forEach((e,i)=>setTimeout(()=>luckFx(e),i*1900))}
- if(old&&S.ph=='play'){S.ln.forEach((l,i)=>['a','b'].forEach(x=>{for(let j=old.ln[i][x].length;j<l[x].length;j++)fresh.add(i+','+x+','+j)}));fh=Math.max(0,S.hand[me].length-old.hand[me].length)}
+ if(old&&S.ph=='play'){S.ln.forEach((l,i)=>['a','b'].forEach(x=>{for(let j=old.ln[i][x].length;j<l[x].length;j++)fresh.add(i+','+x+','+j)}));S.ln.forEach((l,i)=>['a','b'].forEach(x=>{const o2=old.ln[i][x],n2=l[x];for(let j=0;j<Math.min(o2.length,n2.length);j++)if(o2[j].c==n2[j].c&&o2[j].u!=n2[j].u)flp.add(i+','+x+','+j);if(n2.length<o2.length)zap.add(i);if(tot(old,i,x)!=tot(S,i,x))chg.add(i+x)}));fh=Math.max(0,S.hand[me].length-old.hand[me].length)}
 R()}else if(S){S=null;me=null;unsub&&unsub();lobby('部屋がリセットされました。同じ部屋IDで入り直せます。')}})}
 async function resetRoom(){if(confirm('ゲームを強制終了して部屋を削除します。相手の画面も入室画面に戻ります。よろしいですか?'))try{await ref.delete()}catch(e){alert('削除に失敗: '+e.message)}}
 /* ===== 描画 ===== */
@@ -332,21 +353,21 @@ function R(){const A=$('app');if(!S)return;cpu();const s=S,o=opp(me),H=s.hand[me
  else if(!w)msg='処理中…';else if(!mine)msg=esc(s.names[w.who])+' の操作を待っています';
  else msg={act:'<b>あなたの行動:</b> ①手札を選び、出したいラインを押す(表/裏は次の画面で選択) ②またはリフレッシュ',comp:'<b>コンパイル!</b> 光っているラインの「コンパイル」ボタンを押してください',disc:`${src} <b>${w.cache?'手札が6枚以上です。5枚になるまで':''}手札から${w.give?'相手に渡す':'捨てる'}カードを選んでください</b>`,tgt:`${src} <b>${PT[w.op]}</b>(光っているカードを押す)`,rr:`${src} <b>${w.tgt?'入れ替える2つのプロトコルを順に選択':'プロトコルの再配置: どちらを並べ替えますか?'}</b>`,dm:`${src} <b>捨てるカードを選んでください(現在${w.n}枚)。好きな枚数を捨てたら「捨て終わる」を押す</b>`,dcl:`${src} <b>${w.type=='n'?'数字を宣言してください':'プロトコルを宣言してください'}</b>`,ch:`${src} <b>どちらの効果を使いますか?</b>`,phd:`${src} <b>${w.stage==2?'表向きか裏向きかを選んでください':w.stage==1?'Playするラインを選んでください(光っているライン)':(w.src=='dis'?'Trashから':'手札から')+'Playするカードを選んでください'+(w.vf!=null?'(値'+w.vf+')':'')}</b>`,lsel:`${src} <b>対象のラインを選んでください(光っているライン)</b>`,opt:`${src} <b>任意の効果: ${PT[w.op]||'捨て札を山札に混ぜる'}</b> を実行しますか?`,dst:`${src} <b>移動先のラインを選んでください</b>(光っている自分/相手側の枠を押す)`}[w.k];
  h+=`<div class="st ${mine?'me':''}">${s.turn==me?'【あなたのターン】':'【相手のターン】'} ${msg}</div>`;
- if(mine&&w.k=='dcl')h+='<div>'+(w.type=='n'?[0,1,2,3,4,5,6].map(v=>`<button data-dc="${v}">${v}</button>`):[...new Set([...s.pr.a,...s.pr.b])].map(n=>`<button class="pb2" style="${th(n)}" data-dc="${n}">${n}</button>`)).join('')+'</div>';
- if(mine&&w.k=='ch')h+='<div>'+w.opts.map((o,i)=>`<button data-ch="${i}">${o[0]}</button>`).join('')+(w.skip?'<button class="m" data-ch="-1">しない</button>':'')+'</div>';
+ if(0&&mine&&w.k=='dcl')h+='<div>'+(w.type=='n'?[0,1,2,3,4,5,6].map(v=>`<button data-dc="${v}">${v}</button>`):[...new Set([...s.pr.a,...s.pr.b])].map(n=>`<button class="pb2" style="${th(n)}" data-dc="${n}">${n}</button>`)).join('')+'</div>';
+ if(0&&mine&&w.k=='ch')h+='<div>'+w.opts.map((o,i)=>`<button data-ch="${i}">${o[0]}</button>`).join('')+(w.skip?'<button class="m" data-ch="-1">しない</button>':'')+'</div>';
  if(mine&&w.k=='phd'&&w.stage==0&&w.src=='dis')h+='<div class="hand">'+s.dis[me].map((id,k)=>big(id,'',`data-hd="${k}"`)).join('')+'</div>';
  if(mine&&w.k=='dm'&&(w.n>=1||w.rf))h+='<div><button data-dd="1">捨て終わる(捨てた枚数+1枚引く)</button></div>';
- if(mine&&w.k=='rr'){const sk=w.opt?'<button class="m" data-rs="1">再配置しない</button>':'';h+=w.tgt?`<div class="g">${s.pr[w.tgt].map((n,i)=>`<button class="pb pi p-${n} ${i==rrSel?'hit':''}" data-rr="${i}" style="${th(n)}">${n}<br>ライン${i+1}</button>`).join('')}</div>${sk}`:`<div><button data-rw="${me}">自分のプロトコル</button><button data-rw="${o}">相手のプロトコル</button>${sk}</div>`}
- if(mine&&w.k=='opt')h+='<div><button data-o="1">実行する</button><button class="m" data-o="0">実行しない</button></div>';if(s.rv)h+=`<div class="box">公開中: ${esc(s.names[s.rv.own])} の手札 — ${s.rv.h.join(', ')||'なし'}</div>`;
+ if(mine&&w.k=='rr'&&w.tgt){const sk=w.opt?'<button class="m" data-rs="1">再配置しない</button>':'';h+=w.tgt?`<div class="g">${s.pr[w.tgt].map((n,i)=>`<button class="pb pi p-${n} ${i==rrSel?'hit':''}" data-rr="${i}" style="${th(n)}">${n}<br>ライン${i+1}</button>`).join('')}</div>${sk}`:`<div><button data-rw="${me}">自分のプロトコル</button><button data-rw="${o}">相手のプロトコル</button>${sk}</div>`}
+ if(0&&mine&&w.k=='opt')h+='<div><button data-o="1">実行する</button><button class="m" data-o="0">実行しない</button></div>';if(s.rv)h+=`<div class="box">公開中: ${esc(s.names[s.rv.own])} の手札 — ${s.rv.h.join(', ')||'なし'}</div>`;
  h+=zn(o,0)+(s.uc?`<div class="bar"><span>コントロール: ${s.ctl?(s.ctl==me?'あなたが所持':'相手が所持'):'中央'}</span>${s.ctl?'':`<span class="ctl"><img src="${IMC}"><b>CONTROL(中央)</b></span>`}</div>`:'')+'<div class="g">';
  for(let i=0;i<3;i++){const tm=tot(s,i,me),to=tot(s,i,o),cl=mine&&w.k=='comp'&&w.opts.includes(i);
   const st=x=>s.ln[i][x].map((e,j,r)=>{const t=j==r.length-1,hit=mine&&w.k=='tgt'&&w.opts.some(q=>q[0]==i&&q[1]==x&&q[2]==j),c=C[e.c],v=e.u||x==me;
-   return`<div class="cd holo ${e.u?'pi p-'+c.p:'dn'} ${t?'top':''} ${hit?'hit':''} ${fresh.has(i+','+x+','+j)?'pop':''}" style="${th(c.p)}" ${hit?`data-t="${i},${x},${j}"`:v?`data-d="${e.c}"`:''}><span class="ic">${v?TH[c.p][2]:''}</span><b>${val(e)}</b><em>${v?c.p+' '+c.v:'裏'}${!e.u&&v?'(伏)':''}</em>${e.u&&(t||c.t)?`<div class="ft">${esc(t?[c.t&&'【'+LB('t',c.t)+'】'+c.t,c.m&&'【Middle・出した時】'+c.m,c.b&&'【'+LB('b',c.b)+'】'+c.b].filter(Boolean).join(' / '):'【Top・常に有効】'+c.t)}</div>`:''}</div>`}).join('');
+   return`<div class="cd holo ${e.u?'pi p-'+c.p:'dn'} ${t?'top':''} ${hit?'hit':''} ${fresh.has(i+','+x+','+j)?'pop':''} ${flp.has(i+','+x+','+j)?'flp':''}" style="${th(c.p)}" ${hit?`data-t="${i},${x},${j}"`:v?`data-d="${e.c}"`:''}><span class="ic">${v?TH[c.p][2]:''}</span><b>${val(e)}</b><em>${v?c.p+' '+c.v:'裏'}${!e.u&&v?'(伏)':''}</em>${e.u&&(t||c.t)?`<div class="ft">${esc(t?[c.t&&'【'+LB('t',c.t)+'】'+c.t,c.m&&'【Middle・出した時】'+c.m,c.b&&'【'+LB('b',c.b)+'】'+c.b].filter(Boolean).join(' / '):'【Top・常に有効】'+c.t)}</div>`:''}</div>`}).join('');
   const pr=x=>`<div class="pr pi p-${s.pr[x][i]} ${s.cp[x][i]?'done':''}" style="${th(s.pr[x][i])}">${s.pr[x][i]}${s.cp[x][i]?'<small class="ld">COMPILED</small>':'<small class="ld">Loading...</small>'}</div>`;
   const dl=mine&&w.k=='dst'&&w.from[0]!=i&&true,dlx=x=>dl&&x==w.from[1]&&w.from[0]!=i;
   const pl=mine&&w.k=='act',pd=mine&&w.k=='phd'&&w.stage==1&&w.lines.includes(i),ls=mine&&w.k=='lsel'&&!(w.op=='LS3'&&i==s.li)&&!(w.op=='MR2'&&w.first==i);
-  h+=`<div class="col ${pd||ls?'hit':''}" ${pl?`data-pl="${i}"`:pd?`data-pd="${i}"`:ls?`data-ls="${i}"`:''}><div class="half ${dlx(o)?'hit':''}" ${dlx(o)?`data-dl="${i}"`:''}>${pr(o)}${st(o)}</div>
-  <div class="sc">${to} <span style="color:var(--ln)">|</span> <b class="${tm>=10&&tm>to?'ok':''}">${tm}</b>${cl?`<br><button class="m" data-cp="${i}">コンパイル</button>`:''}</div>
+  h+=`<div class="col ${pd||ls?'hit':''} ${zap.has(i)?'zap':''} ${tm>to&&tm>=8?'lead':''}" ${pl?`data-pl="${i}"`:pd?`data-pd="${i}"`:ls?`data-ls="${i}"`:''}><div class="half ${dlx(o)?'hit':''}" ${dlx(o)?`data-dl="${i}"`:''}>${pr(o)}${st(o)}</div>
+  <div class="sc"><span class="${chg.has(i+o)?'bump':''}">${to}</span> <span style="color:var(--ln)">|</span> <b class="${tm>=10&&tm>to?'ok':''} ${chg.has(i+me)?'bump':''}">${tm}</b>${cl?`<br><button class="m" data-cp="${i}">コンパイル</button>`:''}</div>
   <div class="half mine ${(pl&&sel>=0)||dlx(me)?'hit':''}" ${dlx(me)?`data-dl="${i}"`:''}>${pr(me)}${st(me)}</div></div>`}
  h+='</div>';
  if(mine&&w.k=='act')h+=`<div class="ck"><button data-a="ref" ${H.length>=5?'disabled':''}>リフレッシュ(手札5枚未満の時だけ)</button>${!H.length&&!s.deck[me].length&&!s.dis[me].length?'<button data-a="pass">パス</button>':''}</div>`;
@@ -355,9 +376,10 @@ function R(){const A=$('app');if(!S)return;cpu();const s=S,o=opp(me),H=s.hand[me
  if(det)h+=`<div class="box dt">${big(det,'nb')}<div>カード詳細(場のカードを押すと表示)<br><button data-a="cl">閉じる</button></div></div>`;
  h+=`<div class="box"><b>プロトコル特色</b>(押すと表示)<br>${[...s.pr[me],...s.pr[o]].map(n=>`<button class="pb2" data-tr="${n}" style="${th(n)}">${n}</button>`).join('')}<div id="trb" style="margin-top:6px">${trs&&TR[trs]?`<b>${trs}</b><br>`+esc(TR[trs]):''}</div></div>`;
  h+='<div class="box log">'+s.log.slice().reverse().map(esc).join('<br>')+'</div>';
+ if(mine&&(w.k=='opt'||w.k=='ch'||w.k=='dcl'||(w.k=='rr'&&!w.tgt)))h+=effModal(w,s,me,o);
  if(mine&&w.k=='phd'&&w.stage==2)h+=`<div class="md"><div class="mb"><b>どちらで出しますか?</b><div style="display:flex;justify-content:center;margin:10px">${big(phdCard(s),'nb')}</div><button data-pf="1">表向きで出す(効果が発動)</button><button class="m" data-pf="0">裏向きで出す(値2)</button></div></div>`;
  if(pend>=0&&mine&&w.k=='act'&&H[sel])h+=`<div class="md"><div class="mb"><b>どちらで出しますか?</b><div style="display:flex;justify-content:center;margin:10px">${big(H[sel],'nb')}</div>${perr?'<div style="color:#ff9a9a;margin:6px;font-weight:700">⚠ '+esc(perr)+'</div>':''}<button data-up="1">表向きで出す(効果が発動)</button><button class="m" data-up="0">裏向きで出す(値2・どのラインでも可)</button>${H[sel]=="Corruption0"?'<button data-up="s">相手側のラインへ表向きで出す</button>':''}<button data-up="x">キャンセル</button></div></div>`;
- A.innerHTML=h;fresh.clear();fh=0}
+ A.innerHTML=h;fresh.clear();flp.clear();zap.clear();chg.clear();fh=0}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-pk],[data-t],[data-cp],[data-pl],[data-h],[data-a],[data-dl],[data-d],[data-o],[data-tr],[data-ok],[data-up],[data-pd],[data-ls],[data-dd],[data-dc],[data-ch],[data-hd],[data-pf],[data-ar],[data-ok2],[data-rw],[data-rs],[data-rr]');if(!t||!S||!me)return;const s=S,w=s.wt,mine=w&&w.who==me&&!s.win;
  if(mine&&(w.k=='phd'&&w.stage==1||w.k=='lsel')){const L=e.target.closest('[data-pd],[data-ls]');if(L){const q=L.dataset.pd!==undefined?+L.dataset.pd:+L.dataset.ls;return tx(s=>{const z=s.wt;if(!z||z.who!=me)return;if(z.k=='phd'&&z.stage==1)phdPlace(s,q);else if(z.k=='lsel')lineSel(s,q)})}}
  if(mine&&w.k=='act'&&sel>=0&&!e.target.closest('[data-h],[data-a],label')){const L=e.target.closest('[data-pl]');if(L)return doPlay(+L.dataset.pl)}
@@ -426,18 +448,19 @@ function turnSpin(s){const n=[s.names.a,s.names.b],w=s.first=='a'?0:1;animUntil=
  const d=document.createElement('div');d.id='sp';d.innerHTML='<div class="spt">先攻・後攻を決定中…</div><div class="spr"></div><div class="spn"><div class="spc" id="sp0">'+esc(n[0])+(me=='a'?'(あなた)':'')+'</div><div class="spc" id="sp1">'+esc(n[1])+(me=='b'?'(あなた)':'')+'</div></div><div class="spw" id="spw"></div>';document.body.appendChild(d);
  let i=0,steps=20+w,delay=60;const tick=()=>{const k=i%2;$('sp0').classList.toggle('on',k==0);$('sp1').classList.toggle('on',k==1);i++;if(i<=steps){delay*=1.09;setTimeout(tick,delay)}else{$('spw').innerHTML='先攻: <b>'+esc(n[w])+'</b>'+(s.first==me?'(あなたが先攻!)':'')+'<br>後攻: '+esc(n[1-w]);d.classList.add('fin');setTimeout(()=>d.remove(),1900)}};tick()}
 /* ===== BGM(YouTube埋め込み) ===== */
-const BGM={vid:'TteWeu6uLTg',tr:[],cur:0,on:false,vol:50,loop:true,p:null,ready:false,ts:'',want:false};
-function bgmLoad(){try{const c=JSON.parse(localStorage.getItem('bgm')||'{}');if(c.vol!=null)BGM.vol=c.vol;if(c.cur!=null)BGM.cur=c.cur;if(c.loop!=null)BGM.loop=c.loop;BGM.ts=c.ts||'';BGM.want=!!c.on}catch(e){}}
-function bgmSave(){try{localStorage.setItem('bgm',JSON.stringify({vol:BGM.vol,cur:BGM.cur,loop:BGM.loop,ts:BGM.ts,on:BGM.on}))}catch(e){}}
+const DEFAULT_TS=['0:00 廃都市: 水没エリア2','7:16 廃都市: 水没エリア','12:45 亡霊になった街','17:25 旧セントラルエリア','25:29 棄てられた街。','31:41 それでも咲く花に','35:35 廃都市にて。','40:39 雪に咲く街','46:48 かつて街だった場所で。','52:09 赤い季節','59:50 続く世界','1:06:55 終わりの後で','1:14:14 空港跡地','1:18:35 廃都市: 砂漠化エリア','1:22:36 緑への返還'].join('\n');
+const BGM={vid:'TteWeu6uLTg',tr:[],cur:0,on:false,vol:50,loop:false,p:null,ready:false,ts:DEFAULT_TS,want:false};
+function bgmLoad(){try{const c=JSON.parse(localStorage.getItem('bgm2')||'{}');if(c.vol!=null)BGM.vol=c.vol;if(c.cur!=null)BGM.cur=c.cur;if(c.loop!=null)BGM.loop=c.loop;BGM.ts=c.ts||DEFAULT_TS;BGM.want=!!c.on}catch(e){}}
+function bgmSave(){try{localStorage.setItem('bgm2',JSON.stringify({vol:BGM.vol,cur:BGM.cur,loop:BGM.loop,ts:BGM.ts,on:BGM.on}))}catch(e){}}
 function parseTs(x){const L=[];(x||'').split('\n').forEach(l=>{const m=l.match(/(?:(\d+):)?(\d{1,2}):(\d{2})\s*[-–:\s]*\s*(.*)/);if(m)L.push({t:(+m[1]||0)*3600+(+m[2])*60+(+m[3]),n:(m[4]||'').trim()})});return L}
 function buildTracks(){let L=parseTs(BGM.ts);const d=BGM.p&&BGM.p.getDuration?BGM.p.getDuration():0;if(L.length<2)L=d>0?Array.from({length:15},(_,i)=>({t:Math.floor(d/15*i),n:'曲'+(i+1)})):[];BGM.tr=L}
 function ytLoad(cb){if(window.YT&&YT.Player)return cb();window.onYouTubeIframeAPIReady=cb;if(!$('ytapi')){const s=document.createElement('script');s.id='ytapi';s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s)}}
 function bgmInit(cb){if(BGM.ready)return cb();BGM.q=cb;if(BGM.p)return;const h=document.createElement('div');h.id='ytp0';document.body.appendChild(h);
- ytLoad(()=>{BGM.p=new YT.Player('ytp0',{height:'2',width:'2',videoId:BGM.vid,playerVars:{playsinline:1,controls:0,rel:0},events:{onReady:()=>{BGM.ready=true;buildTracks();BGM.q&&BGM.q()},onError:()=>{BGM.err=1;BGM.on=false;bgmUi()},onStateChange:e=>{if(e.data===1&&!BGM.tr.length){buildTracks();fillSel();const t=BGM.tr[BGM.cur];if(t&&t.t>1)BGM.p.seekTo(t.t,true)}if(e.data===0&&BGM.on)BGM.p.playVideo();bgmUi()}}})})}
-function bgmPlay(){BGM.on=true;BGM.err=0;bgmSave();bgmUi();bgmInit(()=>{BGM.p.setVolume(BGM.vol);BGM.p.unMute();BGM.p.playVideo();setTimeout(()=>{if(!BGM.tr.length)buildTracks();const t=BGM.tr[BGM.cur];if(t&&t.t>1)BGM.p.seekTo(t.t,true);fillSel();bgmUi()},1200)})}
+ ytLoad(()=>{BGM.p=new YT.Player('ytp0',{height:'2',width:'2',videoId:BGM.vid,playerVars:{playsinline:1,controls:0,rel:0},events:{onReady:()=>{BGM.ready=true;buildTracks();BGM.q&&BGM.q()},onError:()=>{BGM.err=1;BGM.on=false;bgmUi()},onStateChange:e=>{if(e.data===1&&!BGM.tr.length){buildTracks();fillSel();const t=BGM.tr[BGM.cur];if(t&&t.t>1)BGM.p.seekTo(t.t,true)}if(e.data===0&&BGM.on){BGM.cur=0;BGM.p.seekTo(0,true);BGM.p.playVideo()}bgmUi()}}})})}
+function bgmPlay(){BGM.on=true;BGM.err=0;BGM.lock=Date.now()+2500;bgmSave();bgmUi();bgmInit(()=>{BGM.p.setVolume(BGM.vol);BGM.p.unMute();BGM.p.playVideo();setTimeout(()=>{if(!BGM.tr.length)buildTracks();const t=BGM.tr[BGM.cur];if(t&&t.t>1)BGM.p.seekTo(t.t,true);fillSel();bgmUi()},1200)})}
 function bgmOff(){BGM.on=false;bgmSave();try{BGM.p&&BGM.p.pauseVideo()}catch(e){}bgmUi()}
 function bgmToggle(){BGM.on?bgmOff():bgmPlay()}
-function bgmSeek(i){BGM.cur=i;bgmSave();if(!BGM.on||!BGM.ready){bgmPlay();return}const t=BGM.tr[i];if(t)BGM.p.seekTo(t.t,true);bgmUi()}
+function bgmSeek(i){BGM.cur=i;BGM.lock=Date.now()+2500;bgmSave();if(!BGM.on||!BGM.ready){bgmPlay();return}const t=BGM.tr[i];if(t)BGM.p.seekTo(t.t,true);bgmUi()}
 function bgmStep(d){const n=BGM.tr.length||15;bgmSeek((BGM.cur+d+n)%n)}
 function bgmVol(v){BGM.vol=+v;if($('bgvv'))$('bgvv').textContent=v;try{BGM.p&&BGM.p.setVolume(BGM.vol)}catch(e){}bgmSave()}
 function bgmApply(){BGM.ts=$('bgts').value;bgmSave();buildTracks();fillSel();if(BGM.on&&BGM.ready)bgmSeek(0)}
@@ -445,13 +468,24 @@ function fillSel(){const e=$('bgsel');if(!e)return;const L=BGM.tr.length?BGM.tr:
 function bgmUi(){let b=$('bgb');if(!b){b=document.createElement('div');b.id='bgb';b.innerHTML='<button class="bgbtn" onclick="bgmPanel()"></button>';document.body.appendChild(b)}
  b.firstChild.textContent='♪ BGM '+(BGM.on?'ON':'OFF');const t=$('bgt');if(t)t.textContent=BGM.on?'■ OFF(停止)':'▶ 再生';const s=$('bgs');if(s)s.textContent=BGM.err?'この動画は埋め込み再生できませんでした(YouTube側の制限の可能性があります)':BGM.on&&!BGM.ready?'読み込み中…':(BGM.tr.length?'':'再生が始まると曲リストが作られます');const e=$('bgsel');if(e&&BGM.tr.length)e.value=BGM.cur}
 function bgmPanel(){BGM.open=!BGM.open;let p=$('bgp');if(!BGM.open){p&&p.remove();return}
- p=document.createElement('div');p.id='bgp';p.innerHTML=`<b class="o">BGM</b> <button onclick="bgmToggle()" id="bgt"></button><br><select id="bgsel" onchange="bgmSeek(+this.value)"></select><button onclick="bgmStep(-1)">◀</button><button onclick="bgmStep(1)">▶</button><br>音量 <input type="range" id="bgv" min="0" max="100" value="${BGM.vol}" oninput="bgmVol(this.value)" style="width:140px"> <span id="bgvv">${BGM.vol}</span><br><label><input type="checkbox" id="bgl" ${BGM.loop?'checked':''} onchange="BGM.loop=this.checked;bgmSave()"> この曲をループ</label><details><summary>曲の区切りを設定(YouTube概要欄の時刻を貼り付け)</summary><textarea id="bgts" rows="6" style="width:100%;background:#050b1c;color:#d6e8ff" placeholder="0:00 曲名&#10;3:25 曲名">${esc(BGM.ts||'')}</textarea><button onclick="bgmApply()">適用</button></details><div id="bgs" style="color:#ff9a9a"></div>`;document.body.appendChild(p);fillSel();bgmUi()}
-setInterval(()=>{if(!BGM.on||!BGM.ready||!BGM.tr.length||!BGM.p.getCurrentTime)return;const ct=BGM.p.getCurrentTime(),t=BGM.tr[BGM.cur],nx=BGM.tr[BGM.cur+1],end=nx?nx.t:BGM.p.getDuration();if(t&&end&&ct>=end-.4){if(BGM.loop)BGM.p.seekTo(t.t,true);else bgmSeek((BGM.cur+1)%BGM.tr.length)}},500);
+ p=document.createElement('div');p.id='bgp';p.innerHTML=`<b class="o">BGM</b> <button onclick="bgmToggle()" id="bgt"></button><br><select id="bgsel" onchange="bgmSeek(+this.value)"></select><button onclick="bgmStep(-1)">◀</button><button onclick="bgmStep(1)">▶</button><br>音量 <input type="range" id="bgv" min="0" max="100" value="${BGM.vol}" oninput="bgmVol(this.value)" style="width:140px"> <span id="bgvv">${BGM.vol}</span><br><label><input type="checkbox" id="bgl" ${BGM.loop?'checked':''} onchange="BGM.loop=this.checked;bgmSave()"> この曲だけをループ(OFFなら15曲を通しで再生)</label><details><summary>曲の区切りを設定(YouTube概要欄の時刻を貼り付け)</summary><textarea id="bgts" rows="6" style="width:100%;background:#050b1c;color:#d6e8ff" placeholder="0:00 曲名&#10;3:25 曲名">${esc(BGM.ts||'')}</textarea><button onclick="bgmApply()">適用</button></details><div id="bgs" style="color:#ff9a9a"></div>`;document.body.appendChild(p);fillSel();bgmUi()}
+setInterval(()=>{if(!BGM.on||!BGM.ready||!BGM.tr.length||!BGM.p.getCurrentTime||Date.now()<(BGM.lock||0))return;const ct=BGM.p.getCurrentTime();let idx=0;BGM.tr.forEach((x,i)=>{if(ct>=x.t-.3)idx=i});const tt=BGM.tr[BGM.cur],nx=BGM.tr[BGM.cur+1],end=nx?nx.t:BGM.p.getDuration();if(BGM.loop){if(tt&&end&&ct>=end-.4)BGM.p.seekTo(tt.t,true)}else if(idx!=BGM.cur){BGM.cur=idx;bgmSave();bgmUi()}},500);
 bgmLoad();bgmUi();document.addEventListener('click',()=>{if(BGM.want&&!BGM.on&&!BGM.auto){BGM.auto=1;bgmPlay()}},{once:true});
 function luckFx(e){const d=document.createElement('div'),who=S?S.names[e.w]||'':'';d.className='lk '+(e.k=='decl'?'dc':e.k=='hit'?'ht':'ms');
  d.innerHTML='<div class="lkb" id="lkb"></div><div class="lks">'+esc(e.k=='decl'?who+' の宣言':'公開: '+e.v)+'</div>';document.body.appendChild(d);const b=d.querySelector('.lkb');
  if(e.k=='decl'){const pool=typeof e.v=='number'?['0','1','2','3','4','5','6']:Object.keys(TH);let i=0,n=0;const tk=()=>{if(n++<14){b.textContent=pool[(i+=1+(Math.random()*3|0))%pool.length];setTimeout(tk,70+n*12)}else b.textContent=String(e.v)};tk()}else b.textContent=e.k=='hit'?'的中!!':'ハズレ…';
  setTimeout(()=>d.remove(),1800)}
+function effModal(w,s,me,o){let m='',b='';
+ if(w.k=='opt'){m='任意の効果: '+(PT[w.op]||'捨て札を山札に混ぜる')+'。実行しますか?';b='<button data-o="1">実行する</button><button class="m" data-o="0">実行しない</button>'}
+ else if(w.k=='ch'){m='どちらの効果を使いますか?';b=w.opts.map((x,i)=>`<button data-ch="${i}">${x[0]}</button>`).join('')+(w.skip?'<button class="m" data-ch="-1">しない</button>':'')}
+ else if(w.k=='dcl'){m=w.type=='n'?'数字を宣言してください':'プロトコルを宣言してください';b=(w.type=='n'?[0,1,2,3,4,5,6].map(v=>`<button data-dc="${v}">${v}</button>`):[...new Set([...s.pr.a,...s.pr.b])].map(n=>`<button class="pb2" style="${th(n)}" data-dc="${n}">${n}</button>`)).join('')}
+ else{m='プロトコルの再配置: どちらを並べ替えますか?';b=`<button data-rw="${me}">自分のプロトコル</button><button data-rw="${o}">相手のプロトコル</button>`+(w.opt?'<button class="m" data-rs="1">再配置しない</button>':'')}
+ const card=w.src&&C[w.src]?big(w.src,'nb'):(w.k=='rr'?'<img src="'+IMC+'" style="width:96px;height:96px;border-radius:6px">':'');
+ return`<div class="md"><div class="mb"><div style="display:flex;justify-content:center;margin-bottom:8px">${card}</div><b>${m}</b><div style="margin-top:10px">${b}</div></div></div>`}
+let fxL=[],fxTm=0;
+function fxc(sub,pn){fxL.push({sub,pn});const f=$('fx');let hx='';for(let i=0;i<30;i++)hx+=Array.from({length:8},()=>Math.random().toString(16).slice(2,6).toUpperCase()).join(' ')+'<br>';const n=fxL.length;
+ f.innerHTML=fxL.map((x,i)=>`<div class="pane" style="left:${i*100/n}%;width:${100/n}%">${IM2[x.pn]?`<div class="bgb" style="background-image:url(${IM2[x.pn]})"></div><div class="bgi" style="background-image:url(${IM2[x.pn]})"></div>`:''}</div>`).join('')+`<div class="hx">${hx}${hx}</div><div class="cm"><div class="gl">COMPILE</div><div class="sb">${fxL.map(x=>esc(x.sub)).join(' ／ ')}</div></div><i class="sl"></i>`;
+ f.className='on';f.style.pointerEvents='none';clearTimeout(fxTm);document.body.classList.add('shk2');setTimeout(()=>document.body.classList.remove('shk2'),450);fxTm=setTimeout(()=>{fxL=[];f.className='';f.innerHTML=''},2800)}
 if(CFG.apiKey==="YOUR_API_KEY")$('app').innerHTML='<h1>COMPILE</h1><div class="box">このファイル内の <code>CFG</code>(Firebase設定値)を書き換えてから使ってください。</div>';
 else{firebase.initializeApp(CFG);db=firebase.firestore();lobby()}
 </script></body></html>
