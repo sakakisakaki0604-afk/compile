@@ -211,6 +211,51 @@ input[type=text]{font-size:16px!important}
 .pfhl{position:relative;z-index:1;padding:10px 14px;text-shadow:0 0 6px #000;display:flex;flex-direction:column}.pfhl small{font:700 10px Orbitron,sans-serif;letter-spacing:.3em;color:#fff9}.pfhl b{font:900 clamp(22px,7vw,32px) Orbitron,sans-serif;color:var(--c,#fff)}.pfhl span{font-size:12px;color:#dfe9ff}
 .pfhero.empty{--c:#17315a;align-items:center;justify-content:center;text-align:center;border-style:dashed;box-shadow:none;color:var(--dim)}.pfhero.empty::after{display:none}.pfhero.empty .pfhl{align-items:center}.pfhero.empty b{color:var(--dim)}
 .pfth{width:52px;height:52px;flex:none;border:2px solid var(--c);border-radius:6px}.pfth.pi::before{opacity:1}
+
+/* ===== v5: layout / overlap / banner ===== */
+#bgb{position:fixed!important;left:0!important;right:0!important;top:0!important;bottom:auto!important;height:40px;z-index:80!important;display:flex;align-items:center;justify-content:flex-end;padding:0 10px;background:#050b1cf2;border-bottom:1px solid var(--ln)}
+#bgb::before{content:'COMPILE // PROTOCOL BATTLE';margin-right:auto;font:800 12px Orbitron,sans-serif;color:var(--cy);letter-spacing:.2em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#bgp{left:auto!important;right:10px!important;bottom:auto!important;top:46px!important;z-index:97!important;max-height:calc(100vh - 60px);overflow:auto}
+#app{padding-top:48px!important}
+.ts{top:52px!important}
+.st{position:sticky;top:44px;z-index:70;clip-path:none!important;border-radius:4px;box-shadow:0 4px 14px #000a}
+.st.kact{border-color:#19ff9c;background:#06261a;color:#d8ffe9;box-shadow:0 4px 14px #000a,0 0 16px #19ff9c50}
+.st.kdis{border-color:#ff2e4d;background:#3a0010;color:#ffd6dc;font-size:15px;box-shadow:0 4px 14px #000a,0 0 22px #ff2e4d80;animation:kd 1s infinite alternate}@keyframes kd{to{background:#52001a}}
+.tn2{font:800 11px Orbitron,sans-serif;letter-spacing:.1em;opacity:.8;margin-right:4px}
+.tag{display:inline-block;padding:1px 9px;border-radius:3px;font-weight:800;font-size:12px}.tag.r{background:#ff2e4d;color:#fff}.tag.g{background:#19ff9c;color:#00170d}
+.hh{margin:6px 0;padding:4px 8px;border-left:4px solid var(--ln)}.hh.dis{border-color:#ff2e4d;background:#2a0010}.hh.act{border-color:#19ff9c;background:#05200f}
+.hand.discmode .hc{outline:3px solid #ff2e4d;box-shadow:0 0 18px #ff2e4d}
+.mb.gl{padding-top:0!important}.mb.gl>button:first-child{position:sticky;top:0;z-index:8;display:block;width:100%;margin:0 0 10px;padding:12px;font-size:15px;background:#06142e;box-shadow:0 6px 12px #000c}
+@media(max-width:640px){#bgp{left:6px!important;right:6px!important;max-width:none!important}}
+/* ===== title emblems ===== */
+.ttl{--tc:#19e3ff;display:inline-flex;align-items:center;gap:5px;padding:1px 10px 1px 2px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.04em;border:1px solid var(--tc);background:linear-gradient(90deg,color-mix(in srgb,var(--tc) 30%,#050a18),#050a18);box-shadow:0 0 10px color-mix(in srgb,var(--tc) 60%,transparent);vertical-align:middle;white-space:nowrap}
+.ttl i,.rem{font-style:normal;display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:12px;color:#001;background:radial-gradient(circle at 35% 30%,#fff,var(--tc,#19e3ff) 55%,color-mix(in srgb,var(--tc,#19e3ff) 50%,#000));box-shadow:0 0 8px var(--tc,#19e3ff);flex:none}
+.ttl b{background:linear-gradient(100deg,#fff 0 40%,var(--tc) 50%,#fff 60% 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shn 3s linear infinite}@keyframes shn{to{background-position:-250% 0}}
+.tq0{--tc:#19e3ff}.tq1{--tc:#e8924f}.tq2{--tc:#cfdcf2}.tq3{--tc:#ffd54a}.tq4{--tc:#ff5ad9}
+.ttl.tq4{animation:rbw 3s linear infinite}@keyframes rbw{to{filter:hue-rotate(360deg)}}
+.ttl.tq3 i,.ttl.tq4 i{animation:spk 1.4s ease-in-out infinite alternate}@keyframes spk{to{transform:scale(1.18) rotate(12deg)}}
+.ttl.big{font-size:16px;padding:3px 18px 3px 3px}.ttl.big i{width:34px;height:34px;font-size:19px}
+.fvt{font-size:11px;color:#ffb3e3;font-weight:700}.skt{margin-top:5px}.skt .ttl{font-size:12px}
+/* ===== profile extras ===== */
+.pfdesc{border:1px solid var(--ln);background:#07101f;padding:8px 10px;margin:6px 0;font-size:13px;line-height:1.7}.pfdesc b{color:var(--cy)}
+.hs{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:6px 8px;margin:4px 0;border-left:4px solid var(--ln);background:#07101f}.hs.w{border-color:#19ff9c}.hs.l{border-color:#ff2e4d}
+.hr{font:800 12px Orbitron,sans-serif;min-width:46px}.hs.w .hr{color:#19ff9c}.hs.l .hr{color:#ff6b86}.hdk{display:inline-flex;gap:4px;align-items:center;flex-wrap:wrap}.hdk small{color:var(--dim)}
+.hdot{display:inline-block;width:18px;text-align:center;font-weight:800}.hdot.w{color:#19ff9c}.hdot.l{color:#ff6b86}
+/* ===== PC: use the whole screen, 5 cards in one row ===== */
+@media(min-width:1000px){
+ #app{max-width:min(97vw,1840px)}
+ #app>.hand{flex-wrap:nowrap;overflow-x:auto;justify-content:center}
+ #app>.hand .hc{flex:1 1 0;min-width:150px;width:auto;max-width:340px}
+}
+@media(min-width:1200px){
+ body{font-size:15px}
+ .col{min-height:clamp(340px,46vh,620px)}.half{min-height:clamp(130px,19vh,260px)}
+ .cd{min-height:32px}.cd b{font-size:17px}.cd.top b{font-size:22px}.ft{font-size:14px}
+ .sx{font-size:13.5px}.hd b{font-size:22px}.hd span{font-size:16px}.ha{height:clamp(96px,13vh,170px)}
+ .st{font-size:16px}.pr{font-size:15px;padding:8px}.sc{font-size:22px}.zn{font-size:15px}.bar{font-size:14px}
+ .mb{max-width:760px}.mb .hc{width:250px}.mb.gl{max-width:1100px}
+ .pb{min-height:150px;min-width:190px;flex:1 1 190px;font-size:16px}
+}
 </style></head><body><div id="app"></div><div id="fx"></div>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -416,7 +461,7 @@ function decide(s,p,lv){const L=choices(s,p);if(!L.length)return;if(lv<=1)return
   L.forEach((f,i)=>{const c=cln(r);f(c);nodes=0;sc[i]+=lv>=3?ex(c,p,1):ev(c,p)})}
  let bi=0,bv=-1e9;sc.forEach((v,i)=>{v+=Math.random()*(lv==2?6*K:.01);if(v>bv){bv=v;bi=i}});L[bi](s)}
 /* ===== 通信 ===== */
-let flp=new Set(),zap=new Set(),chg=new Set(),perr='',fresh=new Set(),fh=0,animUntil=0,arSel=-1,rrSel=-1,pkSel='',pend=-1,trs='',myName='',me=null,ref=null,S=null,sel=-1,down=false,unsub=null,det=null,peek=false,peekV=0,db;const $=id=>document.getElementById(id);
+let flp=new Set(),zap=new Set(),chg=new Set(),perr='',fresh=new Set(),fh=0,animUntil=0,arSel=-1,rrSel=-1,pkSel='',pend=-1,trs='',myName='',me=null,ref=null,S=null,sel=-1,down=false,unsub=null,det=null,peek=false,peekV=0,dcf=-1,db;const $=id=>document.getElementById(id);
 async function tx(fn,force){const v0=S?(S.v||0):0;try{await db.runTransaction(async t=>{const d=await t.get(ref);if(!d.exists)throw Error('部屋が存在しません');const s=JSON.parse(d.data().s);if(!force&&(s.v||0)!==v0)return;fn(s);s.v=(s.v||0)+1;t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){alert('通信エラー: '+e.message)}}
 async function join(){const room=$('room').value.trim(),name=$('name').value.trim();if(!room||!name)return alert('部屋IDと名前を入力してください');
  const sets=[...document.querySelectorAll('.ck input:checked')].map(x=>x.value);if(!sets.length)return alert('使うセットを1つ以上選んでください');
@@ -424,7 +469,7 @@ async function join(){const room=$('room').value.trim(),name=$('name').value.tri
  try{await db.runTransaction(async t=>{const d=await t.get(ref);let s;
   if(!d.exists){s=blank(sets);s.uc=$('ctlc').checked?1:0;s.names.a=name;s.uid={a:UID};me='a'}
   else{s=JSON.parse(d.data().s);if(nm(s.names.a)==nm(name)&&(!s.uid||!s.uid.a||s.uid.a==UID))me='a';else if(!s.names.b){s.names.b=name;s.uid=s.uid||{};s.uid.b=UID;me='b';s.ph='draft';s.first=Math.random()<.5?'a':'b'}else if(nm(s.names.b)==nm(name)&&(!s.uid||!s.uid.b||s.uid.b==UID))me='b';else throw Error('この部屋は満員です。参加者: '+s.names.a+' / '+s.names.b+'(同じ名前で入ると再入室できます)')}
-  t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){return alert(e.message)}
+  setTT(s,me);t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){return alert(e.message)}
  myName=nm(name);setTitleSync();try{localStorage.setItem('cp',JSON.stringify({room,name}))}catch(e){}
  unsub=ref.onSnapshot(d=>{if(d.exists){const old=S;S=JSON.parse(d.data().s);if(old&&(S.gid!=old.gid||nm(S.names[me]||'')!=myName)){S=null;me=null;unsub&&unsub();return lobby('部屋がリセットされました。もう一度入室してください。')}const cc=old&&S.cn>(old.cn||0);if(cc)(S.cq||[]).slice(-(S.cn-(old.cn||0))).forEach(x=>{fxc(x.s,x.pn);if(x.p==me)pgBump('c')});if(old&&S.ev>(old.ev||0)&&!cc)toast(S.evt);if(old&&S.nn>(old.nn||0)&&S.nt)cnotice(S.nt);if(old&&S.win&&!old.win)setTimeout(()=>end(S.win==me),cc?2900:0);
  if(S.ph=='draft'&&S.pk==0&&(!old||old.ph!='draft'))turnSpin(S);else if(old&&old.ph=='play'&&S.ph=='play'&&!S.win&&old.turn!=S.turn)banner(S.turn==me?'YOUR TURN':'ENEMY TURN',S.turn==me?'#19e3ff':'#ff2ea6');
@@ -446,8 +491,9 @@ function R(){const A=$('app');if(!S)return;cpu();const s=S,o=opp(me),H=s.hand[me
  let msg='';const src=w&&w.src&&C[w.src]?`<b>${w.src}</b> の効果:`:'';
  if(s.win)msg=s.win==me?'<b>🏆 勝利!</b> 全プロトコルをコンパイルしました。「強制終了・部屋リセット」で次の対戦へ':'<b>敗北…</b> 相手が全プロトコルをコンパイルしました';
  else if(!w)msg='処理中…';else if(!mine)msg=esc(s.names[w.who])+' の操作を待っています';
- else msg={act:'<b>あなたの行動:</b> ①手札を選び、出したいラインを押す(表/裏は次の画面で選択) ②またはリフレッシュ',comp:'<b>コンパイル!</b> 光っているラインの「コンパイル」ボタンを押してください',disc:`${src} <b>${w.cache?'手札が6枚以上です。5枚になるまで':''}手札から${w.give?'相手に渡す':'捨てる'}カードを選んでください</b>`,tgt:`${src} <b>${PT[w.op]}</b>(光っているカードを押す)`,rr:`${src} <b>${w.tgt?'入れ替える2つのプロトコルを順に選択':'プロトコルの再配置: どちらを並べ替えますか?'}</b>`,dm:`${src} <b>捨てるカードを選んでください(現在${w.n}枚)。好きな枚数を捨てたら「捨て終わる」を押す</b>`,dcl:`${src} <b>${w.type=='n'?'数字を宣言してください':'プロトコルを宣言してください'}</b>`,ch:`${src} <b>どちらの効果を使いますか?</b>`,phd:`${src} <b>${w.stage==2?'表向きか裏向きかを選んでください':w.stage==1?'Playするラインを選んでください(光っているライン)':(w.src=='dis'?'Trashから':'手札から')+'Playするカードを選んでください'+(w.vf!=null?'(値'+w.vf+')':'')}</b>`,lsel:`${src} <b>対象のラインを選んでください(光っているライン)</b>`,opt:`${src} <b>任意の効果: ${PT[w.op]||'捨て札を山札に混ぜる'}</b> を実行しますか?`,dst:`${src} <b>移動先のラインを選んでください</b>(光っている自分/相手側の枠を押す)`}[w.k];
- h+=`<div class="st ${mine?'me':''}">${s.turn==me?'【あなたのターン】':'【相手のターン】'} ${msg}</div>`;
+ else msg={act:'<b>手札を1枚選ぶ → 出したいラインを押す</b>(表/裏は次の画面で選択)。※この場面ではカードは捨てられません。出せない時だけ「リフレッシュ」',comp:'<b>コンパイル!</b> 光っているラインの「コンパイル」ボタンを押してください',disc:`${src} <b>${w.cache?'手札が6枚以上です。5枚になるまで':''}手札から${w.give?'相手に渡す':'捨てる'}カードを選んでください</b>`,tgt:`${src} <b>${PT[w.op]}</b>(光っているカードを押す)`,rr:`${src} <b>${w.tgt?'入れ替える2つのプロトコルを順に選択':'プロトコルの再配置: どちらを並べ替えますか?'}</b>`,dm:`${src} <b>捨てるカードを選んでください(現在${w.n}枚)。好きな枚数を捨てたら「捨て終わる」を押す</b>`,dcl:`${src} <b>${w.type=='n'?'数字を宣言してください':'プロトコルを宣言してください'}</b>`,ch:`${src} <b>どちらの効果を使いますか?</b>`,phd:`${src} <b>${w.stage==2?'表向きか裏向きかを選んでください':w.stage==1?'Playするラインを選んでください(光っているライン)':(w.src=='dis'?'Trashから':'手札から')+'Playするカードを選んでください'+(w.vf!=null?'(値'+w.vf+')':'')}</b>`,lsel:`${src} <b>対象のラインを選んでください(光っているライン)</b>`,opt:`${src} <b>任意の効果: ${PT[w.op]||'捨て札を山札に混ぜる'}</b> を実行しますか?`,dst:`${src} <b>移動先のラインを選んでください</b>(光っている自分/相手側の枠を押す)`}[w.k];
+ const kind=mine?(w.k=='disc'||w.k=='dm'?'kdis':w.k=='act'?'kact':'koth'):'';
+ h+=`<div class="st ${mine?'me':''} ${kind}"><span class="tn2">${s.turn==me?'あなたのターン':'相手のターン'}</span> ${kind=='kdis'?'<span class="tag r">🗑 捨てる</span> ':kind=='kact'?'<span class="tag g">▶ プレイ</span> ':''}${msg}</div>`;
  if(0&&mine&&w.k=='dcl')h+='<div>'+(w.type=='n'?[0,1,2,3,4,5,6].map(v=>`<button data-dc="${v}">${v}</button>`):[...new Set([...s.pr.a,...s.pr.b])].map(n=>`<button class="pb2" style="${th(n)}" data-dc="${n}">${n}</button>`)).join('')+'</div>';
  if(0&&mine&&w.k=='ch')h+='<div>'+w.opts.map((o,i)=>`<button data-ch="${i}">${o[0]}</button>`).join('')+(w.skip?'<button class="m" data-ch="-1">しない</button>':'')+'</div>';
  if(mine&&w.k=='phd'&&w.stage==0&&w.src=='dis')h+='<div class="hand">'+s.dis[me].map((id,k)=>big(id,'',`data-hd="${k}"`)).join('')+'</div>';
@@ -467,16 +513,19 @@ function R(){const A=$('app');if(!S)return;cpu();const s=S,o=opp(me),H=s.hand[me
   <div class="half mine ${(pl&&sel>=0)||dlx(me)?'hit':''}" ${dlx(me)?`data-dl="${i}"`:''}>${pr(me)}${st(me)}</div></div>`}
  h+='</div>';
  if(mine&&w.k=='act')h+=`<div class="ck"><button data-a="ref" ${H.length>=5?'disabled':''}>リフレッシュ(手札5枚未満の時だけ)</button>${!H.length&&!s.deck[me].length&&!s.dis[me].length?'<button data-a="pass">パス</button>':''}</div>`;
- h+=zn(me,1)+rvBox(s,1)+`<div style="margin:6px 0"><b>あなたの手札 ${H.length}枚</b>${H.length>5?'(6枚以上は終了時に捨てます)':''}</div>`;
- h+='<div class="hand">'+H.map((id,k)=>big(id,(k==sel?'sel ':'')+(fh&&k>=H.length-fh?'dr':''),`data-h="${k}" draggable="true"`)).join('')+'</div>';
+ const dmode=mine&&(w.k=='disc'||w.k=='dm');
+ h+=zn(me,1)+rvBox(s,1)+`<div class="hh ${dmode?'dis':mine&&w.k=='act'?'act':''}"><b>あなたの手札 ${H.length}枚</b>${H.length>5?'(6枚以上は終了時に捨てます)':''}${dmode?' <span class="tag r">🗑 今はカードを捨てる場面です(タップで確認画面)</span>':mine&&w.k=='act'?' <span class="tag g">▶ 選んでラインに出す</span>':''}</div>`;
+ h+='<div class="hand '+(dmode?'discmode':'')+'">'+H.map((id,k)=>big(id,(k==sel?'sel ':'')+(fh&&k>=H.length-fh?'dr':''),`data-h="${k}" draggable="true"`)).join('')+'</div>';
  if(det)h+=`<div class="box dt">${big(det,'nb')}<div>カード詳細(場のカードを押すと表示)<br><button data-a="cl">閉じる</button></div></div>`;
  h+=`<div class="box"><b>プロトコル特色</b>(押すと表示)<br>${[...s.pr[me],...s.pr[o]].map(n=>`<button class="pb2" data-tr="${n}" style="${th(n)}">${n}</button>`).join('')}<div id="trb" style="margin-top:6px">${trs&&TR[trs]?`<b>${trs}</b><br>`+esc(TR[trs]):''}</div></div>`;
  h+='<div class="box log">'+s.log.slice().reverse().map(esc).join('<br>')+'</div>';
  if(mine&&(w.k=='opt'||w.k=='ch'||w.k=='dcl'||(w.k=='rr'&&!w.tgt)))h+=effModal(w,s,me,o);
  if(mine&&w.k=='phd'&&w.stage==2)h+=`<div class="md"><div class="mb"><button class="pkb m" data-a="peek">👁 盤面を見る</button><b>どちらで出しますか?</b><div style="display:flex;justify-content:center;margin:10px">${big(phdCard(s),'nb')}</div><button data-pf="1">表向きで出す(効果が発動)</button><button class="m" data-pf="0">裏向きで出す(値2)</button></div></div>`;
  if(pend>=0&&mine&&w.k=='act'&&H[sel])h+=`<div class="md"><div class="mb"><button class="pkb m" data-a="peek">👁 盤面を見る</button><b>どちらで出しますか?</b><div style="display:flex;justify-content:center;margin:10px">${big(H[sel],'nb')}</div>${perr?'<div style="color:#ff9a9a;margin:6px;font-weight:700">⚠ '+esc(perr)+'</div>':''}<button data-up="1">表向きで出す(効果が発動)</button><button class="m" data-up="0">裏向きで出す(値2・どのラインでも可)</button>${H[sel]=="Corruption0"?'<button data-up="s">相手側のラインへ表向きで出す</button>':''}<button data-up="x">キャンセル</button></div></div>`;
+ if(!(mine&&(w.k=='disc'||w.k=='dm'))||dcf>=H.length)dcf=-1;
+ if(dcf>=0)h+=`<div class="md"><div class="mb"><button class="pkb m" data-a="peek">👁 盤面を見る</button><b style="color:#ff8aa0;font-size:17px">🗑 このカードを捨てますか?</b><div style="display:flex;justify-content:center;margin:10px">${big(H[dcf],'nb')}</div><button class="m" data-dcf="1">捨てる</button><button data-dcf="0">やめる(戻る)</button></div></div>`;
  A.innerHTML=h;pkUi();fresh.clear();flp.clear();zap.clear();chg.clear();fh=0}
-document.addEventListener('click',e=>{const t=e.target.closest('[data-pk],[data-t],[data-cp],[data-pl],[data-h],[data-a],[data-dl],[data-d],[data-o],[data-tr],[data-ok],[data-up],[data-pd],[data-ls],[data-dd],[data-dc],[data-ch],[data-hd],[data-pf],[data-ar],[data-ok2],[data-rw],[data-rs],[data-rr]');if(!t||!S||!me)return;const s=S,w=s.wt,mine=w&&w.who==me&&!s.win;
+document.addEventListener('click',e=>{const t=e.target.closest('[data-pk],[data-t],[data-cp],[data-pl],[data-h],[data-a],[data-dl],[data-d],[data-o],[data-tr],[data-ok],[data-up],[data-pd],[data-ls],[data-dd],[data-dc],[data-ch],[data-hd],[data-pf],[data-ar],[data-ok2],[data-rw],[data-rs],[data-rr],[data-dcf]');if(!t||!S||!me)return;const s=S,w=s.wt,mine=w&&w.who==me&&!s.win;
  if(mine&&(w.k=='phd'&&w.stage==1||w.k=='lsel')){const L=e.target.closest('[data-pd],[data-ls]');if(L){const q=L.dataset.pd!==undefined?+L.dataset.pd:+L.dataset.ls;return tx(s=>{const z=s.wt;if(!z||z.who!=me)return;if(z.k=='phd'&&z.stage==1)phdPlace(s,q);else if(z.k=='lsel')lineSel(s,q)})}}
  if(mine&&w.k=='act'&&sel>=0&&!e.target.closest('[data-h],[data-a],label')){const L=e.target.closest('[data-pl]');if(L)return doPlay(+L.dataset.pl)}
  if(t.dataset.a=='reset')return resetRoom();
@@ -503,7 +552,8 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-pk],[data-
  if(t.dataset.t){const[i,x,jj]=t.dataset.t.split(',');return tx(s=>pickTgt(s,+i,x,+jj))}
  if(t.dataset.dl)return tx(s=>dstTo(s,+t.dataset.dl));
  if(t.dataset.cp)return tx(s=>comp(s,+t.dataset.cp));
- if(t.dataset.h!==undefined){const k=+t.dataset.h;if(w.k=='dm')return tx(s=>{const z=s.wt;if(!z||z.k!='dm')return;const cd=s.hand[z.who].splice(k,1)[0];s.dis[z.who].push(cd);z.n++;if(!s.hand[z.who].length)dmEnd(s)});if(w.k=='phd'&&w.stage==0&&w.src!='dis')return tx(s=>{const z=s.wt;if(!z||z.k!='phd'||z.stage!=0)return;const id=s.hand[z.who][k];if((z.vf!=null&&C[id].v!=z.vf)||(z.ex&&C[id].p==z.ex))return;z.idx=k;z.stage=1});if(w.k=='disc')return tx(s=>disc(s,k));if(w.k=='act'){sel=sel==k?-1:k;pend=-1;R()}return}
+ if(t.dataset.dcf!==undefined){const k=dcf;dcf=-1;if(t.dataset.dcf!='1'||k<0)return R();if(w.k=='dm')return tx(s=>{const z=s.wt;if(!z||z.k!='dm')return;const cd=s.hand[z.who].splice(k,1)[0];if(cd===undefined)return;s.dis[z.who].push(cd);z.n++;if(!s.hand[z.who].length)dmEnd(s)});if(w.k=='disc')return tx(s=>disc(s,k));return R()}
+ if(t.dataset.h!==undefined){const k=+t.dataset.h;if(w.k=='dm'||w.k=='disc'){dcf=k;return R()}if(w.k=='phd'&&w.stage==0&&w.src!='dis')return tx(s=>{const z=s.wt;if(!z||z.k!='phd'||z.stage!=0)return;const id=s.hand[z.who][k];if((z.vf!=null&&C[id].v!=z.vf)||(z.ex&&C[id].p==z.ex))return;z.idx=k;z.stage=1});if(w.k=='act'){sel=sel==k?-1:k;pend=-1;R()}return}
  if(t.dataset.pl!==undefined){const i=+t.dataset.pl,id=s.hand[me][sel],up=!$('dn')?.checked,er=why(s,me,id,i,up);if(er)return alert(er);down=!up;const k=sel;sel=-1;return tx(s=>play(s,me,k,i,up))}
  if(t.dataset.a=='skp')return tx(s=>{if(s.wt&&s.wt.k=='phd'&&s.wt.stage==1)phdSkip(s)});
  if(t.dataset.a=='ref')return tx(s=>refresh(s,me));
@@ -545,7 +595,7 @@ function cpuAct(s){const w=s.wt,lv=s.lv||2;
 function banner(x,c){const n=document.createElement('div');n.className='tbn';n.style.setProperty('--c',c);n.textContent=x;document.body.appendChild(n);setTimeout(()=>n.remove(),1500)}
 function turnSpin(s){const n=[s.names.a,s.names.b],w=s.first=='a'?0:1;animUntil=Date.now()+6000;
  const d=document.createElement('div');d.id='sp';
- const card=i=>`<div class="sk" id="sk${i}"><div class="ski" id="ski${i}"><div class="skb" style="background-image:url(${IMC})"></div><div class="skf ${i==w?'first':'second'}"><i class="fl"></i><em>${i==w?'FIRST':'SECOND'}</em><b>${i==w?'1':'2'}</b><small>${i==w?'先攻':'後攻'}</small></div></div><div class="skn" id="skn${i}">${esc(n[i])}${(i==0?'a':'b')==me?'<u>YOU</u>':''}</div></div>`;
+ const card=i=>`<div class="sk" id="sk${i}"><div class="ski" id="ski${i}"><div class="skb" style="background-image:url(${IMC})"></div><div class="skf ${i==w?'first':'second'}"><i class="fl"></i><em>${i==w?'FIRST':'SECOND'}</em><b>${i==w?'1':'2'}</b><small>${i==w?'先攻':'後攻'}</small></div></div><div class="skn" id="skn${i}">${esc(n[i])}${(i==0?'a':'b')==me?'<u>YOU</u>':''}<div class="skt">${ttHtml(s,i==0?'a':'b')}</div></div></div>`;
  d.innerHTML='<div class="sph"><div class="spt">TURN ORDER</div><div class="sps">先攻・後攻を決定</div></div><div class="sdk">'+card(0)+card(1)+'</div><div class="spw" id="spw">&nbsp;</div>';document.body.appendChild(d);
  const TT=(f,t)=>setTimeout(()=>{if(d.isConnected)f()},t);
  const c=[$('sk0'),$('sk1')],X=Math.min(innerWidth*.2,100),N=6;let pos=[-1,1],k=0;
@@ -624,8 +674,8 @@ const ACH0=[{id:'w1',t:'ファーストブラッド',d:'初めて勝利する',f
 const EPI={Darkness:'闇',Death:'死',Fire:'焔',Gravity:'重力',Life:'生命',Light:'光',Metal:'鋼',Plague:'疫病',Psychic:'念動',Speed:'疾風',Spirit:'霊魂',Water:'蒼水',Apathy:'虚無',Hate:'憎悪',Love:'愛',Chaos:'混沌',Clarity:'明鏡',Corruption:'腐敗',Courage:'勇気',Fear:'恐怖',Ice:'氷結',Luck:'幸運',Mirror:'鏡像',Peace:'安寧',Smoke:'煙幕',Time:'刻',War:'戦火',Assimilation:'同化',Diversity:'多様',Unity:'統一'};
 const TIERN=[[1,e=>e+'を継ぐ者'],[10,e=>e+'の覇者'],[50,e=>e+'の王'],[100,e=>e+'を統べし神']];
 const PROTOS=Object.keys(TH);
-const ACHP=PROTOS.flatMap(p=>TIERN.map(([n,f])=>({id:'p_'+p+'_'+n,p,n,t:f(EPI[p]||p),d:p+'のプロトコルで'+n+'勝',f:g=>((g.pw||{})[p]||0)>=n})));
-const ACH=ACH0.concat(ACHP),achOf=id=>ACH.find(a=>a.id==id);
+const ACHP=PROTOS.flatMap(p=>TIERN.map(([n,f])=>({id:'p_'+p+'_'+n,p,n,k:n==1?1:n==10?2:n==50?3:4,t:f(EPI[p]||p),d:p+'のプロトコルで'+n+'勝',f:g=>((g.pw||{})[p]||0)>=n})));
+const KMAP={w1:1,g10:1,w10:2,w30:3,w100:4,s3:2,c3:3,fl:3,ct:2,cc:3,d3:2};ACH0.forEach(a=>a.k=KMAP[a.id]||0);const ACH=ACH0.concat(ACHP),achOf=id=>ACH.find(a=>a.id==id);
 const TIPS=['相手より大きい2ラインで優勢になると、ターン開始時にコントロールを獲得できます。','コンパイルはまず実行され、その後でコントロールの再配置ができます。','10以上でも相手より大きくなければコンパイルできません。1ラインに偏らず数字を積みましょう。','Light 4 などで手札を公開されたら、次の一手を読まれます。手札を減らして情報を絞りましょう。','裏向きのカードは値2。どのラインにも出せるので、数字稼ぎと布石に使えます。','盤面が見えにくい時は、確認画面の「盤面を見る」ボタンで画面を確認できます。','カード詳細は場のカードを押すと表示されます。効果を確認してから動きましょう。','敗北しても経験値が入ります。負けたカードの組み合わせを次に活かしましょう。'];
 const ymd=t=>{const d=new Date(t);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 const lvOf=xp=>{let l=0,n=100;while(xp>=n&&l<98){xp-=n;l++;n=100+l*40}return{l,cur:xp,need:n}};
@@ -641,13 +691,17 @@ function pgMis(g){const l=[],ms=todayMis(g);ms.forEach(m=>{if((g.d[m.k]||0)>=m.n
 function pgBump(k){try{const g=pgLoad();g.d[k]=(g.d[k]||0)+1;if(k=='ctl')g.ctlT++;if(k=='c')g.cT++;const r=pgMis(g);pgSave(g);r.l.forEach((m,i)=>setTimeout(()=>toast('ミッション達成!「'+m.t+'」 +50XP'),i*900+600));if(r.all)setTimeout(()=>toast('今日のミッション全達成! ボーナス +100XP'),2400)}catch(e){}}
 const misHtml=g=>todayMis(g).map(m=>{const v=Math.min(g.d[m.k]||0,m.n),ok=g.d.paid[m.id];return`<div class="mi ${ok?'ok':''}"><span style="color:inherit">${ok?'✅':'⬜'} ${m.t}</span><span>${v}/${m.n}</span></div>`}).join('');
 const UID=(()=>{let u='';try{u=localStorage.getItem('cuid')||'';if(!u){u=Math.random().toString(36).slice(2,10);localStorage.setItem('cuid',u)}}catch(e){u='x'+Math.random()}return u})();
-const ttHtml=(s,p)=>{const t=s.tt&&s.tt[p],f=s.fv&&s.fv[p];return(t?'🏅 '+esc(t):'')+(f?(t?' ':'')+'♥ '+esc(f):'')};
-function setTitleSync(k){k=k||0;setTimeout(()=>{if(!S||!me){if(k<8)setTitleSync(k+1);return}const g=pgLoad(),a=achOf(g.prof.title),t=a&&g.ach[a.id]?a.t:'',f=g.prof.fav||'';tx(s=>{s.tt=s.tt||{};s.tt[me]=t;s.fv=s.fv||{};s.fv[me]=f;if(s.cpu&&!s.tt.b)s.tt.b='CPU / '+['','EASY','NORMAL','ABYSS'][s.lv||2]},true)},350)}
+const EMB=['⬢','◈','✪','❖','♛'];
+const ttlHtml=(t,k,big)=>t?`<span class="ttl tq${k||0} ${big?'big':''}"><i>${EMB[k||0]}</i><b>${esc(t)}</b></span>`:'';
+const ttHtml=(s,p)=>{const t=s.tt&&s.tt[p],f=s.fv&&s.fv[p];return ttlHtml(t,s.tk&&s.tk[p])+(f?` <span class="fvt">♥ ${esc(f)}</span>`:'')};
+function myTT(){const g=pgLoad(),a=achOf(g.prof.title),ok=a&&g.ach[a.id];return{t:ok?a.t:'',k:ok?(a.k||0):0,f:g.prof.fav||''}}
+function setTT(s,p){s.tt=s.tt||{};s.tk=s.tk||{};s.fv=s.fv||{};const m=myTT();s.tt[p]=m.t;s.tk[p]=m.k;s.fv[p]=m.f;if(s.cpu&&!s.tt.b){s.tt.b='CPU / '+['','EASY','NORMAL','ABYSS'][s.lv||2];s.tk.b=0}}
+function setTitleSync(k){k=k||0;setTimeout(()=>{if(!S||!me){if(k<8)setTitleSync(k+1);return}tx(s=>setTT(s,me),true)},350)}
 function topProto(g,key){let b='',v=0;PROTOS.forEach(p=>{const x=(g[key]||{})[p]||0;if(x>v){v=x;b=p}});return b?[b,v]:null}
 const pchip=n=>n?`<span class="pchip" style="${th(n)}">${TH[n][2]||''} ${n}</span>`:'<span class="pchip">未設定</span>';
-function lobbyExtra(){try{const g=pgLoad(),L=lvOf(g.xp),bar=document.querySelector('#app .bar');if(!bar)return;const rate=g.g?Math.round(g.w*100/g.g):0,a=achOf(g.prof.title),tt=a&&g.ach[a.id]?a.t:'称号なし',tu=topProto(g,'pu');
+function lobbyExtra(){try{const g=pgLoad(),L=lvOf(g.xp),bar=document.querySelector('#app .bar');if(!bar)return;const rate=g.g?Math.round(g.w*100/g.g):0,a=achOf(g.prof.title),tt=a&&g.ach[a.id]?a.t:'称号なし',tu=topProto(g,'pu'),dots=(g.hist||[]).slice(0,5).map(h=>h.w?'<span class="hdot w">○</span>':'<span class="hdot l">×</span>').join('');
  ['name','cname'].forEach(i=>{const e=$(i);if(e)e.value=g.prof.name});
- bar.insertAdjacentHTML('afterend',`<div class="box pgb"><div class="pgh">${g.prof.fav?`<div class="pfth pi p-${g.prof.fav}" style="${th(g.prof.fav)}"></div>`:''}<b class="pname">${esc(g.prof.name)}</b><span class="o">LV ${L.l+1} ${ttl(L.l)}</span><button style="margin-left:auto" onclick="profScreen(0)">👤 プロフィール</button></div><div class="pgs" style="margin:4px 0">🏅 ${esc(tt)} ／ ♥ ${pchip(g.prof.fav)} ／ 最多使用 ${tu?pchip(tu[0]):'-'}</div><div class="xpb"><i style="width:${Math.round(L.cur*100/L.need)}%"></i><em>${L.cur} / ${L.need} XP</em></div><div class="pgs">${g.w}勝 ${g.l}敗(勝率${rate}%) / 連勝 ${g.st}(最高${g.bs}) / ${g.ds}日連続ログイン</div><div class="pgm"><b>📋 今日のミッション</b>(1つ +50XP / 全達成で +100XP)${misHtml(g)}</div></div>`);
+ bar.insertAdjacentHTML('afterend',`<div class="box pgb"><div class="pgh">${g.prof.fav?`<div class="pfth pi p-${g.prof.fav}" style="${th(g.prof.fav)}"></div>`:''}<b class="pname">${esc(g.prof.name)}</b><span class="o">LV ${L.l+1} ${ttl(L.l)}</span><button style="margin-left:auto" onclick="profScreen(0)">👤 プロフィール</button></div><div class="pgs" style="margin:4px 0">${a&&g.ach[a.id]?ttlHtml(a.t,a.k):'称号なし'} ／ ♥ ${pchip(g.prof.fav)} ／ 最多使用 ${tu?pchip(tu[0]):'-'}</div><div class="xpb"><i style="width:${Math.round(L.cur*100/L.need)}%"></i><em>${L.cur} / ${L.need} XP</em></div><div class="pgs">${g.w}勝 ${g.l}敗(勝率${rate}%) / 連勝 ${g.st}(最高${g.bs}) / ${g.ds}日連続ログイン / 直近 ${dots||'-'}</div><div class="pgm"><b>📋 今日のミッション</b>(1つ +50XP / 全達成で +100XP)${misHtml(g)}</div></div>`);
  if(g.bonus){const b=g.bonus;g.bonus=0;pgSave(g);setTimeout(()=>toast('ログインボーナス +20XP('+b+'日連続ログイン)'),500)}}catch(e){console.error(e)}}
 /* ===== プロフィール画面 ===== */
 let PF=null;
@@ -655,19 +709,20 @@ function profScreen(first){const g=pgLoad();PF={name:g.prof.name||'',fav:g.prof.
 function pfRender(){const sy=window.scrollY,g=pgLoad(),L=lvOf(g.xp),A=$('app'),rate=g.g?Math.round(g.w*100/g.g):0,tu=topProto(g,'pu'),tw=topProto(g,'pw');
  const uses=PROTOS.map(p=>[p,(g.pu||{})[p]||0]).filter(x=>x[1]).sort((a,b)=>b[1]-a[1]).slice(0,5),mx=uses.length?uses[0][1]:1,tg=Math.max(1,g.g);
  const unl=ACH.filter(a=>g.ach[a.id]).length,a0=achOf(PF.title),eq=a0&&g.ach[a0.id]?a0.t:'未選択';
- const row=a=>{const ok=g.ach[a.id],on=PF.title==a.id;return`<div class="mi ach ${ok?'ok':'lkd'} ${on?'eq':''}" ${ok?`onclick="pfTitle('${a.id}')"`:''}><span style="color:inherit">${ok?(on?'✅':'🏅'):'🔒'} <b>${esc(a.t)}</b></span><span>${esc(a.d)}</span></div>`};
- const hero=PF.fav?`<div class="pfhero pi p-${PF.fav}" style="${th(PF.fav)}"><div class="pfhl"><small>♥ FAVORITE PROTOCOL</small><b>${PF.fav}</b><span>${esc((TR[PF.fav]||'').slice(0,54))}…</span></div></div>`:`<div class="pfhero empty"><div class="pfhl"><small>♥ FAVORITE PROTOCOL</small><b>未選択</b><span>下から好きなプロトコルを選んでください</span></div></div>`;
+ const row=a=>{const ok=g.ach[a.id],on=PF.title==a.id;return`<div class="mi ach ${ok?'ok':'lkd'} ${on?'eq':''}" ${ok?`onclick="pfTitle('${a.id}')"`:''}><span style="color:inherit">${ok?(on?'✅':'<i class="rem tq'+a.k+'">'+EMB[a.k]+'</i>'):'🔒'} <b>${esc(a.t)}</b></span><span>${esc(a.d)}</span></div>`};
+ const hero=PF.fav?`<div class="pfhero pi p-${PF.fav}" style="${th(PF.fav)}"><div class="pfhl"><small>♥ FAVORITE PROTOCOL</small><b>${PF.fav}</b></div></div>${TR[PF.fav]?`<div class="pfdesc"><b>${PF.fav}</b> — ${esc(TR[PF.fav])}</div>`:''}`:`<div class="pfhero empty"><div class="pfhl"><small>♥ FAVORITE PROTOCOL</small><b>未選択</b><span>下から好きなプロトコルを選んでください</span></div></div>`;
  A.innerHTML=`<div class="bar o"><span>PROFILE</span>${PF.first?'':'<button onclick="pfBack()">← ロビーへ</button>'}</div>
  <div class="box"><b>プレイヤー名</b><input type="text" id="pf_name" maxlength="12" placeholder="名前を入力(最大12文字)" autocomplete="off" value="${esc(PF.name)}"><div class="pgs">${PF.first?'最初に名前を決めてください。入室時の名前入力は不要になります。':'名前の変更はここで行えます。'}</div></div>
- <div class="box"><b>好きなプロトコル</b>${hero}<div class="pk">${PROTOS.map(n=>`<button class="pb pi ${n==PF.fav?'hit':''}" style="${th(n)}" onclick="pfFav('${n}')">${TH[n][2]||''} ${n}</button>`).join('')}</div></div>
- <div class="box"><b>称号(対戦中、名前の下に表示されます)</b><div style="margin:6px 0">現在: <span class="pchip">🏅 ${esc(eq)}</span> <button onclick="pfTitle('')">外す</button></div><div class="pgs">下の実績一覧から解除済みの実績をタップして選択</div></div>
+ <div class="box"><b>好きなプロトコル</b>${hero}<div class="pk">${PROTOS.map(n=>`<button class="pb pi p-${n} ${n==PF.fav?'hit':''}" style="${th(n)}" onclick="pfFav('${n}')">${TH[n][2]||''} ${n}</button>`).join('')}</div></div>
+ <div class="box"><b>称号(対戦中、名前の下に表示されます)</b><div style="margin:6px 0">現在: ${a0&&g.ach[a0.id]?ttlHtml(a0.t,a0.k,1):'<span class="pchip">未選択</span>'} <button onclick="pfTitle('')">外す</button></div><div class="pgs">下の実績一覧から解除済みの実績をタップして選択</div></div>
  ${PF.first?'':`<div class="box"><b>戦績</b><div class="pgh" style="margin:6px 0"><span class="o">LV ${L.l+1} ${ttl(L.l)}</span></div><div class="xpb"><i style="width:${Math.round(L.cur*100/L.need)}%"></i><em>${L.cur} / ${L.need} XP</em></div>
  <div class="stg"><div><small>勝率</small><b>${rate}%</b></div><div><small>勝 / 敗</small><b>${g.w} / ${g.l}</b></div><div><small>連勝(最高)</small><b>${g.st}(${g.bs})</b></div><div><small>実績</small><b>${unl}/${ACH.length}</b></div></div>
  <div style="margin:8px 0">最多使用: ${tu?pchip(tu[0])+` ${tu[1]}回(使用率${Math.round(tu[1]*100/tg)}%・勝率${Math.round(((g.pw||{})[tu[0]]||0)*100/tu[1])}%)`:'データなし'}</div>
  <div style="margin:8px 0">最多勝利: ${tw?pchip(tw[0])+` ${tw[1]}勝`:'データなし'}</div>
- ${uses.length?'<b>使用率ランキング</b>'+uses.map(([p,c])=>`<div class="ub"><span>${pchip(p)}</span><i style="width:${Math.round(c*100/mx)}%;background:${TH[p][0]}"></i><em>${Math.round(c*100/tg)}%</em></div>`).join(''):''}</div>`}
+ ${uses.length?'<b>使用率ランキング</b>'+uses.map(([p,c])=>`<div class="ub"><span>${pchip(p)}</span><i style="width:${Math.round(c*100/mx)}%;background:${TH[p][0]}"></i><em>${Math.round(c*100/tg)}%</em></div>`).join(''):''}${histHtml(g)}</div>`}
  <div class="box"><b>🏅 実績一覧(${unl}/${ACH.length})</b><div style="margin-top:6px">${ACH0.map(row).join('')}</div>${PROTOS.map(p=>{const l=ACHP.filter(a=>a.p==p),c=l.filter(a=>g.ach[a.id]).length;return`<details><summary>${pchip(p)} ${c}/4</summary>${l.map(row).join('')}</details>`}).join('')}</div>
  <div class="okbar"><button onclick="pfDone()">${PF.first?'この内容ではじめる':'保存してロビーへ'}</button></div>`;window.scrollTo(0,sy)}
+function histHtml(g){const h=(g.hist||[]).slice(0,5);return'<div style="margin-top:12px"><b>直近5戦</b></div>'+(h.length?h.map(x=>`<div class="hs ${x.w?'w':'l'}"><span class="hr">${x.w?'WIN':'LOSE'}</span><span class="ho">vs <b>${esc(x.o)}</b>${x.c?' <small>(CPU '+['','弱','普通','最強'][x.c]+')</small>':''}<small> ${esc(x.d)}</small></span><span class="hdk"><small>使用</small>${(x.deck||[]).map(p=>pchip(p)).join('')}</span>${x.od?`<span class="hdk"><small>相手</small>${x.od.map(p=>pchip(p)).join('')}</span>`:''}</div>`).join(''):'<div class="pgs">まだ対戦記録がありません</div>')}
 function pfKeep(){const e=$('pf_name');if(e)PF.name=e.value}
 function pfFav(n){pfKeep();PF.fav=n;pfRender()}
 function pfTitle(id){pfKeep();PF.title=id;pfRender()}
@@ -681,7 +736,7 @@ const _lobby=lobby;lobby=function(n){if(!pgLoad().prof.name)return profScreen(1)
 let PGdone='',LASTCPU=null;
 const _joinCpu=joinCpu;joinCpu=async function(){try{LASTCPU={name:$('cname').value.trim(),sets:[...document.querySelectorAll('.ck input:checked')].map(x=>x.value),uc:$('ctlc').checked,lv:+$('lv').value}}catch(e){}return _joinCpu()};
 function onGameEnd(win){if(!S||PGdone==S.gid)return;PGdone=S.gid;const g=pgLoad();if(g.lastGid==S.gid)return;g.lastGid=S.gid;
- const o=opp(me),cpuG=!!S.cpu,lv=S.lv||0,myC=S.cp[me].filter(x=>x).length,opC=S.cp[o].filter(x=>x).length,lb=lvOf(g.xp).l;const rows=[['対戦に参加',20]];g.g++;g.d.g++;S.pr[me].forEach(p=>{g.pu[p]=(g.pu[p]||0)+1;if(win)g.pw[p]=(g.pw[p]||0)+1});
+ const o=opp(me),cpuG=!!S.cpu,lv=S.lv||0,myC=S.cp[me].filter(x=>x).length,opC=S.cp[o].filter(x=>x).length,lb=lvOf(g.xp).l;const rows=[['対戦に参加',20]];g.g++;g.d.g++;S.pr[me].forEach(p=>{g.pu[p]=(g.pu[p]||0)+1;if(win)g.pw[p]=(g.pw[p]||0)+1});g.hist=g.hist||[];g.hist.unshift({d:ymd(Date.now()).slice(5),o:S.names[o]||'?',c:cpuG?lv:0,w:win?1:0,deck:[...S.pr[me]],od:[...S.pr[o]]});g.hist=g.hist.slice(0,20);
  if(win){g.w++;g.d.w++;g.st++;g.bs=Math.max(g.bs,g.st);rows.push(['勝利',50]);
   if(cpuG){g.lv[lv]=(g.lv[lv]||0)+1;if(lv>=2)g.d.w2++;const b=lv>=3?70:lv==2?30:0;if(b)rows.push(['CPU難易度ボーナス',b])}
   if(opC==0){g.fl++;g.d.fl++;rows.push(['完全勝利(相手0コンパイル)',40])}
