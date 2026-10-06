@@ -176,6 +176,35 @@ details summary{cursor:pointer;margin:8px 0;color:var(--cy)}
 .rr{display:flex;justify-content:space-between;padding:2px 6px;border-bottom:1px solid var(--ln)}.rr b{color:#ffe14a}
 .lvup{margin:6px 0;padding:6px 10px;border:1px solid #ffe14a;background:#2a2000;color:#ffe14a;font-weight:700;text-align:center;animation:okp 1s infinite alternate}
 .tip{margin:8px 0;color:#cfe6ff;font-size:13px}.rbt{display:flex;flex-wrap:wrap;gap:4px}.rbt button{flex:1;min-width:140px;padding:11px}
+
+#sp{pointer-events:none!important;gap:14px!important}
+.sph{text-align:center;z-index:1}
+.spt{font:900 clamp(26px,8vw,46px) Orbitron,sans-serif!important;letter-spacing:.28em!important;background:linear-gradient(90deg,#19e3ff,#ff2ea6);-webkit-background-clip:text;background-clip:text;color:transparent!important;filter:drop-shadow(0 0 12px #19e3ff90)}
+.sps{font:600 13px 'Noto Sans JP',sans-serif;letter-spacing:.45em;color:#7da4d6;margin-top:4px}
+.sdk{height:min(78vw,350px)!important}
+.skf{background:linear-gradient(160deg,#0e2250,#050a18)!important;border-color:#19e3ff!important;box-shadow:0 0 26px #19e3ff90!important;gap:2px}
+.skf.first{background:linear-gradient(160deg,#4a3600,#120d00)!important;border-color:#ffe14a!important;box-shadow:0 0 38px #ffe14a!important}
+.skf em{font:700 11px Orbitron,sans-serif;letter-spacing:.35em;font-style:normal;color:#9fd8ff}.skf.first em{color:#ffe14a}
+.skf b{font:900 clamp(56px,19vw,96px) Orbitron,sans-serif!important;line-height:1;color:#fff!important;text-shadow:0 0 22px #19e3ff!important}.skf.first b{color:#ffe14a!important;text-shadow:0 0 26px #ffb300!important}
+.skf small{font:800 17px 'Noto Sans JP',sans-serif!important;letter-spacing:.35em;color:#cfe6ff!important;margin-left:.35em}
+.fl{position:absolute;inset:0;background:#fff;opacity:0;border-radius:8px;pointer-events:none}.ski.op .fl{animation:flsh .6s .3s}
+@keyframes flsh{0%{opacity:0}30%{opacity:.9}100%{opacity:0}}
+.sk.lose{opacity:.55;filter:saturate(.5)}
+.skn u{text-decoration:none;background:#ffe14a;color:#001;font:800 10px Orbitron,sans-serif;padding:2px 6px;margin-left:6px;border-radius:2px;vertical-align:middle}
+.spw{min-height:76px;text-align:center;z-index:1}.spw .sw{display:block;font:900 clamp(24px,8vw,40px) Orbitron,sans-serif;letter-spacing:.14em;color:#19e3ff;text-shadow:0 0 18px #19e3ff;animation:swin .5s cubic-bezier(.2,1.6,.4,1)}.spw .sw.g{color:#ffe14a;text-shadow:0 0 24px #ffb300}
+.spw .sj{display:block;margin-top:4px;font:700 15px 'Noto Sans JP',sans-serif;color:#cfe6ff;letter-spacing:.2em}
+@keyframes swin{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
+.nmw{display:inline-flex;flex-direction:column;line-height:1.2}.tt{color:#ffe14a;font-size:11px;font-weight:700;letter-spacing:.04em}
+.pname{font-size:20px!important;color:#fff!important}
+.pchip{display:inline-block;padding:1px 8px;border:1px solid var(--ln);border-radius:3px;font-size:12px;font-weight:700;background:#07101f}
+.stg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}.stg div{background:#07101f;border:1px solid var(--ln);padding:6px;text-align:center}.stg small{display:block;color:var(--dim);font-size:11px}.stg b{font:800 16px Orbitron,sans-serif;color:var(--cy)}
+.ub{position:relative;display:flex;align-items:center;gap:8px;margin:4px 0}.ub span{width:130px;flex:none}.ub i{display:block;height:10px;border-radius:2px;opacity:.85}.ub em{font-style:normal;font-size:12px;color:var(--dim)}
+.mi.ach.ok{cursor:pointer}.mi.ach.lk{opacity:.5}.mi.ach.eq{border-color:#ffe14a;background:#241c00;color:#ffe14a}
+.okbar{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px;background:#050b1cf2;border-top:2px solid var(--cy);text-align:center}.okbar button{width:min(92%,520px);padding:14px;font-size:16px;margin:0}
+#app{padding-bottom:84px}
+*{-webkit-tap-highlight-color:rgba(25,227,255,.25)}
+input[type=text]{font-size:16px!important}
+@media(max-width:640px){button{min-height:42px}.pb{min-height:48px;font-size:14px}.stg{grid-template-columns:repeat(2,1fr)}.ub span{width:100px}.rbt button{min-width:100%}}
 </style></head><body><div id="app"></div><div id="fx"></div>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -387,10 +416,10 @@ async function join(){const room=$('room').value.trim(),name=$('name').value.tri
  const sets=[...document.querySelectorAll('.ck input:checked')].map(x=>x.value);if(!sets.length)return alert('使うセットを1つ以上選んでください');
  ref=db.collection(COL).doc(room);
  try{await db.runTransaction(async t=>{const d=await t.get(ref);let s;
-  if(!d.exists){s=blank(sets);s.uc=$('ctlc').checked?1:0;s.names.a=name;me='a'}
-  else{s=JSON.parse(d.data().s);if(nm(s.names.a)==nm(name))me='a';else if(!s.names.b){s.names.b=name;me='b';s.ph='draft';s.first=Math.random()<.5?'a':'b'}else if(nm(s.names.b)==nm(name))me='b';else throw Error('この部屋は満員です。参加者: '+s.names.a+' / '+s.names.b+'(同じ名前で入ると再入室できます)')}
+  if(!d.exists){s=blank(sets);s.uc=$('ctlc').checked?1:0;s.names.a=name;s.uid={a:UID};me='a'}
+  else{s=JSON.parse(d.data().s);if(nm(s.names.a)==nm(name)&&(!s.uid||!s.uid.a||s.uid.a==UID))me='a';else if(!s.names.b){s.names.b=name;s.uid=s.uid||{};s.uid.b=UID;me='b';s.ph='draft';s.first=Math.random()<.5?'a':'b'}else if(nm(s.names.b)==nm(name)&&(!s.uid||!s.uid.b||s.uid.b==UID))me='b';else throw Error('この部屋は満員です。参加者: '+s.names.a+' / '+s.names.b+'(同じ名前で入ると再入室できます)')}
   t.set(ref,{s:JSON.stringify(s),t:Date.now()})})}catch(e){return alert(e.message)}
- myName=nm(name);try{localStorage.setItem('cp',JSON.stringify({room,name}))}catch(e){}
+ myName=nm(name);setTitleSync();try{localStorage.setItem('cp',JSON.stringify({room,name}))}catch(e){}
  unsub=ref.onSnapshot(d=>{if(d.exists){const old=S;S=JSON.parse(d.data().s);if(old&&(S.gid!=old.gid||nm(S.names[me]||'')!=myName)){S=null;me=null;unsub&&unsub();return lobby('部屋がリセットされました。もう一度入室してください。')}const cc=old&&S.cn>(old.cn||0);if(cc)(S.cq||[]).slice(-(S.cn-(old.cn||0))).forEach(x=>{fxc(x.s,x.pn);if(x.p==me)pgBump('c')});if(old&&S.ev>(old.ev||0)&&!cc)toast(S.evt);if(old&&S.nn>(old.nn||0)&&S.nt)cnotice(S.nt);if(old&&S.win&&!old.win)setTimeout(()=>end(S.win==me),cc?2900:0);
  if(S.ph=='draft'&&S.pk==0&&(!old||old.ph!='draft'))turnSpin(S);else if(old&&old.ph=='play'&&S.ph=='play'&&!S.win&&old.turn!=S.turn)banner(S.turn==me?'YOUR TURN':'ENEMY TURN',S.turn==me?'#19e3ff':'#ff2ea6');
  if(old&&S.fn>(old.fn||0)){const n=S.fn-(old.fn||0);(S.fq||[]).slice(-n).forEach((e,i)=>setTimeout(()=>luckFx(e),i*1900))}
@@ -401,12 +430,12 @@ async function resetRoom(){if(confirm('ゲームを強制終了して部屋を�
 const th=p=>`--c:${TH[p][0]};--b:${TH[p][1]}`;
 function big(id,cls,attr){const c=C[id],T=(x,l,k,ok)=>x?`<div class="sx ${k}"><u>${l}</u>${fmt(x)}${ok?'':'<s>未実装</s>'}</div>`:'';
  return`<div class="hc holo ${cls}" style="${th(c.p)}" ${attr||''}><div class="hd"><b>${c.v}</b><span>${c.p}</span></div><div class="ha pi p-${c.p}"></div>${T(c.t,LB('t',c.t),'t',c.ti)}${T(c.m,'Middle・出した時','m',c.mi)}${T(c.b,LB('b',c.b),'b',c.bi)}</div>`}
-function lobby(note){$('app').innerHTML=`<h1 class="o">COMPILE</h1><div class="bar">PROTOCOL BATTLE // 1 vs 1</div>${note?`<div class="st">${note}</div>`:''}<div class="box pi p-${rk()}"><label>ROOM ID</label><input type="text" id="room" placeholder="例: room1" autocomplete="off"><label>NAME</label><input type="text" id="name" placeholder="あなたの名前" autocomplete="off"><div class="ck" style="margin:8px 0">使うセット(部屋を作る人の設定が有効):<br><label><input type="checkbox" value="m1" checked> Main 1</label><label><input type="checkbox" value="a1" checked> Aux 1</label><label><input type="checkbox" value="m2" checked> Main 2</label><label><input type="checkbox" value="a2" checked> Aux 2</label></div><div style="margin-bottom:8px"><label><input type="checkbox" id="ctlc" checked> コントロールカードを使う(初回は外してもOK)</label></div><button onclick="join()">ENTER ROOM</button><button onclick="showGl()">用語集・ルール</button><button onclick="showDex()">カード能力図鑑</button><div style="color:var(--dim);margin-top:8px">同じ部屋IDを入れた2人で対戦します。切断しても同じ名前で入り直せば再開できます。</div></div><div class="box"><b class="o">VS CPU</b><br>名前<input type="text" id="cname" placeholder="あなたの名前" autocomplete="off">難易度 <select id="lv" style="background:#050b1c;color:#d6e8ff;padding:6px"><option value="1">弱い</option><option value="2" selected>普通</option><option value="3">最強</option></select><button class="m" onclick="joinCpu()">CPUと対戦開始</button><div style="color:var(--dim)">上の「使うセット」の選択が使われます。</div></div>`;try{const c=JSON.parse(localStorage.getItem('cp'));if(c){$('room').value=c.room;$('name').value=c.name;$('cname').value=c.name}}catch(e){}}
+function lobby(note){$('app').innerHTML=`<h1 class="o">COMPILE</h1><div class="bar">PROTOCOL BATTLE // 1 vs 1</div>${note?`<div class="st">${note}</div>`:''}<div class="box pi p-${rk()}"><label>ROOM ID</label><input type="text" id="room" placeholder="例: room1" autocomplete="off"><input type="hidden" id="name"><div class="ck" style="margin:8px 0">使うセット(部屋を作る人の設定が有効):<br><label><input type="checkbox" value="m1" checked> Main 1</label><label><input type="checkbox" value="a1" checked> Aux 1</label><label><input type="checkbox" value="m2" checked> Main 2</label><label><input type="checkbox" value="a2" checked> Aux 2</label></div><div style="margin-bottom:8px"><label><input type="checkbox" id="ctlc" checked> コントロールカードを使う(初回は外してもOK)</label></div><button onclick="join()">ENTER ROOM</button><button onclick="showGl()">用語集・ルール</button><button onclick="showDex()">カード能力図鑑</button><div style="color:var(--dim);margin-top:8px">同じ部屋IDを入れた2人で対戦します。切断しても同じ名前で入り直せば再開できます。</div></div><div class="box"><b class="o">VS CPU</b><br><input type="hidden" id="cname">難易度 <select id="lv" style="background:#050b1c;color:#d6e8ff;padding:6px"><option value="1">弱い</option><option value="2" selected>普通</option><option value="3">最強</option></select><button class="m" onclick="joinCpu()">CPUと対戦開始</button><div style="color:var(--dim)">上の「使うセット」の選択が使われます。</div></div>`;try{const c=JSON.parse(localStorage.getItem('cp'));if(c){$('room').value=c.room;$('name').value=c.name;$('cname').value=c.name}}catch(e){}}
 function R(){const A=$('app');if(!S)return;cpu();const s=S,o=opp(me),H=s.hand[me],w=s.wt,mine=w&&w.who==me&&!s.win;tn(s,o);
  let h=`<div class="bar o"><span>ROOM ${esc(ref.id)}</span><span>YOU: ${esc(s.names[me])} / FOE: ${esc(s.names[o]||'待機中…')}</span><button onclick="showGl()">用語集・ルール</button><button onclick="showDex()">カード能力図鑑</button><button data-a="fix">操作が止まった時の復旧</button><button class="m" data-a="reset">強制終了・部屋リセット</button></div>`;
  if(s.ph=='wait')return A.innerHTML=h+'<div class="box">対戦相手の入室を待っています。同じ部屋IDで相手に入室してもらってください。</div>';
  if(s.ph=='draft'){const cur=pw(s);
-  h+=`<div class="st ${cur==me?'me':''}"><b>プロトコル選択</b>(先攻1→後攻2→先攻2→後攻1) 先攻: ${esc(s.names[s.first||'a'])} — ${cur==me?'あなたの番です。1つ選んでください':esc(s.names[cur])+' が選択中'}</div><div class="box pk">`+s.pool.map(n=>`<button class="pb pi p-${n} ${n==pkSel?'hit':''}" title="${esc(TR[n]||'')}" data-pk="${n}" style="${th(n)}">${TH[n][2]} ${n}</button>`).join('')+'</div><div class="box" id="trb">'+(trs&&TR[trs]?'<b>'+trs+'</b><br>'+esc(TR[trs]):'プロトコルにカーソルを合わせる(またはタップ)と特色が表示されます')+(cur==me&&pkSel&&s.pool.includes(pkSel)?'<div><button data-ok="1">「'+pkSel+'」で決定</button></div>':'<div style="color:var(--dim)">'+(cur==me?'プロトコルを押して詳細を確認し、決定ボタンで確定します':'相手の選択を待っています')+'</div>')+'</div>'+['a','b'].map(p=>`<div>${esc(s.names[p])}: ${s.pr[p].join(' / ')||'-'}</div>`).join('');return A.innerHTML=h}
+  h+=`<div class="st ${cur==me?'me':''}"><b>プロトコル選択</b>(先攻1→後攻2→先攻2→後攻1) 先攻: ${esc(s.names[s.first||'a'])} — ${cur==me?'あなたの番です。1つ選んでください':esc(s.names[cur])+' が選択中'}</div><div class="box pk">`+s.pool.map(n=>`<button class="pb pi p-${n} ${n==pkSel?'hit':''}" title="${esc(TR[n]||'')}" data-pk="${n}" style="${th(n)}">${TH[n][2]} ${n}</button>`).join('')+'</div><div class="box" id="trb">'+(trs&&TR[trs]?'<b>'+trs+'</b><br>'+esc(TR[trs]):'プロトコルにカーソルを合わせる(またはタップ)と特色が表示されます')+(cur==me&&pkSel&&s.pool.includes(pkSel)?'<div class="okbar"><button data-ok="1">「'+pkSel+'」で決定</button></div>':'<div style="color:var(--dim)">'+(cur==me?'プロトコルを押して詳細を確認し、決定ボタンで確定します':'相手の選択を待っています')+'</div>')+'</div>'+['a','b'].map(p=>`<div>${esc(s.names[p])}: ${s.pr[p].join(' / ')||'-'}</div>`).join('');return A.innerHTML=h}
  if(s.ph=='arr'){const my=s.pr[me];h+=`<div class="st me"><b>プロトコルの配置</b> 左から順に、ライン1・2・3になります。入れ替えたい2つを順に押し、決定を押してください。</div><div class="g">${my.map((n,i)=>`<button class="pb pi p-${n} ${i==arSel?'hit':''}" data-ar="${i}" draggable="true" style="${th(n)}">${n}<br>ライン${i+1}</button>`).join('')}</div>${s.ok2[me]?'<div class="st">配置を確定しました。相手を待っています…</div>':'<button data-ok2="1">この配置で決定</button>'}`;return A.innerHTML=h}
  let msg='';const src=w&&w.src&&C[w.src]?`<b>${w.src}</b> の効果:`:'';
  if(s.win)msg=s.win==me?'<b>🏆 勝利!</b> 全プロトコルをコンパイルしました。「強制終了・部屋リセット」で次の対戦へ':'<b>敗北…</b> 相手が全プロトコルをコンパイルしました';
@@ -483,7 +512,7 @@ function tn(s,o){let d=0,l=0;for(let i=0;i<3;i++){const m=tot(s,i,me),q=tot(s,i,
 function toast(x){const n=document.createElement('div');n.className='ts';n.textContent='▶ '+x;document.body.appendChild(n);setTimeout(()=>n.remove(),2600)}
 function end(w){const f=$('fx');let hx='';for(let i=0;i<40;i++)hx+=Array.from({length:8},()=>Math.random().toString(16).slice(2,6).toUpperCase()).join(' ')+'<br>';
  f.className='on end '+(w?'win':'lose');f.style.pointerEvents='auto';f.onclick=()=>{f.className='';f.innerHTML='';f.style.pointerEvents='none'};
- f.innerHTML=w?'<i class="ray"></i><i class="rg"></i><i class="rg r2"></i><div class="cm"><div class="gl">VICTORY</div><div class="sb">ALL PROTOCOLS COMPILED</div><div class="sb s2">CLICK TO CLOSE</div></div>':`<div class="hx">${hx}${hx}</div><div class="cm"><div class="gl">BREACHED</div><div class="sb">YOUR PROTOCOLS HAVE BEEN HACKED</div><pre class="tm">&gt; root access granted to opponent\n&gt; overwriting protocol stack ...\n&gt; ACCESS DENIED // YOU LOSE</pre><div class="sb s2">CLICK TO CLOSE</div></div>`}
+ f.innerHTML=w?'<i class="ray"></i><i class="rg"></i><i class="rg r2"></i><div class="cm"><div class="gl">VICTORY</div><div class="sb">ALL PROTOCOLS COMPILED</div><div class="sb s2">TAP TO CONTINUE ▶ RESULT</div></div>':`<div class="hx">${hx}${hx}</div><div class="cm"><div class="gl">BREACHED</div><div class="sb">YOUR PROTOCOLS HAVE BEEN HACKED</div><pre class="tm">&gt; root access granted to opponent\n&gt; overwriting protocol stack ...\n&gt; ACCESS DENIED // YOU LOSE</pre><div class="sb s2">TAP TO CONTINUE ▶ RESULT</div></div>`}
 function doPlay(i){if(!S.hand[me][sel])return;pend=i;perr='';R()}
 document.addEventListener('dragstart',e=>{const h=e.target.closest('[data-h]');if(h){sel=+h.dataset.h;e.dataTransfer.setData('text','c')}});
 document.addEventListener('dragover',e=>{if(e.target.closest('[data-pl]'))e.preventDefault()});
@@ -493,7 +522,7 @@ const rk=()=>Object.keys(IM)[Math.random()*Object.keys(IM).length|0];
 const tg=x=>x.replace(TRE,'<em class="tm" data-term="$1">$1</em>'),fmt=x=>tg(esc(x).replace(/。/g,'。<br>'));
 function showGl(){const d=document.createElement('div');d.className='md';d.innerHTML='<div class="mb gl"><button onclick="this.closest(\'.md\').remove()">閉じる</button><h4>ゲーム用語(押すと意味が出ます)</h4><p>'+Object.keys(TERMS).map(k=>`<em class="tm" data-term="${k}">${k}</em>`).join(' / ')+'</p><h4>用語集・ルール</h4>'+GL.replace(/>([^<]+)</g,(m,x)=>'>'+tg(x)+'<')+'</div>';document.body.appendChild(d)}
 document.addEventListener('click',e=>{const x=e.target.closest('[data-term]');if(!x)return;e.stopPropagation();const k=x.dataset.term;let p=$('tp');if(!p){p=document.createElement('div');p.id='tp';document.body.appendChild(p)}p.innerHTML=`<b>${esc(k)}</b> — ${esc(TERMS[k])} <button onclick="this.parentNode.remove()">×</button>`},true);
-function zn(p,m){const s=S,n=s.hand[p].length,d=s.dis[p],tp=d[d.length-1];return`<div class="zn ${s.uc&&s.ctl==p?'has':''}"><b>${m?'あなた':'相手'}:${esc(s.names[p])}</b><span class="zc">手札<i>${n}</i>${m?'':'<span class="cbs">'+'<u></u>'.repeat(Math.min(n,8))+'</span>'}</span><span class="zc">山札<i>${s.deck[p].length}</i></span>${s.uc&&s.ctl==p?`<span class="ctl"><img src="${IMC}"><b>CONTROL</b></span>`:''}<span class="zc">捨て札<i>${d.length}</i>${tp?' 最後: '+tp:''}</span><button onclick="showDis('${p}')">捨て札を見る</button></div>`}
+function zn(p,m){const s=S,n=s.hand[p].length,d=s.dis[p],tp=d[d.length-1];return`<div class="zn ${s.uc&&s.ctl==p?'has':''}"><span class="nmw"><b>${m?'あなた':'相手'}:${esc(s.names[p])}</b><small class="tt">${ttHtml(s,p)}</small></span><span class="zc">手札<i>${n}</i>${m?'':'<span class="cbs">'+'<u></u>'.repeat(Math.min(n,8))+'</span>'}</span><span class="zc">山札<i>${s.deck[p].length}</i></span>${s.uc&&s.ctl==p?`<span class="ctl"><img src="${IMC}"><b>CONTROL</b></span>`:''}<span class="zc">捨て札<i>${d.length}</i>${tp?' 最後: '+tp:''}</span><button onclick="showDis('${p}')">捨て札を見る</button></div>`}
 function cnotice(n){if(n.k=='get'&&n.p==me)pgBump('ctl');const m=n.p==me,x=document.createElement('div');x.className='ts cs';x.innerHTML='<img src="'+IMC+'"> '+(n.k=='get'?(m?'あなたがコントロールカードを獲得しました!':esc(S.names[n.p])+' がコントロールカードを獲得しました!'):(m?'あなたがコントロールカードを中央へ返しました':esc(S.names[n.p])+' がコントロールカードを中央へ返しました'));document.body.appendChild(x);setTimeout(()=>x.remove(),3400)}
 function showDex(n){let d=$('dx');if(!d){d=document.createElement('div');d.id='dx';d.className='md';document.body.appendChild(d)}n=n||Object.keys(TH)[0];const st=SN[Object.values(C).find(c=>c.p==n).s];
  d.innerHTML=`<div class="mb gl" style="max-width:1100px"><button onclick="$('dx').remove()">閉じる</button><h4>カード能力図鑑(全${Object.keys(C).length}枚)</h4><div>${Object.keys(TH).map(k=>`<button class="pb2" style="${th(k)}${k==n?';outline:2px solid #fff':''}" onclick="showDex('${k}')">${k}</button>`).join('')}</div><h4>${n}(${st})</h4><p>${esc(TR[n]||'')}</p><div class="hand">${Object.keys(C).filter(id=>C[id].p==n).map(id=>big(id,'nb')).join('')}</div></div>`}
@@ -508,24 +537,25 @@ function cpuAct(s){const w=s.wt,lv=s.lv||2;
   const n=lv<=1?rndc(s.pool):[...s.pool].sort((x,y)=>sc(y)-sc(x)+(lv==2?(Math.random()-.5)*8:0))[0];s.pr.b.push(n);s.pool=s.pool.filter(x=>x!=n);s.pk++;if(s.pk>=6)toArr(s);return}
  if(!w||w.who!='b'||s.win)return;decide(s,'b',lv)}
 function banner(x,c){const n=document.createElement('div');n.className='tbn';n.style.setProperty('--c',c);n.textContent=x;document.body.appendChild(n);setTimeout(()=>n.remove(),1500)}
-function turnSpin(s){const n=[s.names.a,s.names.b],w=s.first=='a'?0:1;animUntil=Date.now()+9600;
+function turnSpin(s){const n=[s.names.a,s.names.b],w=s.first=='a'?0:1;animUntil=Date.now()+6000;
  const d=document.createElement('div');d.id='sp';
- const card=i=>`<div class="sk" id="sk${i}"><div class="ski" id="ski${i}"><div class="skb" style="background-image:url(${IMC})"></div><div class="skf ${i==w?'first':'second'}"><small>${i==w?'FIRST':'SECOND'}</small><b>${i==w?'先攻':'後攻'}</b></div></div><div class="skn" id="skn${i}">${esc(n[i])}${(i==0?'a':'b')==me?'(あなた)':''}</div></div>`;
- d.innerHTML='<div class="spt">ORDER SELECT</div><div class="sdk">'+card(0)+card(1)+'</div><div class="spw" id="spw">カードをシャッフル…</div>';document.body.appendChild(d);const TT=(f,t)=>setTimeout(()=>{if(d.isConnected)f()},t);
+ const card=i=>`<div class="sk" id="sk${i}"><div class="ski" id="ski${i}"><div class="skb" style="background-image:url(${IMC})"></div><div class="skf ${i==w?'first':'second'}"><i class="fl"></i><em>${i==w?'FIRST':'SECOND'}</em><b>${i==w?'1':'2'}</b><small>${i==w?'先攻':'後攻'}</small></div></div><div class="skn" id="skn${i}">${esc(n[i])}${(i==0?'a':'b')==me?'<u>YOU</u>':''}</div></div>`;
+ d.innerHTML='<div class="sph"><div class="spt">TURN ORDER</div><div class="sps">先攻・後攻を決定</div></div><div class="sdk">'+card(0)+card(1)+'</div><div class="spw" id="spw">&nbsp;</div>';document.body.appendChild(d);
+ const TT=(f,t)=>setTimeout(()=>{if(d.isConnected)f()},t);
  const c=[$('sk0'),$('sk1')],X=Math.min(innerWidth*.2,100),N=6;let pos=[-1,1],k=0;
  const set=(i,x,y,r,t,sc)=>{const e=c[i];e.style.setProperty('--x',x+'px');e.style.setProperty('--y',y+'px');e.style.setProperty('--r',r+'deg');e.style.setProperty('--t',t+'ms');e.style.setProperty('--s',sc||1)};
  set(0,0,0,-4,0);set(1,0,0,4,0);
- TT(()=>{set(0,-X,0,0,500);set(1,X,0,0,500)},200);
- const swap=()=>{if(k>=N){after();return}const dur=Math.max(200,380-k*30),up=k%2?1:-1;
-  [0,1].forEach(i=>{const np=-pos[i];set(i,np*X,(pos[i]<0?-1:1)*up*42,np*7,dur,1.04)});
-  TT(()=>{[0,1].forEach(i=>{pos[i]=-pos[i];set(i,pos[i]*X,0,0,Math.round(dur*.45),1)})},dur);
-  k++;TT(swap,Math.round(dur*1.4))};
- TT(swap,900);
- const after=()=>{TT(()=>{[0,1].forEach(i=>$('skn'+i).classList.add('on'));$('spw').textContent='カードをオープン!'},350);
-  TT(()=>$('ski0').classList.add('op'),1000);
-  TT(()=>$('ski1').classList.add('op'),1900);
-  TT(()=>{c[w].classList.add('win');set(w,pos[w]*X,0,0,500,1.12);$('spw').innerHTML='先攻は <b>'+esc(n[w])+'</b>'+(s.first==me?' ── あなたが先攻!':'')},2900)};
- setTimeout(()=>{d.classList.add('fin');setTimeout(()=>d.remove(),1900)},8400)}
+ TT(()=>{set(0,-X,0,0,260);set(1,X,0,0,260)},80);
+ const swap=()=>{if(k>=N){after();return}const dur=Math.max(110,190-k*14),up=k%2?1:-1;
+  [0,1].forEach(i=>{const np=-pos[i];set(i,np*X,(pos[i]<0?-1:1)*up*40,np*8,dur,1.05)});
+  TT(()=>{[0,1].forEach(i=>{pos[i]=-pos[i];set(i,pos[i]*X,0,0,Math.round(dur*.5),1)})},dur);
+  k++;TT(swap,Math.round(dur*1.3))};
+ TT(swap,380);
+ const after=()=>{TT(()=>{[0,1].forEach(i=>$('skn'+i).classList.add('on'))},100);
+  TT(()=>$('ski0').classList.add('op'),550);
+  TT(()=>$('ski1').classList.add('op'),1100);
+  TT(()=>{c[w].classList.add('win');set(w,pos[w]*X,-6,0,400,1.12);c[1-w].classList.add('lose');$('spw').innerHTML=s.first==me?'<span class="sw g">YOU GO FIRST</span><span class="sj">あなたが先攻です</span>':'<span class="sw">'+esc(n[w])+'</span><span class="sj">が先攻 ／ あなたは後攻</span>'},1700)};
+ setTimeout(()=>{d.classList.add('fin');setTimeout(()=>d.remove(),1200)},4900)}
 /* ===== BGM(YouTube埋め込み) ===== */
 const DEFAULT_TS=['0:00 廃都市: 水没エリア2','7:16 廃都市: 水没エリア','12:45 亡霊になった街','17:25 旧セントラルエリア','25:29 棄てられた街。','31:41 それでも咲く花に','35:35 廃都市にて。','40:39 雪に咲く街','46:48 かつて街だった場所で。','52:09 赤い季節','59:50 続く世界','1:06:55 終わりの後で','1:14:14 空港跡地','1:18:35 廃都市: 砂漠化エリア','1:22:36 緑への返還'].join('\n');
 const BGM={vid:'TteWeu6uLTg',tr:[],cur:0,on:false,vol:50,loop:false,p:null,ready:false,ts:DEFAULT_TS,want:false};
@@ -584,14 +614,19 @@ function rvBox(s,side){const r=s.rv;if(!r)return'';const isMe=r.own==me;if(!!sid
 /* ===== 継続プレイ: 戦績 / XP / デイリーミッション / 実績 ===== */
 const PGK='cprog1',TTL=['NEWBIE','SCRIPT KIDDIE','CODER','HACKER','SYSADMIN','ROOT','ARCHITECT','GHOST','LEGEND'];
 const MIS=[{id:'g2',t:'2試合プレイする',n:2,k:'g'},{id:'w1',t:'1回勝利する',n:1,k:'w'},{id:'c3',t:'コンパイルを3回する',n:3,k:'c'},{id:'k1',t:'コントロールを獲得する',n:1,k:'ctl'},{id:'w2',t:'CPU(普通以上)に勝つ',n:1,k:'w2'},{id:'fl',t:'相手に1つもコンパイルさせず勝つ',n:1,k:'fl'}];
-const ACH=[{id:'w1',t:'初勝利',d:'1勝する',f:g=>g.w>=1},{id:'g10',t:'常連',d:'10試合プレイ',f:g=>g.g>=10},{id:'w10',t:'10勝達成',d:'10勝する',f:g=>g.w>=10},{id:'w30',t:'30勝達成',d:'30勝する',f:g=>g.w>=30},{id:'s3',t:'3連勝',d:'3連勝する',f:g=>g.bs>=3},{id:'c3',t:'最強CPU撃破',d:'最強CPUに勝つ',f:g=>(g.lv[3]||0)>=1},{id:'fl',t:'完全勝利',d:'相手0コンパイルで勝つ',f:g=>g.fl>=1},{id:'ct',t:'支配者',d:'コントロールを獲得',f:g=>g.ctlT>=1},{id:'cc',t:'コンパイラ',d:'通算30回コンパイル',f:g=>g.cT>=30},{id:'d3',t:'3日連続',d:'3日連続でログイン',f:g=>g.ds>=3}];
+const ACH0=[{id:'w1',t:'ファーストブラッド',d:'初めて勝利する',f:g=>g.w>=1},{id:'g10',t:'終わらぬ接続',d:'10試合プレイする',f:g=>g.g>=10},{id:'w10',t:'電脳の戦士',d:'通算10勝',f:g=>g.w>=10},{id:'w30',t:'不敗のプロセス',d:'通算30勝',f:g=>g.w>=30},{id:'w100',t:'百戦錬磨のROOT',d:'通算100勝',f:g=>g.w>=100},{id:'s3',t:'連鎖する勝利',d:'3連勝する',f:g=>g.bs>=3},{id:'c3',t:'頂点を貫く者',d:'最強CPUに勝つ',f:g=>(g.lv[3]||0)>=1},{id:'fl',t:'無傷の制圧者',d:'相手0コンパイルで勝つ',f:g=>g.fl>=1},{id:'ct',t:'支配者の王冠',d:'コントロールを獲得する',f:g=>g.ctlT>=1},{id:'cc',t:'コンパイル・マスター',d:'通算30回コンパイル',f:g=>g.cT>=30},{id:'d3',t:'三夜連続の亡霊',d:'3日連続でログイン',f:g=>g.ds>=3}];
+const EPI={Darkness:'闇',Death:'死',Fire:'焔',Gravity:'重力',Life:'生命',Light:'光',Metal:'鋼',Plague:'疫病',Psychic:'念動',Speed:'疾風',Spirit:'霊魂',Water:'蒼水',Apathy:'虚無',Hate:'憎悪',Love:'愛',Chaos:'混沌',Clarity:'明鏡',Corruption:'腐敗',Courage:'勇気',Fear:'恐怖',Ice:'氷結',Luck:'幸運',Mirror:'鏡像',Peace:'安寧',Smoke:'煙幕',Time:'刻',War:'戦火',Assimilation:'同化',Diversity:'多様',Unity:'統一'};
+const TIERN=[[1,e=>e+'を継ぐ者'],[10,e=>e+'の覇者'],[50,e=>e+'の王'],[100,e=>e+'を統べし神']];
+const PROTOS=Object.keys(TH);
+const ACHP=PROTOS.flatMap(p=>TIERN.map(([n,f])=>({id:'p_'+p+'_'+n,p,n,t:f(EPI[p]||p),d:p+'のプロトコルで'+n+'勝',f:g=>((g.pw||{})[p]||0)>=n})));
+const ACH=ACH0.concat(ACHP),achOf=id=>ACH.find(a=>a.id==id);
 const TIPS=['相手より大きい2ラインで優勢になると、ターン開始時にコントロールを獲得できます。','コンパイルはまず実行され、その後でコントロールの再配置ができます。','10以上でも相手より大きくなければコンパイルできません。1ラインに偏らず数字を積みましょう。','Light 4 などで手札を公開されたら、次の一手を読まれます。手札を減らして情報を絞りましょう。','裏向きのカードは値2。どのラインにも出せるので、数字稼ぎと布石に使えます。','盤面が見えにくい時は、確認画面の「盤面を見る」ボタンで画面を確認できます。','カード詳細は場のカードを押すと表示されます。効果を確認してから動きましょう。','敗北しても経験値が入ります。負けたカードの組み合わせを次に活かしましょう。'];
 const ymd=t=>{const d=new Date(t);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 const lvOf=xp=>{let l=0,n=100;while(xp>=n&&l<98){xp-=n;l++;n=100+l*40}return{l,cur:xp,need:n}};
 const ttl=l=>TTL[Math.min(TTL.length-1,Math.floor(l/3))];
 function pgSave(g){try{localStorage.setItem(PGK,JSON.stringify(g))}catch(e){}}
 function pgLoad(){let g={};try{g=JSON.parse(localStorage.getItem(PGK)||'{}')||{}}catch(e){}
- const D=(k,v)=>{if(g[k]==null)g[k]=v};D('xp',0);D('g',0);D('w',0);D('l',0);D('st',0);D('bs',0);D('fl',0);D('ctlT',0);D('cT',0);D('ds',0);D('days',0);D('dd','');D('ach',{});D('lv',{});D('d',{});D('lastGid','');
+ const D=(k,v)=>{if(g[k]==null)g[k]=v};D('xp',0);D('g',0);D('w',0);D('l',0);D('st',0);D('bs',0);D('fl',0);D('ctlT',0);D('cT',0);D('ds',0);D('days',0);D('dd','');D('ach',{});D('lv',{});D('d',{});D('lastGid','');D('prof',{});D('pu',{});D('pw',{});
  const t=ymd(Date.now());if(g.d.date!=t)g.d={date:t,g:0,w:0,c:0,ctl:0,w2:0,fl:0,paid:{}};
  if(g.dd!=t){g.ds=g.dd==ymd(Date.now()-864e5)?g.ds+1:1;g.days++;g.dd=t;g.xp+=20;g.bonus=g.ds;pgSave(g)}
  return g}
@@ -599,14 +634,47 @@ function todayMis(g){let r=[...g.d.date].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>
 function pgMis(g){const l=[],ms=todayMis(g);ms.forEach(m=>{if((g.d[m.k]||0)>=m.n&&!g.d.paid[m.id]){g.d.paid[m.id]=1;g.xp+=50;l.push(m)}});let all=false;if(l.length&&ms.every(m=>g.d.paid[m.id])&&!g.d.paid.all){g.d.paid.all=1;g.xp+=100;all=true}return{l,all}}
 function pgBump(k){try{const g=pgLoad();g.d[k]=(g.d[k]||0)+1;if(k=='ctl')g.ctlT++;if(k=='c')g.cT++;const r=pgMis(g);pgSave(g);r.l.forEach((m,i)=>setTimeout(()=>toast('ミッション達成!「'+m.t+'」 +50XP'),i*900+600));if(r.all)setTimeout(()=>toast('今日のミッション全達成! ボーナス +100XP'),2400)}catch(e){}}
 const misHtml=g=>todayMis(g).map(m=>{const v=Math.min(g.d[m.k]||0,m.n),ok=g.d.paid[m.id];return`<div class="mi ${ok?'ok':''}"><span style="color:inherit">${ok?'✅':'⬜'} ${m.t}</span><span>${v}/${m.n}</span></div>`}).join('');
-function lobbyExtra(){try{const g=pgLoad(),L=lvOf(g.xp),bar=document.querySelector('#app .bar');if(!bar)return;const rate=g.g?Math.round(g.w*100/g.g):0;
- bar.insertAdjacentHTML('afterend',`<div class="box pgb"><div class="pgh"><span class="o">LV ${L.l+1}</span> <b>${ttl(L.l)}</b><span class="pgs">${g.w}勝 ${g.l}敗(勝率${rate}%) / 連勝 ${g.st}(最高${g.bs}) / ${g.ds}日連続ログイン</span></div><div class="xpb"><i style="width:${Math.round(L.cur*100/L.need)}%"></i><em>${L.cur} / ${L.need} XP</em></div><div class="pgm"><b>📋 今日のミッション</b>(1つ +50XP / 全達成で +100XP)${misHtml(g)}</div><details><summary>🏅 実績 ${ACH.filter(a=>g.ach[a.id]).length}/${ACH.length}</summary>${ACH.map(a=>`<div class="mi ${g.ach[a.id]?'ok':''}"><span style="color:inherit">${g.ach[a.id]?'🏅':'🔒'} ${a.t}</span><span>${a.d}</span></div>`).join('')}</details></div>`);
+const UID=(()=>{let u='';try{u=localStorage.getItem('cuid')||'';if(!u){u=Math.random().toString(36).slice(2,10);localStorage.setItem('cuid',u)}}catch(e){u='x'+Math.random()}return u})();
+const ttHtml=(s,p)=>{const t=s.tt&&s.tt[p],f=s.fv&&s.fv[p];return(t?'🏅 '+esc(t):'')+(f?(t?' ':'')+'♥ '+esc(f):'')};
+function setTitleSync(k){k=k||0;setTimeout(()=>{if(!S||!me){if(k<8)setTitleSync(k+1);return}const g=pgLoad(),a=achOf(g.prof.title),t=a&&g.ach[a.id]?a.t:'',f=g.prof.fav||'';tx(s=>{s.tt=s.tt||{};s.tt[me]=t;s.fv=s.fv||{};s.fv[me]=f;if(s.cpu&&!s.tt.b)s.tt.b='CPU / '+['','EASY','NORMAL','ABYSS'][s.lv||2]},true)},350)}
+function topProto(g,key){let b='',v=0;PROTOS.forEach(p=>{const x=(g[key]||{})[p]||0;if(x>v){v=x;b=p}});return b?[b,v]:null}
+const pchip=n=>n?`<span class="pchip" style="${th(n)}">${TH[n][2]||''} ${n}</span>`:'<span class="pchip">未設定</span>';
+function lobbyExtra(){try{const g=pgLoad(),L=lvOf(g.xp),bar=document.querySelector('#app .bar');if(!bar)return;const rate=g.g?Math.round(g.w*100/g.g):0,a=achOf(g.prof.title),tt=a&&g.ach[a.id]?a.t:'称号なし',tu=topProto(g,'pu');
+ ['name','cname'].forEach(i=>{const e=$(i);if(e)e.value=g.prof.name});
+ bar.insertAdjacentHTML('afterend',`<div class="box pgb"><div class="pgh"><b class="pname">${esc(g.prof.name)}</b><span class="o">LV ${L.l+1} ${ttl(L.l)}</span><button style="margin-left:auto" onclick="profScreen(0)">👤 プロフィール</button></div><div class="pgs" style="margin:4px 0">🏅 ${esc(tt)} ／ ♥ ${pchip(g.prof.fav)} ／ 最多使用 ${tu?pchip(tu[0]):'-'}</div><div class="xpb"><i style="width:${Math.round(L.cur*100/L.need)}%"></i><em>${L.cur} / ${L.need} XP</em></div><div class="pgs">${g.w}勝 ${g.l}敗(勝率${rate}%) / 連勝 ${g.st}(最高${g.bs}) / ${g.ds}日連続ログイン</div><div class="pgm"><b>📋 今日のミッション</b>(1つ +50XP / 全達成で +100XP)${misHtml(g)}</div></div>`);
  if(g.bonus){const b=g.bonus;g.bonus=0;pgSave(g);setTimeout(()=>toast('ログインボーナス +20XP('+b+'日連続ログイン)'),500)}}catch(e){console.error(e)}}
-const _lobby=lobby;lobby=function(n){_lobby(n);lobbyExtra()};
+/* ===== プロフィール画面 ===== */
+let PF=null;
+function profScreen(first){const g=pgLoad();PF={name:g.prof.name||'',fav:g.prof.fav||'',title:g.prof.title||'',first:!!first};pfRender()}
+function pfRender(){const g=pgLoad(),L=lvOf(g.xp),A=$('app'),rate=g.g?Math.round(g.w*100/g.g):0,tu=topProto(g,'pu'),tw=topProto(g,'pw');
+ const uses=PROTOS.map(p=>[p,(g.pu||{})[p]||0]).filter(x=>x[1]).sort((a,b)=>b[1]-a[1]).slice(0,5),mx=uses.length?uses[0][1]:1,tg=Math.max(1,g.g);
+ const unl=ACH.filter(a=>g.ach[a.id]).length,a0=achOf(PF.title),eq=a0&&g.ach[a0.id]?a0.t:'未選択';
+ const row=a=>{const ok=g.ach[a.id],on=PF.title==a.id;return`<div class="mi ach ${ok?'ok':'lk'} ${on?'eq':''}" ${ok?`onclick="pfTitle('${a.id}')"`:''}><span style="color:inherit">${ok?(on?'✅':'🏅'):'🔒'} <b>${esc(a.t)}</b></span><span>${esc(a.d)}</span></div>`};
+ A.innerHTML=`<div class="bar o"><span>PROFILE</span>${PF.first?'':'<button onclick="pfBack()">← ロビーへ</button>'}</div>
+ <div class="box"><b>プレイヤー名</b><input type="text" id="pf_name" maxlength="12" placeholder="名前を入力(最大12文字)" autocomplete="off" value="${esc(PF.name)}"><div class="pgs">${PF.first?'最初に名前を決めてください。入室時の名前入力は不要になります。':'名前の変更はここで行えます。'}</div></div>
+ <div class="box"><b>称号(対戦中、名前の下に表示されます)</b><div style="margin:6px 0">現在: <span class="pchip">🏅 ${esc(eq)}</span> <button onclick="pfTitle('')">外す</button></div><div class="pgs">下の実績一覧から解除済みの実績をタップして選択</div></div>
+ <div class="box"><b>好きなプロトコル</b><div class="pk">${PROTOS.map(n=>`<button class="pb pi ${n==PF.fav?'hit':''}" style="${th(n)}" onclick="pfFav('${n}')">${TH[n][2]||''} ${n}</button>`).join('')}</div></div>
+ ${PF.first?'':`<div class="box"><b>戦績</b><div class="pgh" style="margin:6px 0"><span class="o">LV ${L.l+1} ${ttl(L.l)}</span></div><div class="xpb"><i style="width:${Math.round(L.cur*100/L.need)}%"></i><em>${L.cur} / ${L.need} XP</em></div>
+ <div class="stg"><div><small>勝率</small><b>${rate}%</b></div><div><small>勝 / 敗</small><b>${g.w} / ${g.l}</b></div><div><small>連勝(最高)</small><b>${g.st}(${g.bs})</b></div><div><small>実績</small><b>${unl}/${ACH.length}</b></div></div>
+ <div style="margin:8px 0">最多使用: ${tu?pchip(tu[0])+` ${tu[1]}回(使用率${Math.round(tu[1]*100/tg)}%・勝率${Math.round(((g.pw||{})[tu[0]]||0)*100/tu[1])}%)`:'データなし'}</div>
+ <div style="margin:8px 0">最多勝利: ${tw?pchip(tw[0])+` ${tw[1]}勝`:'データなし'}</div>
+ ${uses.length?'<b>使用率ランキング</b>'+uses.map(([p,c])=>`<div class="ub"><span>${pchip(p)}</span><i style="width:${Math.round(c*100/mx)}%;background:${TH[p][0]}"></i><em>${Math.round(c*100/tg)}%</em></div>`).join(''):''}</div>`}
+ <div class="box"><b>🏅 実績一覧(${unl}/${ACH.length})</b><div style="margin-top:6px">${ACH0.map(row).join('')}</div>${PROTOS.map(p=>{const l=ACHP.filter(a=>a.p==p),c=l.filter(a=>g.ach[a.id]).length;return`<details><summary>${pchip(p)} ${c}/4</summary>${l.map(row).join('')}</details>`}).join('')}</div>
+ <div class="okbar"><button onclick="pfDone()">${PF.first?'この内容ではじめる':'保存してロビーへ'}</button></div>`}
+function pfKeep(){const e=$('pf_name');if(e)PF.name=e.value}
+function pfFav(n){pfKeep();PF.fav=n;pfRender()}
+function pfTitle(id){pfKeep();PF.title=id;pfRender()}
+function pfSaveNow(){pfKeep();const nm2=PF.name.trim();if(!nm2){alert('名前を入力してください');return false}const g=pgLoad();g.prof={name:nm2.slice(0,12),fav:PF.fav,title:PF.title};pgSave(g);return true}
+function pfDone(){if(pfSaveNow()){PF=null;lobby()}}
+function pfBack(){pfKeep();PF=null;lobby()}
+let tch=0,rqd=0;const _R=R;R=function(){if(tch&&Date.now()-tch<1500){rqd=1;return}rqd=0;const hs=[...document.querySelectorAll('#app .hand')].map(e=>e.scrollLeft);_R();document.querySelectorAll('#app .hand').forEach((e,i)=>{if(hs[i])e.scrollLeft=hs[i]})};
+const tEnd=()=>{tch=0;setTimeout(()=>{if(rqd&&!tch){rqd=0;R()}},400)};
+document.addEventListener('touchstart',()=>{tch=Date.now()},{passive:true});document.addEventListener('touchend',tEnd,{passive:true});document.addEventListener('touchcancel',tEnd,{passive:true});
+const _lobby=lobby;lobby=function(n){if(!pgLoad().prof.name)return profScreen(1);_lobby(n);lobbyExtra()};
 let PGdone='',LASTCPU=null;
 const _joinCpu=joinCpu;joinCpu=async function(){try{LASTCPU={name:$('cname').value.trim(),sets:[...document.querySelectorAll('.ck input:checked')].map(x=>x.value),uc:$('ctlc').checked,lv:+$('lv').value}}catch(e){}return _joinCpu()};
 function onGameEnd(win){if(!S||PGdone==S.gid)return;PGdone=S.gid;const g=pgLoad();if(g.lastGid==S.gid)return;g.lastGid=S.gid;
- const o=opp(me),cpuG=!!S.cpu,lv=S.lv||0,myC=S.cp[me].filter(x=>x).length,opC=S.cp[o].filter(x=>x).length,lb=lvOf(g.xp).l;const rows=[['対戦に参加',20]];g.g++;g.d.g++;
+ const o=opp(me),cpuG=!!S.cpu,lv=S.lv||0,myC=S.cp[me].filter(x=>x).length,opC=S.cp[o].filter(x=>x).length,lb=lvOf(g.xp).l;const rows=[['対戦に参加',20]];g.g++;g.d.g++;S.pr[me].forEach(p=>{g.pu[p]=(g.pu[p]||0)+1;if(win)g.pw[p]=(g.pw[p]||0)+1});
  if(win){g.w++;g.d.w++;g.st++;g.bs=Math.max(g.bs,g.st);rows.push(['勝利',50]);
   if(cpuG){g.lv[lv]=(g.lv[lv]||0)+1;if(lv>=2)g.d.w2++;const b=lv>=3?70:lv==2?30:0;if(b)rows.push(['CPU難易度ボーナス',b])}
   if(opC==0){g.fl++;g.d.fl++;rows.push(['完全勝利(相手0コンパイル)',40])}
@@ -616,7 +684,8 @@ function onGameEnd(win){if(!S||PGdone==S.gid)return;PGdone=S.gid;const g=pgLoad(
  g.xp+=rows.reduce((a,r)=>a+r[1],0);
  const mr=pgMis(g);mr.l.forEach(m=>rows.push(['ミッション「'+m.t+'」',50]));if(mr.all)rows.push(['ミッション全達成ボーナス',100]);
  const na=[];ACH.forEach(a=>{if(!g.ach[a.id]&&a.f(g)){g.ach[a.id]=1;na.push(a)}});
- pgSave(g);resPanel(win,rows,lb,g,na)}
+ pgSave(g);PEND=[win,rows,lb,g,na]}
+let PEND=null;function showPend(){if(PEND){const a=PEND;PEND=null;resPanel(...a)}}
 function resPanel(win,rows,lb,g,na){const old=$('rs');if(old)old.remove();const L=lvOf(g.xp),tot2=rows.reduce((a,r)=>a+r[1],0),cpuG=S&&S.cpu;
  const d=document.createElement('div');d.id='rs';
  d.innerHTML=`<div class="rsb"><div class="rsh"><b class="o">${win?'🏆 VICTORY':'💀 DEFEAT'}</b><span>獲得 <b>+${tot2} XP</b></span></div>${rows.map(r=>`<div class="rr"><span>${esc(r[0])}</span><b>+${r[1]}</b></div>`).join('')}<div class="xpb"><i style="width:${Math.round(L.cur*100/L.need)}%"></i><em>LV ${L.l+1} ${ttl(L.l)} — ${L.cur}/${L.need}</em></div>${L.l>lb?`<div class="lvup">⬆ LEVEL UP! LV ${L.l+1} ${ttl(L.l)}</div>`:''}${na.map(a=>`<div class="lvup">🏅 実績解除: ${a.t}</div>`).join('')}<div class="pgm"><b>📋 今日のミッション</b>${misHtml(g)}</div><div class="tip">💡 ${esc(TIPS[Math.random()*TIPS.length|0])}</div><div class="rbt">${cpuG?'<button onclick="rematchCpu()">▶ もう一度戦う(同じ設定)</button>':'<button onclick="rematchPvp()">▶ 部屋をリセットして再戦</button>'}<button class="m" onclick="toLobby()">ロビーへ</button><button onclick="$(\'rs\').remove()">閉じる</button></div></div>`;
@@ -625,7 +694,7 @@ function closeEnd(){const f=$('fx');if(f){f.className='';f.innerHTML='';f.style.
 function toLobby(){closeEnd();unsub&&unsub();S=null;me=null;lobby()}
 async function rematchPvp(){closeEnd();try{await ref.delete()}catch(e){}unsub&&unsub();S=null;me=null;lobby('部屋をリセットしました。同じ部屋IDと名前で入り直してください(相手の画面も入室画面に戻ります)。')}
 function rematchCpu(){const c=LASTCPU;closeEnd();unsub&&unsub();S=null;me=null;lobby();if(!c)return;$('cname').value=c.name;document.querySelectorAll('.ck input').forEach(x=>{x.checked=c.sets.includes(x.value)});$('ctlc').checked=!!c.uc;$('lv').value=c.lv;joinCpu()}
-const _end=end;end=function(w){_end(w);try{onGameEnd(w)}catch(e){console.error(e)}};
+const _end=end;end=function(w){_end(w);try{onGameEnd(w)}catch(e){console.error(e)}const f=$('fx');if(f)f.onclick=()=>{f.className='';f.innerHTML='';f.style.pointerEvents='none';showPend()}};
 if(CFG.apiKey==="YOUR_API_KEY")$('app').innerHTML='<h1>COMPILE</h1><div class="box">このファイル内の <code>CFG</code>(Firebase設定値)を書き換えてから使ってください。</div>';
 else{firebase.initializeApp(CFG);db=firebase.firestore();lobby()}
 </script></body></html>
