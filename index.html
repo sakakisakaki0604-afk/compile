@@ -242,20 +242,29 @@ input[type=text]{font-size:16px!important}
 .hr{font:800 12px Orbitron,sans-serif;min-width:46px}.hs.w .hr{color:#19ff9c}.hs.l .hr{color:#ff6b86}.hdk{display:inline-flex;gap:4px;align-items:center;flex-wrap:wrap}.hdk small{color:var(--dim)}
 .hdot{display:inline-block;width:18px;text-align:center;font-weight:800}.hdot.w{color:#19ff9c}.hdot.l{color:#ff6b86}
 /* ===== PC: use the whole screen, 5 cards in one row ===== */
-@media(min-width:1000px){
- #app{max-width:min(97vw,1840px)}
- #app>.hand{flex-wrap:nowrap;overflow-x:auto;justify-content:center}
- #app>.hand .hc{flex:1 1 0;min-width:150px;width:auto;max-width:340px}
+@media(min-width:900px){
+ #app>.hand{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start}
+ #app>.hand .hc{flex:0 0 calc((100% - 32px)/5);width:auto;max-width:none}
 }
-@media(min-width:1200px){
- body{font-size:15px}
- .col{min-height:clamp(340px,46vh,620px)}.half{min-height:clamp(130px,19vh,260px)}
- .cd{min-height:32px}.cd b{font-size:17px}.cd.top b{font-size:22px}.ft{font-size:14px}
- .sx{font-size:13.5px}.hd b{font-size:22px}.hd span{font-size:16px}.ha{height:clamp(96px,13vh,170px)}
- .st{font-size:16px}.pr{font-size:15px;padding:8px}.sc{font-size:22px}.zn{font-size:15px}.bar{font-size:14px}
- .mb{max-width:760px}.mb .hc{width:250px}.mb.gl{max-width:1100px}
- .pb{min-height:150px;min-width:190px;flex:1 1 190px;font-size:16px}
-}
+/* ===== title tiers: harder = more gorgeous ===== */
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes angs{to{--ang:360deg}}
+@keyframes gp{to{box-shadow:0 0 22px #ffd54a,0 0 44px #ffb300aa}}
+@keyframes tw{from{opacity:.2;transform:scale(.6) rotate(0)}to{opacity:1;transform:scale(1.25) rotate(40deg)}}
+.ttl{position:relative;isolation:isolate}
+.ttl.tq2{background:linear-gradient(90deg,#3d4a62,#0c1220 75%)}
+.ttl.tq3{font-size:12px;box-shadow:0 0 14px #ffd54a,0 0 28px #ffb30060;animation:gp 1.6s ease-in-out infinite alternate}
+.ttl.tq3::after,.ttl.tq4::after,.ttl.tq5::after{content:'✦';position:absolute;right:-4px;top:-9px;font-size:12px;color:#fff;text-shadow:0 0 8px var(--tc);animation:tw 1.2s infinite alternate;z-index:2}
+.ttl.tq4{font-size:13px;border:2px solid transparent;background:linear-gradient(#10061c,#10061c) padding-box,conic-gradient(from var(--ang),#ff5ad9,#19e3ff,#ffd54a,#7cff6b,#ff5ad9) border-box;animation:angs 3s linear infinite;filter:none;box-shadow:0 0 16px #ff5ad9aa,0 0 30px #19e3ff70}
+.ttl.tq4 b{background-image:linear-gradient(100deg,#ff5ad9,#ffd54a,#19e3ff,#7cff6b,#ff5ad9);background-size:300% 100%}
+.ttl.tq5{--tc:#ffe14a;font-size:14px;padding:3px 18px 3px 3px;border:2px solid transparent;background:linear-gradient(135deg,#1c1400,#000 55%,#1c1400) padding-box,conic-gradient(from var(--ang),#fff6c0,#ffb300,#fff,#ffe14a,#ff8a00,#fff6c0) border-box;box-shadow:0 0 18px #ffe14a,0 0 40px #ffb300,0 0 80px #ff8a0080;animation:angs 2.2s linear infinite,gp 1.2s ease-in-out infinite alternate}
+.ttl.tq5::before{content:'';position:absolute;inset:-8px;border-radius:999px;background:radial-gradient(circle,#ffe14a66,transparent 70%);z-index:-1;filter:blur(7px);animation:gp 1.2s infinite alternate}
+.ttl.tq5 i{width:28px;height:28px;font-size:17px;background:radial-gradient(circle at 35% 30%,#fff,#ffe14a 45%,#ff8a00);animation:spk 1s infinite alternate}
+.ttl.tq5 b{background-image:linear-gradient(100deg,#fff 0,#ffe14a 22%,#fff 45%,#ff9ad5 70%,#fff 100%);background-size:300% 100%;letter-spacing:.1em}
+.ttl.big.tq4{font-size:17px}.ttl.big.tq5{font-size:20px}.ttl.big.tq5 i{width:38px;height:38px;font-size:22px}
+.tq5{--tc:#ffe14a}.mi.ach.adm{border-color:#ffe14a;background:linear-gradient(90deg,#2a2000,#07101f)}
+.vtag{margin:26px 0 6px;text-align:center;font-size:10px;color:#3a4c70;letter-spacing:.2em;cursor:default;user-select:none}
+#adm{display:none;text-align:center;margin:6px 0 20px}#adm input{width:150px;font-size:16px}
 </style></head><body><div id="app"></div><div id="fx"></div>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -675,7 +684,8 @@ const EPI={Darkness:'闇',Death:'死',Fire:'焔',Gravity:'重力',Life:'生命',
 const TIERN=[[1,e=>e+'を継ぐ者'],[10,e=>e+'の覇者'],[50,e=>e+'の王'],[100,e=>e+'を統べし神']];
 const PROTOS=Object.keys(TH);
 const ACHP=PROTOS.flatMap(p=>TIERN.map(([n,f])=>({id:'p_'+p+'_'+n,p,n,k:n==1?1:n==10?2:n==50?3:4,t:f(EPI[p]||p),d:p+'のプロトコルで'+n+'勝',f:g=>((g.pw||{})[p]||0)>=n})));
-const KMAP={w1:1,g10:1,w10:2,w30:3,w100:4,s3:2,c3:3,fl:3,ct:2,cc:3,d3:2};ACH0.forEach(a=>a.k=KMAP[a.id]||0);const ACH=ACH0.concat(ACHP),achOf=id=>ACH.find(a=>a.id==id);
+const KMAP={w1:1,g10:1,w10:2,s3:2,ct:2,d3:2,w30:3,fl:3,cc:3,c3:4,w100:4};ACH0.forEach(a=>a.k=KMAP[a.id]||0);const ACH=ACH0.concat(ACHP),achOf=id=>id=='adm'?ADM:ACH.find(a=>a.id==id);
+const ADM={id:'adm',t:'創世の管理者 GENESIS',d:'限定称号:管理者専用',k:5},ADMH='8b9kgs42tg';
 const TIPS=['相手より大きい2ラインで優勢になると、ターン開始時にコントロールを獲得できます。','コンパイルはまず実行され、その後でコントロールの再配置ができます。','10以上でも相手より大きくなければコンパイルできません。1ラインに偏らず数字を積みましょう。','Light 4 などで手札を公開されたら、次の一手を読まれます。手札を減らして情報を絞りましょう。','裏向きのカードは値2。どのラインにも出せるので、数字稼ぎと布石に使えます。','盤面が見えにくい時は、確認画面の「盤面を見る」ボタンで画面を確認できます。','カード詳細は場のカードを押すと表示されます。効果を確認してから動きましょう。','敗北しても経験値が入ります。負けたカードの組み合わせを次に活かしましょう。'];
 const ymd=t=>{const d=new Date(t);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 const lvOf=xp=>{let l=0,n=100;while(xp>=n&&l<98){xp-=n;l++;n=100+l*40}return{l,cur:xp,need:n}};
@@ -691,7 +701,7 @@ function pgMis(g){const l=[],ms=todayMis(g);ms.forEach(m=>{if((g.d[m.k]||0)>=m.n
 function pgBump(k){try{const g=pgLoad();g.d[k]=(g.d[k]||0)+1;if(k=='ctl')g.ctlT++;if(k=='c')g.cT++;const r=pgMis(g);pgSave(g);r.l.forEach((m,i)=>setTimeout(()=>toast('ミッション達成!「'+m.t+'」 +50XP'),i*900+600));if(r.all)setTimeout(()=>toast('今日のミッション全達成! ボーナス +100XP'),2400)}catch(e){}}
 const misHtml=g=>todayMis(g).map(m=>{const v=Math.min(g.d[m.k]||0,m.n),ok=g.d.paid[m.id];return`<div class="mi ${ok?'ok':''}"><span style="color:inherit">${ok?'✅':'⬜'} ${m.t}</span><span>${v}/${m.n}</span></div>`}).join('');
 const UID=(()=>{let u='';try{u=localStorage.getItem('cuid')||'';if(!u){u=Math.random().toString(36).slice(2,10);localStorage.setItem('cuid',u)}}catch(e){u='x'+Math.random()}return u})();
-const EMB=['⬢','◈','✪','❖','♛'];
+const EMB=['⬢','◈','✪','❖','♛','♚'];
 const ttlHtml=(t,k,big)=>t?`<span class="ttl tq${k||0} ${big?'big':''}"><i>${EMB[k||0]}</i><b>${esc(t)}</b></span>`:'';
 const ttHtml=(s,p)=>{const t=s.tt&&s.tt[p],f=s.fv&&s.fv[p];return ttlHtml(t,s.tk&&s.tk[p])+(f?` <span class="fvt">♥ ${esc(f)}</span>`:'')};
 function myTT(){const g=pgLoad(),a=achOf(g.prof.title),ok=a&&g.ach[a.id];return{t:ok?a.t:'',k:ok?(a.k||0):0,f:g.prof.fav||''}}
@@ -720,9 +730,13 @@ function pfRender(){const sy=window.scrollY,g=pgLoad(),L=lvOf(g.xp),A=$('app'),r
  <div style="margin:8px 0">最多使用: ${tu?pchip(tu[0])+` ${tu[1]}回(使用率${Math.round(tu[1]*100/tg)}%・勝率${Math.round(((g.pw||{})[tu[0]]||0)*100/tu[1])}%)`:'データなし'}</div>
  <div style="margin:8px 0">最多勝利: ${tw?pchip(tw[0])+` ${tw[1]}勝`:'データなし'}</div>
  ${uses.length?'<b>使用率ランキング</b>'+uses.map(([p,c])=>`<div class="ub"><span>${pchip(p)}</span><i style="width:${Math.round(c*100/mx)}%;background:${TH[p][0]}"></i><em>${Math.round(c*100/tg)}%</em></div>`).join(''):''}${histHtml(g)}</div>`}
- <div class="box"><b>🏅 実績一覧(${unl}/${ACH.length})</b><div style="margin-top:6px">${ACH0.map(row).join('')}</div>${PROTOS.map(p=>{const l=ACHP.filter(a=>a.p==p),c=l.filter(a=>g.ach[a.id]).length;return`<details><summary>${pchip(p)} ${c}/4</summary>${l.map(row).join('')}</details>`}).join('')}</div>
+ <div class="box"><b>🏅 実績一覧(${unl}/${ACH.length})</b><div style="margin-top:6px">${g.adm?row(ADM).replace('mi ach ','mi ach adm '):''}${ACH0.map(row).join('')}</div>${PROTOS.map(p=>{const l=ACHP.filter(a=>a.p==p),c=l.filter(a=>g.ach[a.id]).length;return`<details><summary>${pchip(p)} ${c}/4</summary>${l.map(row).join('')}</details>`}).join('')}</div>
+ <div class="vtag" onclick="admOpen()">build 5.0.3</div><div id="adm"><input type="password" id="adm_pw" autocomplete="off" onkeydown="if(event.key=='Enter')admGo()"> <button onclick="admGo()">OK</button></div>
  <div class="okbar"><button onclick="pfDone()">${PF.first?'この内容ではじめる':'保存してロビーへ'}</button></div>`;window.scrollTo(0,sy)}
 function histHtml(g){const h=(g.hist||[]).slice(0,5);return'<div style="margin-top:12px"><b>直近5戦</b></div>'+(h.length?h.map(x=>`<div class="hs ${x.w?'w':'l'}"><span class="hr">${x.w?'WIN':'LOSE'}</span><span class="ho">vs <b>${esc(x.o)}</b>${x.c?' <small>(CPU '+['','弱','普通','最強'][x.c]+')</small>':''}<small> ${esc(x.d)}</small></span><span class="hdk"><small>使用</small>${(x.deck||[]).map(p=>pchip(p)).join('')}</span>${x.od?`<span class="hdk"><small>相手</small>${x.od.map(p=>pchip(p)).join('')}</span>`:''}</div>`).join(''):'<div class="pgs">まだ対戦記録がありません</div>')}
+function h53(s){let h1=0xdeadbeef,h2=0x41c6ce57;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return(4294967296*(2097151&h2)+(h1>>>0)).toString(36)}
+function admOpen(){const e=$('adm');if(!e)return;e.style.display='block';const i=$('adm_pw');i&&i.focus()}
+function admGo(){const i=$('adm_pw');if(!i)return;const v=i.value;if(h53(v)!=ADMH){i.value='';toast('認証に失敗しました');return}const g=pgLoad();g.adm=1;ACH.forEach(a=>{g.ach[a.id]=1});g.ach.adm=1;pgSave(g);toast('全称号を解除し、限定称号を獲得しました');pfKeep();pfRender()}
 function pfKeep(){const e=$('pf_name');if(e)PF.name=e.value}
 function pfFav(n){pfKeep();PF.fav=n;pfRender()}
 function pfTitle(id){pfKeep();PF.title=id;pfRender()}
