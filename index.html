@@ -191,7 +191,7 @@ details summary{cursor:pointer;margin:8px 0;color:var(--cy)}
 @keyframes flsh{0%{opacity:0}30%{opacity:.9}100%{opacity:0}}
 .sk.lose{opacity:.55;filter:saturate(.5)}
 .skn u{text-decoration:none;background:#ffe14a;color:#001;font:800 10px Orbitron,sans-serif;padding:2px 6px;margin-left:6px;border-radius:2px;vertical-align:middle}
-.spw{min-height:76px;text-align:center;z-index:1}.spw .sw{display:block;font:900 clamp(24px,8vw,40px) Orbitron,sans-serif;letter-spacing:.14em;color:#19e3ff;text-shadow:0 0 18px #19e3ff;animation:swin .5s cubic-bezier(.2,1.6,.4,1)}.spw .sw.g{color:#ffe14a;text-shadow:0 0 24px #ffb300}
+.spw{min-height:76px;text-align:center;z-index:1}.spw .sw{display:block;font:900 clamp(24px,8vw,40px) Orbitron,sans-serif;letter-spacing:.14em;color:#19e3ff;text-shadow:0 0 18px #19e3ff;animation:swin .5s cubic-bezier(.2,1.6,.4,1)}.spw .sw.gold{color:#ffe14a;text-shadow:0 0 24px #ffb300}
 .spw .sj{display:block;margin-top:4px;font:700 15px 'Noto Sans JP',sans-serif;color:#cfe6ff;letter-spacing:.2em}
 @keyframes swin{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
 .nmw{display:inline-flex;flex-direction:column;line-height:1.2}.tt{color:#ffe14a;font-size:11px;font-weight:700;letter-spacing:.04em}
@@ -199,12 +199,18 @@ details summary{cursor:pointer;margin:8px 0;color:var(--cy)}
 .pchip{display:inline-block;padding:1px 8px;border:1px solid var(--ln);border-radius:3px;font-size:12px;font-weight:700;background:#07101f}
 .stg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}.stg div{background:#07101f;border:1px solid var(--ln);padding:6px;text-align:center}.stg small{display:block;color:var(--dim);font-size:11px}.stg b{font:800 16px Orbitron,sans-serif;color:var(--cy)}
 .ub{position:relative;display:flex;align-items:center;gap:8px;margin:4px 0}.ub span{width:130px;flex:none}.ub i{display:block;height:10px;border-radius:2px;opacity:.85}.ub em{font-style:normal;font-size:12px;color:var(--dim)}
-.mi.ach.ok{cursor:pointer}.mi.ach.lk{opacity:.5}.mi.ach.eq{border-color:#ffe14a;background:#241c00;color:#ffe14a}
+.mi.ach.ok{cursor:pointer}.mi.ach.lkd{opacity:.5}.mi.ach.eq{border-color:#ffe14a;background:#241c00;color:#ffe14a}
 .okbar{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px;background:#050b1cf2;border-top:2px solid var(--cy);text-align:center}.okbar button{width:min(92%,520px);padding:14px;font-size:16px;margin:0}
 #app{padding-bottom:84px}
 *{-webkit-tap-highlight-color:rgba(25,227,255,.25)}
 input[type=text]{font-size:16px!important}
 @media(max-width:640px){button{min-height:42px}.pb{min-height:48px;font-size:14px}.stg{grid-template-columns:repeat(2,1fr)}.ub span{width:100px}.rbt button{min-width:100%}}
+
+.pfhero{position:relative;height:clamp(150px,38vw,220px);border:2px solid var(--c);border-radius:6px;margin:8px 0;display:flex;align-items:flex-end;box-shadow:0 0 22px color-mix(in srgb,var(--c) 55%,transparent)}
+.pfhero.pi::before{opacity:1}.pfhero::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#000d 0,#0000 70%);z-index:0}
+.pfhl{position:relative;z-index:1;padding:10px 14px;text-shadow:0 0 6px #000;display:flex;flex-direction:column}.pfhl small{font:700 10px Orbitron,sans-serif;letter-spacing:.3em;color:#fff9}.pfhl b{font:900 clamp(22px,7vw,32px) Orbitron,sans-serif;color:var(--c,#fff)}.pfhl span{font-size:12px;color:#dfe9ff}
+.pfhero.empty{--c:#17315a;align-items:center;justify-content:center;text-align:center;border-style:dashed;box-shadow:none;color:var(--dim)}.pfhero.empty::after{display:none}.pfhero.empty .pfhl{align-items:center}.pfhero.empty b{color:var(--dim)}
+.pfth{width:52px;height:52px;flex:none;border:2px solid var(--c);border-radius:6px}.pfth.pi::before{opacity:1}
 </style></head><body><div id="app"></div><div id="fx"></div>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -435,7 +441,7 @@ function R(){const A=$('app');if(!S)return;cpu();const s=S,o=opp(me),H=s.hand[me
  let h=`<div class="bar o"><span>ROOM ${esc(ref.id)}</span><span>YOU: ${esc(s.names[me])} / FOE: ${esc(s.names[o]||'待機中…')}</span><button onclick="showGl()">用語集・ルール</button><button onclick="showDex()">カード能力図鑑</button><button data-a="fix">操作が止まった時の復旧</button><button class="m" data-a="reset">強制終了・部屋リセット</button></div>`;
  if(s.ph=='wait')return A.innerHTML=h+'<div class="box">対戦相手の入室を待っています。同じ部屋IDで相手に入室してもらってください。</div>';
  if(s.ph=='draft'){const cur=pw(s);
-  h+=`<div class="st ${cur==me?'me':''}"><b>プロトコル選択</b>(先攻1→後攻2→先攻2→後攻1) 先攻: ${esc(s.names[s.first||'a'])} — ${cur==me?'あなたの番です。1つ選んでください':esc(s.names[cur])+' が選択中'}</div><div class="box pk">`+s.pool.map(n=>`<button class="pb pi p-${n} ${n==pkSel?'hit':''}" title="${esc(TR[n]||'')}" data-pk="${n}" style="${th(n)}">${TH[n][2]} ${n}</button>`).join('')+'</div><div class="box" id="trb">'+(trs&&TR[trs]?'<b>'+trs+'</b><br>'+esc(TR[trs]):'プロトコルにカーソルを合わせる(またはタップ)と特色が表示されます')+(cur==me&&pkSel&&s.pool.includes(pkSel)?'<div class="okbar"><button data-ok="1">「'+pkSel+'」で決定</button></div>':'<div style="color:var(--dim)">'+(cur==me?'プロトコルを押して詳細を確認し、決定ボタンで確定します':'相手の選択を待っています')+'</div>')+'</div>'+['a','b'].map(p=>`<div>${esc(s.names[p])}: ${s.pr[p].join(' / ')||'-'}</div>`).join('');return A.innerHTML=h}
+  h+=`<div class="st ${cur==me?'me':''}"><b>プロトコル選択</b>(先攻1→後攻2→先攻2→後攻1) 先攻: ${esc(s.names[s.first||'a'])} — ${cur==me?'あなたの番です。1つ選んでください':esc(s.names[cur])+' が選択中'}</div><div class="box pk">`+s.pool.map(n=>`<button class="pb pi p-${n} ${n==pkSel?'hit':''}" title="${esc(TR[n]||'')}" data-pk="${n}" style="${th(n)}">${TH[n][2]} ${n}</button>`).join('')+'</div><div class="box" id="trb">'+(trs&&TR[trs]?'<b>'+trs+'</b><br>'+esc(TR[trs]):'プロトコルにカーソルを合わせる(またはタップ)と特色が表示されます')+(cur==me&&pkSel&&s.pool.includes(pkSel)?'<div><button data-ok="1">「'+pkSel+'」で決定</button></div>':'<div style="color:var(--dim)">'+(cur==me?'プロトコルを押して詳細を確認し、決定ボタンで確定します':'相手の選択を待っています')+'</div>')+'</div>'+(cur==me&&pkSel&&s.pool.includes(pkSel)?'<div class="okbar"><button data-ok="1">「'+pkSel+'」で決定する</button></div>':'')+['a','b'].map(p=>`<div>${esc(s.names[p])}: ${s.pr[p].join(' / ')||'-'}</div>`).join('');return A.innerHTML=h}
  if(s.ph=='arr'){const my=s.pr[me];h+=`<div class="st me"><b>プロトコルの配置</b> 左から順に、ライン1・2・3になります。入れ替えたい2つを順に押し、決定を押してください。</div><div class="g">${my.map((n,i)=>`<button class="pb pi p-${n} ${i==arSel?'hit':''}" data-ar="${i}" draggable="true" style="${th(n)}">${n}<br>ライン${i+1}</button>`).join('')}</div>${s.ok2[me]?'<div class="st">配置を確定しました。相手を待っています…</div>':'<button data-ok2="1">この配置で決定</button>'}`;return A.innerHTML=h}
  let msg='';const src=w&&w.src&&C[w.src]?`<b>${w.src}</b> の効果:`:'';
  if(s.win)msg=s.win==me?'<b>🏆 勝利!</b> 全プロトコルをコンパイルしました。「強制終了・部屋リセット」で次の対戦へ':'<b>敗北…</b> 相手が全プロトコルをコンパイルしました';
@@ -554,7 +560,7 @@ function turnSpin(s){const n=[s.names.a,s.names.b],w=s.first=='a'?0:1;animUntil=
  const after=()=>{TT(()=>{[0,1].forEach(i=>$('skn'+i).classList.add('on'))},100);
   TT(()=>$('ski0').classList.add('op'),550);
   TT(()=>$('ski1').classList.add('op'),1100);
-  TT(()=>{c[w].classList.add('win');set(w,pos[w]*X,-6,0,400,1.12);c[1-w].classList.add('lose');$('spw').innerHTML=s.first==me?'<span class="sw g">YOU GO FIRST</span><span class="sj">あなたが先攻です</span>':'<span class="sw">'+esc(n[w])+'</span><span class="sj">が先攻 ／ あなたは後攻</span>'},1700)};
+  TT(()=>{c[w].classList.add('win');set(w,pos[w]*X,-6,0,400,1.12);c[1-w].classList.add('lose');$('spw').innerHTML=s.first==me?'<span class="sw gold">YOU GO FIRST</span><span class="sj">あなたが先攻です</span>':'<span class="sw">'+esc(n[w])+'</span><span class="sj">が先攻 ／ あなたは後攻</span>'},1700)};
  setTimeout(()=>{d.classList.add('fin');setTimeout(()=>d.remove(),1200)},4900)}
 /* ===== BGM(YouTube埋め込み) ===== */
 const DEFAULT_TS=['0:00 廃都市: 水没エリア2','7:16 廃都市: 水没エリア','12:45 亡霊になった街','17:25 旧セントラルエリア','25:29 棄てられた街。','31:41 それでも咲く花に','35:35 廃都市にて。','40:39 雪に咲く街','46:48 かつて街だった場所で。','52:09 赤い季節','59:50 続く世界','1:06:55 終わりの後で','1:14:14 空港跡地','1:18:35 廃都市: 砂漠化エリア','1:22:36 緑への返還'].join('\n');
@@ -641,26 +647,27 @@ function topProto(g,key){let b='',v=0;PROTOS.forEach(p=>{const x=(g[key]||{})[p]
 const pchip=n=>n?`<span class="pchip" style="${th(n)}">${TH[n][2]||''} ${n}</span>`:'<span class="pchip">未設定</span>';
 function lobbyExtra(){try{const g=pgLoad(),L=lvOf(g.xp),bar=document.querySelector('#app .bar');if(!bar)return;const rate=g.g?Math.round(g.w*100/g.g):0,a=achOf(g.prof.title),tt=a&&g.ach[a.id]?a.t:'称号なし',tu=topProto(g,'pu');
  ['name','cname'].forEach(i=>{const e=$(i);if(e)e.value=g.prof.name});
- bar.insertAdjacentHTML('afterend',`<div class="box pgb"><div class="pgh"><b class="pname">${esc(g.prof.name)}</b><span class="o">LV ${L.l+1} ${ttl(L.l)}</span><button style="margin-left:auto" onclick="profScreen(0)">👤 プロフィール</button></div><div class="pgs" style="margin:4px 0">🏅 ${esc(tt)} ／ ♥ ${pchip(g.prof.fav)} ／ 最多使用 ${tu?pchip(tu[0]):'-'}</div><div class="xpb"><i style="width:${Math.round(L.cur*100/L.need)}%"></i><em>${L.cur} / ${L.need} XP</em></div><div class="pgs">${g.w}勝 ${g.l}敗(勝率${rate}%) / 連勝 ${g.st}(最高${g.bs}) / ${g.ds}日連続ログイン</div><div class="pgm"><b>📋 今日のミッション</b>(1つ +50XP / 全達成で +100XP)${misHtml(g)}</div></div>`);
+ bar.insertAdjacentHTML('afterend',`<div class="box pgb"><div class="pgh">${g.prof.fav?`<div class="pfth pi p-${g.prof.fav}" style="${th(g.prof.fav)}"></div>`:''}<b class="pname">${esc(g.prof.name)}</b><span class="o">LV ${L.l+1} ${ttl(L.l)}</span><button style="margin-left:auto" onclick="profScreen(0)">👤 プロフィール</button></div><div class="pgs" style="margin:4px 0">🏅 ${esc(tt)} ／ ♥ ${pchip(g.prof.fav)} ／ 最多使用 ${tu?pchip(tu[0]):'-'}</div><div class="xpb"><i style="width:${Math.round(L.cur*100/L.need)}%"></i><em>${L.cur} / ${L.need} XP</em></div><div class="pgs">${g.w}勝 ${g.l}敗(勝率${rate}%) / 連勝 ${g.st}(最高${g.bs}) / ${g.ds}日連続ログイン</div><div class="pgm"><b>📋 今日のミッション</b>(1つ +50XP / 全達成で +100XP)${misHtml(g)}</div></div>`);
  if(g.bonus){const b=g.bonus;g.bonus=0;pgSave(g);setTimeout(()=>toast('ログインボーナス +20XP('+b+'日連続ログイン)'),500)}}catch(e){console.error(e)}}
 /* ===== プロフィール画面 ===== */
 let PF=null;
 function profScreen(first){const g=pgLoad();PF={name:g.prof.name||'',fav:g.prof.fav||'',title:g.prof.title||'',first:!!first};pfRender()}
-function pfRender(){const g=pgLoad(),L=lvOf(g.xp),A=$('app'),rate=g.g?Math.round(g.w*100/g.g):0,tu=topProto(g,'pu'),tw=topProto(g,'pw');
+function pfRender(){const sy=window.scrollY,g=pgLoad(),L=lvOf(g.xp),A=$('app'),rate=g.g?Math.round(g.w*100/g.g):0,tu=topProto(g,'pu'),tw=topProto(g,'pw');
  const uses=PROTOS.map(p=>[p,(g.pu||{})[p]||0]).filter(x=>x[1]).sort((a,b)=>b[1]-a[1]).slice(0,5),mx=uses.length?uses[0][1]:1,tg=Math.max(1,g.g);
  const unl=ACH.filter(a=>g.ach[a.id]).length,a0=achOf(PF.title),eq=a0&&g.ach[a0.id]?a0.t:'未選択';
- const row=a=>{const ok=g.ach[a.id],on=PF.title==a.id;return`<div class="mi ach ${ok?'ok':'lk'} ${on?'eq':''}" ${ok?`onclick="pfTitle('${a.id}')"`:''}><span style="color:inherit">${ok?(on?'✅':'🏅'):'🔒'} <b>${esc(a.t)}</b></span><span>${esc(a.d)}</span></div>`};
+ const row=a=>{const ok=g.ach[a.id],on=PF.title==a.id;return`<div class="mi ach ${ok?'ok':'lkd'} ${on?'eq':''}" ${ok?`onclick="pfTitle('${a.id}')"`:''}><span style="color:inherit">${ok?(on?'✅':'🏅'):'🔒'} <b>${esc(a.t)}</b></span><span>${esc(a.d)}</span></div>`};
+ const hero=PF.fav?`<div class="pfhero pi p-${PF.fav}" style="${th(PF.fav)}"><div class="pfhl"><small>♥ FAVORITE PROTOCOL</small><b>${PF.fav}</b><span>${esc((TR[PF.fav]||'').slice(0,54))}…</span></div></div>`:`<div class="pfhero empty"><div class="pfhl"><small>♥ FAVORITE PROTOCOL</small><b>未選択</b><span>下から好きなプロトコルを選んでください</span></div></div>`;
  A.innerHTML=`<div class="bar o"><span>PROFILE</span>${PF.first?'':'<button onclick="pfBack()">← ロビーへ</button>'}</div>
  <div class="box"><b>プレイヤー名</b><input type="text" id="pf_name" maxlength="12" placeholder="名前を入力(最大12文字)" autocomplete="off" value="${esc(PF.name)}"><div class="pgs">${PF.first?'最初に名前を決めてください。入室時の名前入力は不要になります。':'名前の変更はここで行えます。'}</div></div>
+ <div class="box"><b>好きなプロトコル</b>${hero}<div class="pk">${PROTOS.map(n=>`<button class="pb pi ${n==PF.fav?'hit':''}" style="${th(n)}" onclick="pfFav('${n}')">${TH[n][2]||''} ${n}</button>`).join('')}</div></div>
  <div class="box"><b>称号(対戦中、名前の下に表示されます)</b><div style="margin:6px 0">現在: <span class="pchip">🏅 ${esc(eq)}</span> <button onclick="pfTitle('')">外す</button></div><div class="pgs">下の実績一覧から解除済みの実績をタップして選択</div></div>
- <div class="box"><b>好きなプロトコル</b><div class="pk">${PROTOS.map(n=>`<button class="pb pi ${n==PF.fav?'hit':''}" style="${th(n)}" onclick="pfFav('${n}')">${TH[n][2]||''} ${n}</button>`).join('')}</div></div>
  ${PF.first?'':`<div class="box"><b>戦績</b><div class="pgh" style="margin:6px 0"><span class="o">LV ${L.l+1} ${ttl(L.l)}</span></div><div class="xpb"><i style="width:${Math.round(L.cur*100/L.need)}%"></i><em>${L.cur} / ${L.need} XP</em></div>
  <div class="stg"><div><small>勝率</small><b>${rate}%</b></div><div><small>勝 / 敗</small><b>${g.w} / ${g.l}</b></div><div><small>連勝(最高)</small><b>${g.st}(${g.bs})</b></div><div><small>実績</small><b>${unl}/${ACH.length}</b></div></div>
  <div style="margin:8px 0">最多使用: ${tu?pchip(tu[0])+` ${tu[1]}回(使用率${Math.round(tu[1]*100/tg)}%・勝率${Math.round(((g.pw||{})[tu[0]]||0)*100/tu[1])}%)`:'データなし'}</div>
  <div style="margin:8px 0">最多勝利: ${tw?pchip(tw[0])+` ${tw[1]}勝`:'データなし'}</div>
  ${uses.length?'<b>使用率ランキング</b>'+uses.map(([p,c])=>`<div class="ub"><span>${pchip(p)}</span><i style="width:${Math.round(c*100/mx)}%;background:${TH[p][0]}"></i><em>${Math.round(c*100/tg)}%</em></div>`).join(''):''}</div>`}
  <div class="box"><b>🏅 実績一覧(${unl}/${ACH.length})</b><div style="margin-top:6px">${ACH0.map(row).join('')}</div>${PROTOS.map(p=>{const l=ACHP.filter(a=>a.p==p),c=l.filter(a=>g.ach[a.id]).length;return`<details><summary>${pchip(p)} ${c}/4</summary>${l.map(row).join('')}</details>`}).join('')}</div>
- <div class="okbar"><button onclick="pfDone()">${PF.first?'この内容ではじめる':'保存してロビーへ'}</button></div>`}
+ <div class="okbar"><button onclick="pfDone()">${PF.first?'この内容ではじめる':'保存してロビーへ'}</button></div>`;window.scrollTo(0,sy)}
 function pfKeep(){const e=$('pf_name');if(e)PF.name=e.value}
 function pfFav(n){pfKeep();PF.fav=n;pfRender()}
 function pfTitle(id){pfKeep();PF.title=id;pfRender()}
