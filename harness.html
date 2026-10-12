@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="/style.css"><body><div id="app"></div>
+<script type="module">
+import { createGame, apply } from '/js/engine/game.js';
+import { createGameUI } from '/js/game-ui.js';
+import { BONUS_TILES, FACTORY_CARDS } from '/js/engine/cards.js';
+let st = createGame({ players: [{ uid: 'a', faction: 'nordic', mat: 'industrial', combatCards: 1 }, { uid: 'b', faction: 'saxony', mat: 'agricultural', combatCards: 4 }], bonusTileId: BONUS_TILES[0].id, factoryIds: FACTORY_CARDS.slice(0, 3).map((f) => f.id) });
+const scene = new URLSearchParams(location.search).get('s') || 'section';
+const me = st.turnUid;
+if (scene !== 'section') st = apply(st, me, { t: 'section', section: scene === 'bolster' ? 1 : 1 }).state;
+const ui = createGameUI({ root: document.getElementById('app'), net: () => ({ dispatch: async (a) => { st = apply(st, me, a).state; ui.render(); } }), toast: console.log, getCtx: () => ({ st, me, room: { hostUid: me }, priv: { hand: [], objectives: [] }, deck: null, combat: null, names: (u) => u }), onLeave() {}, onRematch() {} });
+window.ui = ui; ui.render(); window.__ready = true;
+</script>

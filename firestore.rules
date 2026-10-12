@@ -1,0 +1,79 @@
+rules_version = '2';
+// Spark(無料)構成: Cloud Functionsなし。目的は「改ざん・不正アクセスの防止」。
+// - 匿名認証したユーザーのみ。ルームの中身は参加者だけが読める（コードを知る人は参加時のみ get 可）
+// - 自分の手札などの秘密情報は private/{uid} に置き、本人だけが読める
+// - ドラフト希望は全員提出後にだけ公開される
+// - 状態の書き込みは revision を+1したものだけ（古い画面の上書き防止）
+service cloud.firestore {
+  match /databases/{db}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function roomDoc(rid) { return get(/databases/$(db)/documents/rooms/$(rid)).data; }
+    function isMember(rid) { return signedIn() && request.auth.uid in roomDoc(rid).memberUids; }
+    function changed() { return request.resource.data.diff(resource.data).affectedKeys(); }
+    function nextRev() { return request.resource.data.revision == resource.data.revision + 1; }
+
+    match /rooms/{rid} {
+      // 一覧取得は禁止。ルームコードを知っている人だけが get できる
+      allow get: if signedIn();
+      allow list: if false;
+
+      allow create: if signedIn()
+        && request.resource.data.hostUid == request.auth.uid
+        && request.resource.data.memberUids == [request.auth.uid]
+        && request.resource.data.status == 'lobby'
+        && request.resource.data.revision == 0;
+
+      allow update: if signedIn() && nextRev() && (
+        // 参加（開始前・5人まで・自分だけを追加）
+        ( resource.data.status == 'lobby'
+          && !(request.auth.uid in resource.data.memberUids)
+          && request.resource.data.memberUids == resource.data.memberUids.concat([request.auth.uid])
+          && request.resource.data.memberUids.size() <= 5
+          && changed().hasOnly(['memberUids', 'members', 'revision'])
+          && request.resource.data.members.diff(resource.data.members).affectedKeys().hasOnly([request.auth.uid]) )
+        // 自分の表示情報・提出済みフラグの更新（開始前のみ表示名変更可）
+        || ( request.auth.uid in resource.data.memberUids
+          && changed().hasOnly(['members', 'submitted', 'revision'])
+          && request.resource.data.members.diff(resource.data.members).affectedKeys().hasOnly([request.auth.uid])
+          && (!('submitted' in resource.data) || request.resource.data.submitted.diff(resource.data.submitted).affectedKeys().hasOnly([request.auth.uid])) )
+        // ホストのみ: 設定・進行・ドラフト結果・開始。対戦中は終了後（再戦）にだけ触れる
+        || ( resource.data.hostUid == request.auth.uid
+          && changed().hasOnly(['status', 'settings', 'draft', 'submitted', 'game', 'revision'])
+          && (resource.data.status != 'playing' || resource.data.game.over == true) )
+        // 対戦中は手番プレイヤーのみ game を更新
+        || ( resource.data.status == 'playing'
+          && resource.data.game.over == false
+          && resource.data.game.turnUid == request.auth.uid
+          && changed().hasOnly(['game', 'revision']) )
+      );
+      allow delete: if false;
+
+      // ドラフト希望: 自分の分は書ける。他人の分は全員提出後に限り読める
+      match /drafts/{uid} {
+        allow read: if signedIn() && (request.auth.uid == uid
+          || (isMember(rid) && roomDoc(rid).submitted.keys().size() == roomDoc(rid).memberUids.size()));
+        allow create, update: if signedIn() && request.auth.uid == uid && isMember(rid)
+          && roomDoc(rid).status in ['draft_faction', 'draft_mat'];
+        allow delete: if false;
+      }
+
+      // 山札の枚数・戦闘の確定/公開など、参加者が共有して更新する領域（札の順番や中身は持たない）
+      match /pub/{doc} {
+        allow read, write: if isMember(rid);
+      }
+
+      // 秘密情報（手札・戦闘ダイヤル等）: 本人のみ読み書き
+      match /private/{uid} {
+        allow read, write: if signedIn() && request.auth.uid == uid && isMember(rid);
+      }
+
+      // ログ: 参加者のみ読める。追記のみ・改ざん不可
+      match /logs/{eid} {
+        allow read: if isMember(rid);
+        allow create: if isMember(rid) && request.resource.data.uid == request.auth.uid;
+        allow update, delete: if false;
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+:root{--bg:#1b1713;--panel:#2a241d;--ink:#efe6d6;--mute:#b3a68f;--acc:#c9a24a;--bad:#d9674f;--ok:#7fb069;--line:#4a4033}
+@media (prefers-color-scheme:light){:root{--bg:#f3ecdd;--panel:#fffaf0;--ink:#2a2118;--mute:#6f6350;--acc:#8a6a1c;--bad:#b3402a;--ok:#3f7a2c;--line:#d9ccb2}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:1.25rem;letter-spacing:.08em}h1 small{color:var(--mute);font-size:.7em;margin-left:.5em}
+main{max-width:760px;margin:0 auto;padding:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;margin:0 0 16px}
+h2{margin:0 0 8px;font-size:1.1rem;color:var(--acc)}
+input,select,button{font:inherit;color:inherit}
+input,select{background:transparent;border:1px solid var(--line);border-radius:6px;padding:8px 10px;max-width:100%}
+button{background:var(--acc);color:#1b1713;border:0;border-radius:6px;padding:9px 16px;cursor:pointer;font-weight:700}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.mute{color:var(--mute);font-size:.9em}.bad{color:var(--bad)}.ok{color:var(--ok)}
+ul.plain{list-style:none;padding:0;margin:0}ul.plain li{padding:6px 0;border-bottom:1px solid var(--line)}
+.code{font:700 1.4rem/1 monospace;letter-spacing:.2em;color:var(--acc)}
+#toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:var(--panel);border:1px solid var(--line);padding:8px 14px;border-radius:6px;opacity:0;transition:opacity .2s;pointer-events:none}
+#toast.show{opacity:1}
+@media (max-width:480px){main{padding:12px}}
+
+/* ---- 対戦画面 ---- */
+.banner{background:#6b3d12;color:#ffe9c7;border:1px solid var(--acc);border-radius:6px;padding:6px 10px;margin:0 0 8px;font-size:.85rem}
+.turnbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 10px;border:1px solid var(--line);border-radius:6px;margin-bottom:8px;background:var(--panel)}
+.turnbar.mine{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc) inset}
+.turnbar .tools{margin-left:auto;display:flex;gap:6px;align-items:center}
+.game{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:12px;align-items:start}
+.boardwrap{overflow:auto;background:#14110e;border:1px solid var(--line);border-radius:8px;max-height:82vh;touch-action:pan-x pan-y pinch-zoom}
+.boardwrap svg{display:block;margin:auto;max-width:none}
+.side{display:flex;flex-direction:column;gap:0}
+.side .card{margin-bottom:10px;padding:12px}
+button.sm{padding:5px 10px;font-size:.85rem}
+.tl{font:700 9px sans-serif;fill:#111;text-anchor:middle;pointer-events:none}
+.eb,.sb,.ub{font:700 9px sans-serif;text-anchor:middle;pointer-events:none;fill:#111}
+.ub{fill:#fff;font-size:8px}.sb{fill:#fff}
+.rc{font:700 8.5px sans-serif;fill:#fff;paint-order:stroke;stroke:#000;stroke-width:2px;pointer-events:none}
+.hx{cursor:pointer}.hx polygon{transition:stroke .12s}
+[data-unit]{cursor:pointer}
+.opt{display:block;padding:6px 0;border-bottom:1px solid var(--line)}
+.units{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.pl{padding:6px 8px;border-radius:6px;border:1px solid transparent;margin-bottom:4px}
+.pl.turn{border-color:var(--acc)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.stats{font-size:.85rem}
+.log{max-height:200px;overflow:auto;font-size:.82rem}
+.chk{display:inline-flex;gap:6px;align-items:center;font-size:.85rem}
+.tag{font-size:.7rem;border:1px solid var(--acc);color:var(--acc);border-radius:4px;padding:0 4px;margin-left:6px}
+.cardchip{display:inline-flex;gap:4px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+.tbl{width:100%;border-collapse:collapse;font-size:.85rem}.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:4px;text-align:left}
+@media (max-width:820px){.game{grid-template-columns:1fr}.boardwrap{max-height:60vh}}
+
+.matbg{background-size:cover;background-position:center;border-radius:10px;padding:8px;margin:0 0 10px;border:1px solid var(--line)}
+.matbg .card{background:rgba(18,14,10,.72);margin:0;backdrop-filter:blur(1.5px)}
+.facbg{background-size:cover;background-position:center}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(78px,1fr));gap:6px}
+.col{display:flex;flex-direction:column;gap:4px;align-items:center;padding:10px 4px;background:rgba(0,0,0,.45);border:1px solid #c9a96a;color:#fff}
+.col b{font-size:15px}.col i{font-size:11px;font-style:normal;opacity:.8}.col u{text-decoration:none;font-size:13px;border-top:1px solid #c9a96a;padding-top:4px;width:100%;text-align:center}
+.col:disabled{opacity:.35}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.chip{padding:6px 10px;background:rgba(0,0,0,.5);border:1px solid #c9a96a;color:#fff;border-radius:16px}.chip.on{background:#c9a96a;color:#111;font-weight:700}
+.boardwrap{overflow:auto}.boardwrap svg{display:block}
+
+.facopt{display:flex;gap:10px;align-items:flex-start}.facopt img{width:110px;border-radius:6px;flex:none}
+.opt.dim{opacity:.45}.tag{background:#6b5a2e;color:#ffe9a8;font-size:11px;padding:1px 6px;border-radius:8px;margin-left:4px}
+.matbg,.facbg{color:#f3ead8}.matbg h2,.facbg h2{color:#ffe9a8;text-shadow:0 1px 3px #000}.matbg .mute,.facbg .mute,.facbg .stats{color:#e4d8bd}
+.matbg .opt,.matbg label{color:#f3ead8}.matbg select,.matbg input{color:#222}.matbg button.ghost{color:#f3ead8;border-color:#c9a96a;background:rgba(0,0,0,.35)}
